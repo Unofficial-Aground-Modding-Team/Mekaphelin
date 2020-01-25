@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<mod>
+    <name>Mek Mechs</name>
+    <description>Mech concepts for the Mek mod</description>
+    <author>Airom</author>
+    <version>BETA</version>
+    <init>
+      <include id="small_mech.xml"/>
+      <tile id="small_mech" sheet="small_mech.1"/>
+      <animation id="small_mech.idle" count="1"/>
+      <animation id="small_mech.move" x="1" count="14"/>
+
+      <tilesheet id="small_mech_shield.png" width="8" height="22"/>
+      <tile id="small_mech_shield" sheet="small_mech_shield.png" offsetY="-1" offsetX="-14"/>
+
+      <procedure id="check_meks_equip">
+        <set id="s" value="this.getStructure(this.xPos, this.yTop())" />
+        <choose>
+          <section if="s != null && s.info.xml.get('meks_equip') == 'true'"><set id="v" value="this" /><run procedure="exo_mech_equip" /></section>
+          <dialogue section="warning" id="mek_equip" />
+        </choose><stop />
+      </procedure>
+
+      <vehicle id="small_mech" tile="small_mech" health="200" speed="2" defense="8" fps="9" fuel="5000" efficiency="0" tooltip="structure.tooltip.operate" icon="exo_mech.ico" blood="science.explosion.sm" max_weight="1000" hitDamage="1" death_sfx="explosion" block_move="true" oxygen="100" underwater="true">
+        <!-- <slot id="head"><run procedure="check_meks_equip" /></slot> -->
+        <slot id="head" />
+        <slot id="attack"/>
+        <slot id="defend"/>
+        <slot id="back" />
+        <slot id="mech_boots" />
+        <init><set id="partial" value="0" /></init>
+        <onFrame>
+          if(this.blocking){var of = Math.floor(frames*2.5); partial += frames*2.5-of; if(partial >= 1){of++; partial -= 1;} if(of > 0) this.useFuel(of);}
+        </onFrame>
+        <!-- <onFrame>
+          var f2 = frames*2; var of = Math.floor(f2); partial += f2-of; if(partial >= 1){of++; partial -= 1;}
+          var p = of*cores; if(this.blocking) p -= of*4; if(p > 0) this.addFuel(p); else if(p &lt; 0) this.useFuel(-p);
+        </onFrame> -->
+        <shield tile="small_mech_shield" animation="single" hit_sfx="ship_shield" />
+        <light tile="light.headlamp" offsetX="-72"/>
+        <!-- <initRenderer><action>this.renderer.addChildAt(this.renderer.equipmentSprite, 0); this.renderer.startAnimIndex = 1</action></initRenderer> -->
+      </vehicle>
+
+      <!-- Head -->
+      <item id="small_mech.light" type="equipment" slot="mech_head" equipOn="small_mech" icon="exo_mech.light.ico" cost="0" weight="0" unequip="true">
+        <light tile="light.large" />
+      </item>
+
+      <item id="small_mech.laser_head" type="equipment" slot="mech_head" equipOn="small_mech" cost="0" weight="0" unequip="true" range="10" attack="8" power="50" enableAttack="true" desc="item.descriptions.auto_fire">
+        <handleSecond>
+          <!-- <section if="(player.vehicle.equipment.getStateI('head')&NO_ATTACK) == 0 && getEnemyInRange(player.vehicle, this.info.range, this.info.attack, 0, 0) != null && player.vehicle.getUsableFuel() >= this.info.xml.get('power')"> -->
+          <section if="getEnemyInRange(player.vehicle, this.info.range, this.info.attack, 0, 0) != null && player.vehicle.getUsableFuel() >= eval(this.info.xml.get('power'))">
+          <!-- <action>player.vehicle.renderer.setItemAnimation("head", "fire", false); player.loseStamina(this.info.getStamina(player));</action> -->
+          <action>player.vehicle.useFuel(eval(this.info.xml.get('power')))</action>
+          <projectile tile="mega_earth_helm.projectile" animation="mega_earth_helm.projectile" width="16" height="16" speed="3" dx="player.vehicle.getDX()" spawner="player.vehicle" damage="this.info.attack" range="this.info.range" fire_sfx="fireball" underwater="true">
+            <hitEffect tile="mega_earth_helm.projectile" animation="mega_earth_helm.projectile.impact" />
+          </projectile>
+        </section></handleSecond>
+      </item>
+
+      <!-- Main Hand Weapons -->
+      <tile id="small_mech.marm" sheet="small_mech.2"/>
+      <animation id="equipment.small_mech.marm.idle" count="1" />
+      <animation id="equipment.small_mech.marm.move" x="1" count="14" />
+      <animation id="equipment.small_mech.marm" x="1" count="14" />
+      <item id="small_mech.marm" type="equipment" slot="attack" equipOn="small_mech" cost="0" weight="0" unequip="true"/>
+
+      <!-- Two handed Weapons -->
+      <tilesheet id="small_mech_bfg.png" width="36" height="22"/>
+      <tile id="small_mech.bfg" sheet="small_mech_bfg.png" offsetX="-7"/>
+      <animation id="equipment.small_mech.bfg" x="1" count="6" />
+      <item id="small_mech.bfg" type="equipment" slot="attack" equipOn="small_mech" icon="exo_mech.gun.ico" cost="0" power="100" weight="0" attack="10" range="15" unequip="true">
+        <use slot="defend"/><use slot="mech_back"/>
+        <projectile tile="exo_gun" animation="exo_gun.bolt" speed="4" critical="true" delay="4" offsetY="-2">
+          <pre><play object="this" animation="warmup" /></pre>
+          <hitEffect tile="exo_gun" animation="exo_gun.bolt.impact" color="99ccff" />
+        </projectile>
+      </item>
+
+      <!-- Offhand Utils -->
+      <tile id="small_mech.oarm" sheet="small_mech.3"/>
+      <animation id="equipment.small_mech.oarm.idle" count="1" />
+      <animation id="equipment.small_mech.oarm.move" x="1" count="14" />
+      <animation id="equipment.small_mech.oarm" x="1" count="14" />
+      <item id="small_mech.oarm" type="equipment" slot="defend" equipOn="small_mech" cost="0" weight="0" unequip="true"/>
+
+      <tilesheet id="small_mech_oshield.png" width="36" height="22"/>
+      <tile id="small_mech.oshield" sheet="small_mech_oshield.png" offsetX="-7"/>
+      <animation id="equipment.small_mech.oshield.idle" count="1" />
+      <animation id="equipment.small_mech.oshield.move" x="1" count="14" />
+      <animation id="equipment.small_mech.oshield" x="1" count="14" />
+      <item id="small_mech.oshield" type="equipment" slot="defend" equipOn="small_mech" icon="energy_shield.ico" cost="0" weight="0" use="block" unequip="true"/>
+
+      <tilesheet id="small_mech_drill.png" width="36" height="22"/>
+      <tile id="small_mech.drill" sheet="small_mech_drill.png" offsetX="-7"/>
+      <animation id="equipment.small_mech.drill.move" x="1" count="14" />
+      <animation id="equipment.small_mech.drill" x="4" count="5" length="0.5"/>
+      <item id="small_mech.drill" type="equipment" slot="defend" equipOn="small_mech" cost="0" power="25" mine="7" weight="0" unequip="true" sfx="drill">
+        <onEquip><action>object.mine_power = this.info.mine; object.mineSlot = "defend";</action></onEquip>
+        <onUnequip><action>object.mine_power = 0; object.mineSlot = null;</action></onUnequip>
+      </item>
+
+      <!-- Back -->
+      <item id="small_mech.power_core" type="equipment" slot="back" equipOn="small_mech" icon="power_core.ico" cost="0" weight="0" unequip="true">
+        <handleSecond><action>player.vehicle.addFuel(5);</action></handleSecond>
+      </item>
+
+      <lang id="en_US">
+        <section id="item.names">
+          <text id="small_mech.light">Small Mech Light</text>
+          <text id="small_mech.laser_head">Small Mech Visor</text>
+
+          <text id="small_mech.marm">Small Mech Main Arm</text>
+
+          <text id="small_mech.bfg">Small Mech Cannon</text>
+
+          <text id="small_mech.oarm">Small Mech Second Arm</text>
+          <text id="small_mech.oshield">Small Mech Shield</text>
+          <text id="small_mech.drill">Small Mech Drill</text>
+
+          <text id="small_mech">Battlesuit</text>
+          <text id="med_mech">Gorilla</text>
+        </section>
+        <section id="item.descriptions">
+
+        </section>
+        <section id="equipment">
+          <text id="mech_boots">Boots:</text>
+        </section>
+        <section id="warning">
+          <text id="mek_equip">You can only install equipment for this vehicle in the [color=770000]Mek Factory[/color].</text>
+        </section>
+      </lang>
+    </init>
+</mod>
