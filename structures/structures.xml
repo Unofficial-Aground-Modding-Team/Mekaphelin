@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<data>
+  <tilesheet id="bunker_barracks_left4.png" width="56" height="55" />
+  <tilesheet id="bunker_barracks_mid4.png" width="54" height="55" />
+  <tilesheet id="bunker_barracks_right4.png" width="56" height="55" />
+  <tile id="barracks_left" sheet="bunker_barracks_left4.png"/>
+  <tile id="barracks_mid" sheet="bunker_barracks_mid4.png" />
+  <tile id="barracks_right" sheet="bunker_barracks_right4.png"/>
+  <animation id="bunker_barracks_base.off" x="0" count="1" />
+	<animation id="bunker_barracks_base.on" x="1" count="4" />
+  <structure id="barracks_kitchen" extends="bunker_kitchen" connectTo="bunker_right"/>
+  <structure id="bunker_barracks_base" tile="bunker" animation="bunker_barracks_base" sleep="true" powered="true" name="enter" behind="true" fullHeight="true" repairType="mechanic">
+    <operate>
+      <choose>
+        <section if="this.isPowered()">
+          <action>player.restoreHealth();</action>
+        </section>
+        <dialogue section="warning" id="not_powered_house" />
+      </choose>
+      <action if="var b = this.getBounds(); b.inflate(Tile.SIZE*3, 0); var s = area.getStructure(b, true, function(s){return s.info.id == 'o2_generator';}); return s != null && s.isPowered()">player.restoreOxygen();</action>
+      <action>player.restoreStamina();</action><save sleep="true" />
+    </operate>
+    <light tile="light.large" color="9ce1eb" offsetX="30" offsetY="45" />
+  </structure>
+  <tile id="bunker_left" equals="bunker" offsetX="-1"/>
+  <animation id="bunker_door_left.closed" x="1" count="4" offsetX="-1"/>
+  <animation id="bunker_door_left.closing" x="5" count="4" offsetX="-1" reverse="true" />
+  <animation id="bunker_door_left.opening" x="5" count="4" offsetX="-1"/>
+  <structure id="bunker_barracks_left" extends="bunker_barracks_base" tile="barracks_left">
+    <tile id="bunker_left" animation="bunker_door_left.closed" fps="15" y="0"/>
+    <over><action>var door = this.getTileById("bunker_left"); if(door != null) door.playAnimation("bunker_door_left.opening", false)</action></over>
+    <out><action>var door = this.getTileById("bunker_left"); if(door != null) door.playAnimation("bunker_door_left.closing", false, function(p){p.playAnimation("bunker_door_left.closed", true);})</action></out>
+  </structure>
+  <tile id="bunker_mid" equals="bunker" offsetX="-3"/>
+  <animation id="bunker_door_mid.closed" x="1" count="4" offsetX="-3"/>
+  <animation id="bunker_door_mid.closing" x="5" count="4" offsetX="-3" reverse="true" />
+  <animation id="bunker_door_mid.opening" x="5" count="4" offsetX="-3"/>
+  <structure id="bunker_barracks_mid" extends="bunker_barracks_base" tile="barracks_mid" connectTo="bunker_left">
+    <tile id="bunker_mid" animation="bunker_door_mid.closed" fps="15" y="0"/>
+    <over><action>var door = this.getTileById("bunker_mid"); if(door != null) door.playAnimation("bunker_door_mid.opening", false)</action></over>
+    <out><action>var door = this.getTileById("bunker_mid"); if(door != null) door.playAnimation("bunker_door_mid.closing", false, function(p){p.playAnimation("bunker_door_mid.closed", true);})</action></out>
+  </structure>
+  <tile id="bunker_right" equals="bunker" offsetX="-4"/>
+  <animation id="bunker_door_right.closed" x="1" count="4" offsetX="-3"/>
+  <animation id="bunker_door_right.closing" x="5" count="4" offsetX="-3" reverse="true" />
+  <animation id="bunker_door_right.opening" x="5" count="4" offsetX="-3"/>
+  <structure id="bunker_barracks_right" extends="bunker_barracks_base" tile="barracks_right" connectTo="bunker_mid">
+    <tile id="bunker_right" animation="bunker_door_right.closed" fps="15" y="0"/>
+    <over><action>var door = this.getTileById("bunker_right"); if(door != null) door.playAnimation("bunker_door_right.opening", false)</action></over>
+    <out><action>var door = this.getTileById("bunker_right"); if(door != null) door.playAnimation("bunker_door_right.closing", false, function(p){p.playAnimation("bunker_door_right.closed", true);})</action></out>
+  </structure>
+
+  <action>
+    function uefd_outpost(area,?x,?y) {
+        if (x == null){x = 0;}
+        if (y == null){y = -1;}
+        var dx = x + 100;
+        for (o in x...dx){mine(o,-1); setOre(o,-1,'cable');}
+        area.dispatchEvent(new Event("update_cables"));
+        var eStructure = getStructure('bunker_barracks_left');
+        area.addStructure(eStructure.create((x * Tile.SIZE) + 0, (y * Tile.SIZE)));
+        var eStructure = getStructure('bunker_barracks_mid');
+        area.addStructure(eStructure.create((x * Tile.SIZE) + 56, (y * Tile.SIZE)));
+        var eStructure = getStructure('bunker_barracks_right');
+        area.addStructure(eStructure.create((x * Tile.SIZE) + 110, (y * Tile.SIZE)));
+        var eStructure = getStructure('barracks_kitchen');
+        area.addStructure(eStructure.create((x * Tile.SIZE) + 166, (y * Tile.SIZE)));
+        }
+
+  </action>
+  <!-- <tilesheet id="dockthing.png" width="256" height="192"/>
+  <tile id="spaceport" sheet="dockthing.png" x="10"/> -->
+  <!-- <tile id="spaceport2" sheet="dockthing.png" x="0"/>
+  <tile id="spaceport3" sheet="dockthing.png" x="1"/> -->
+  <!-- <animation id="spaceport1" x="10" count="1"/>
+  <animation id="spaceport3" x="1" count="8"/>
+  <animation id="spaceport2" x="0" count="1"/>
+  <structure id="spaceport" tile="spaceport" animation="spaceport1">
+  <tile id="spaceport" animation="spaceport3" fps="8" y="5" front="true"/>
+  <tile id="spaceport" animation="spaceport2" y="20" front="true"/>
+</structure> -->
+
+  <!-- <structure id="bunker_barracks_left" x="0"/> <structure id="bunker_barracks_mid" x="3.375"/> <structure id="bunker_barracks_right" x="6.75"/>-->
+</data>

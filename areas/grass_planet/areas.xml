@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<data>
+  <!-- <action>
+    function checkMekaphelinMine(e){
+      var p = getLocalPlayer();
+      if((e.object == null || e.object.info.id != "drill_beetle") &amp;&amp; p.getCurrentArea() == e.area)
+      runProcedure("uefd_security.warn", null, p);
+    }
+    function checkMekaphelinKill(e){
+      var p = getLocalPlayer();
+      if(e.killer != null &amp;&amp; p.getCurrentArea() == e.area)
+      runProcedure("uefd_security.warn", null, p);
+    }
+    funtion convertCount(count){
+    switch count {
+        case 1: {
+              string = 'first';
+            };
+        case 2: {
+                string = 'second';
+            };
+        case 3: {
+                string = 'third';
+            };
+        case 4: {
+                string = 'fourth';
+            };
+    }
+    }
+
+  </action> -->
+  <procedure id="uefd_security.arrive">
+		<action>
+			var x = Math.round(player.getVCenterX())-8;
+      var y = Math.round(player.getVCenterY());
+      facing = player._getFacing();
+      scale = getGameScale();
+			uefd_security = ObjectInfo.make("uefd_security.drone", x-facing*30, y-8);
+      area.addObject(uefd_security); uefd_security.renderer.scaleX = -facing;
+      uefd_security.renderer.x -= facing*160;
+		</action>
+		<section if="scale != 1">
+      <action>setGameScale(1)</action>
+      <pan toObject="player.vehicle == null?player:player.vehicle" />
+    </section>
+		<lerp object="uefd_security" deltaX="facing*160/Tile.SIZE" modal="true" seconds="3" />
+	</procedure>
+	<procedure id="uefd_security.leave">
+		<action>uefd_security.renderer.scaleX = - uefd_security.renderer.scaleX;</action>
+    <lerp object="uefd_security" deltaX="-facing*160/Tile.SIZE" modal="true" seconds="3" />
+		<section if="scale != 1">
+      <action>setGameScale(scale)</action>
+      <pan toObject="player.vehicle == null?player:player.vehicle" />
+    </section>
+		<action>uefd_security.renderer.alpha = 0; area.removeObject(uefd_security)</action>
+	</procedure>
+  <procedure id="uefd_security.intro">
+    <run procedure="uefd_security.arrive" />
+    <wait seconds="1"><operate object="uefd_security" /></wait>
+    <!-- <dialogue section="unnature" id="intro1" speaker="splicer" />
+    <dialogue section="unnature" id="intro2" speaker="splicer" />
+    <dialogue section="unnature" id="intro3" speaker="splicer" />
+    <dialogue section="unnature" id="intro4" speaker="splicer" />
+    <dialogue section="unnature" id="intro5" speaker="player" />
+    <dialogue section="unnature" id="intro6" speaker="splicer" />
+    <dialogue section="unnature" id="intro7" speaker="splicer" /> -->
+    <wait seconds="1"><operate object="uefd_security" /></wait>
+    <run procedure="uefd_security.leave" />
+  </procedure>
+  <procedure id="uefd_security.warn">
+    <action if="player.vehicle == null && (player.tile_y != -1 || player.tile_x < 0 || player.tile_x > 127)" with="fade">player.setPosition(Utils.clampi(player.xPos, 0, 128*Tile.SIZE-player._width), -16); player.renderer.teleport();</action>
+    <action if="player.vehicle != null" with="fade">
+      player.vehicle.droneArea = null; player.vehicle.setPosition(Utils.clampi(player.vehicle.xPos, 0, 128*Tile.SIZE-player.vehicle._width), -16); player.vehicle.doDismount(true);
+    </action>
+    <run procedure="uefd_security.arrive" />
+    <wait seconds="1"><operate object="uefd_security" /></wait>
+    <action>
+      var count = player.getVar('uefd_warning');
+      player.setVar('uefd_warning',count + 1);
+      setGlobal('uefd_warning',player.getVar('uefd_warning'););
+    </action>
+    <section if="player.getVar('uefd_warning') &lt; 3">
+      <dialogue section="uefd" id="warning" speaker="uefd_security"/>
+    <wait seconds="1"><operate object="uefd_security" /></wait>
+    <run procedure="uefd_security.leave" /><stop/></section>
+
+    <section if="player.getVar('uefd_warning') == 3">
+      <dialogue section="uefd" id="warning_last" speaker="uefd_security"/>
+    <wait seconds="1"><operate object="uefd_security" /></wait>
+    <run procedure="uefd_security.leave" /></section>
+
+    <section if="player.getVar('uefd_warning') > 3">
+      <dialogue section="uefd" id="enrage1" speaker="uefd_security"/>
+      <run procedure="uefd_security.enrage"/>
+    </section>
+  </procedure>
+  <procedure id="uuefd_security.enrage">
+    <action>
+      area.removeEventListener("mine", checkMekaphelinMine);
+      area.removeEventListener("tree_cut", checkMekaphelinKill);
+      area.objects.removeEventListener("rem_object", checkMekaphelinKill);
+    </action>
+    <stop if="getFlag('uefd_security.enraged') || getFlag('uefd_security.deenrage')" />
+    <action>setFlag('uefd_security.enraged', true)</action>
+    <play object="uefd_security" animation="enrage" modal="true" />
+    <action>
+    x = uefd_security.tile_x;
+    y = uefd_security.tile_y;
+    facing = uefd_security.renderer.scaleX;
+    uefd_security_enraged = ObjectInfo.make("uefd_security.drone.enraged", x-facing, y);
+    area.removeObject(uefd_security);
+    area.addObject(uefd_security_enraged);
+    uefd_security_enraged.renderer.scaleX = -facing;
+  </action>
+  <dialogue section="uefd" id="punish" speaker="uefd_security_enraged"/>
+    <objects id="uefd_security.drone.enraged" start="-0.5" end="0" percent="0.001"/>
+  </procedure>
+
+  <planet id="mekaphelin.meks" height="80">
+    <orbit id="mekaphelin.meks.orbit" width="1024" height="96" background="colony.orbit" name="system.planet.mekaphelin.meks.orbit" type="none" distress="false">
+        <!-- <area id="mekaphelin.meks.island1"/> -->
+      <init><runAreaLoad /></init>
+      <onLoad><action>if(!getFlag('mekaphelin.signal')){setFlag('mekaphelin.signal',true);}</action><music id="orbit" seconds="1" /><radar tile="orbit.radar" animation="orbit.radar" padding="2" /></onLoad>
+    </orbit>
+  </planet>
+</data>

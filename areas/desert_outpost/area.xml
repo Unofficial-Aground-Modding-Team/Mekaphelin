@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<data>
+  <include id="mountain_range.xml"/>
+
+  <area id="mekaphelin.desert_moon" width="512" height="96" background="mekaphelin.desert_moon" planet="mekaphelin.desert" looping="true" name="mekaphelin.uefd_outpost" >
+      <appendArea id="desert.mountain" offsetX="100" offsetY="1"/>
+    <tiles id="desert.dirt_top" y="0" empty="true" />
+    <tiles id="bedrock" y="95" empty="true" />
+    <tiles id="desert.dirt" start="0" end="0.5" empty="true" />
+    <tiles id="basalt" start="0.5" end="1" empty="true" />
+    <ore id="oil" start="0.0" end="0.5" percent="0.0375" tile="desert.dirt" />
+    <ore id="uranium" start="0.9" end="1.0" percent="0.000625" tile="basalt" />
+    <ore id="diamond" start="0.8" end="1.0" percent="0.0125" tile="basalt" />
+    <ore id="gold" start="0.5" end="1.0" percent="0.0125" tile="basalt" />
+    <ore id="oil" start="0.5" end="0.8" percent="0.0375" tile="basalt" />
+    <ore id="chromium" start="0.8" end="1" percent="0.0375" tile="basalt" />
+    <object id="conifer_snow" x="216" y="-6" />
+    <object id="conifer_snow" x="127" y="-16" />
+    <objects id="conifer_snow" y="-32" startX="226" endX="243" minDist="6" maxDist="6" />
+    <objects id="conifer_snow" y="-16" startX="179" endX="207" minDist="6" maxDist="6" />
+    <objects id="conifer_snow" y="-52" startX="140" endX="168" minDist="6" maxDist="6" />
+    <objects id="conifer_snow" y="-19" startX="95" endX="105" minDist="6" maxDist="6" />
+
+    <!-- <objects id="bush_snow" y="-1" fromX="12" toX="29" percent="0.25" />
+    <objects id="red_bush_snow" y="-1" fromX="12" toX="29" percent="0.175"  /> -->
+    <init><runAreaLoad /></init>
+    <onLoad><music id="outpost" seconds="1" /></onLoad>
+  </area>
+  <planet id="mekaphelin.desert" height="80">
+    <orbit id="mekaphelin.desert.orbit" width="1024" height="96" background="stars.dwarf.orbit" name="system.mekaphelin.desert.orbit" type="none">
+      <area id="mekaphelin.desert_moon" />
+      <init><runAreaLoad /></init>
+      <onLoad><action>if(!getFlag('mekaphelin.signal')){setFlag('mekaphelin.signal',true);}</action><music id="orbit" seconds="1" /><radar tile="orbit.radar" animation="orbit.radar" padding="2" /></onLoad>
+    </orbit>
+  </planet>
+</data>

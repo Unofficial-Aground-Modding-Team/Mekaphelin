@@ -1,0 +1,50 @@
+<data>
+  <procedure id="arearemove">
+    <section if="player.vehicle == null">
+    <action>
+      var a = player.area.id;
+      var xpos = player.tile_x;
+      var ypos = player.tile_y;
+      player.teleport('spirit_box.void');
+      player.areas.remove(a);
+      player.teleport(a,xpos,ypos);
+      setGameTime(12);
+      setGameScale(2);
+    </action>
+  </section>
+  <!-- <section if="player.vehicle != null">
+  <action>
+    a = player.vehicle.area.id;
+    player.teleport('start');
+    player.areas.remove(a);
+    player.teleport(a, x="-282", y="-10")
+  </action>
+</section> -->
+<!-- <music id="minigame_shooter"/> -->
+  </procedure>
+<include id="parallax/parallax.xml" />
+<include id="space_parralax/parralax.xml" />
+<include id="grass_planet/areas.xml"/>
+<include id="desert_outpost/area.xml"/>
+<include id="system.xml" />
+<procedure id="scavenger.signal" extends="scavenger.signal">
+  <run procedure="mekaphelin.signal"/>
+</procedure>
+
+
+<area id="mekaphelin.dead_moon" width="256" height="96" hasO2="false" background="mekaphelin.dead_moon" planet="mekaphelin.dead" looping="true" name="mekaphelin.dead_moon" >
+  <tiles id="desert.dirt_top" y="0" empty="true" />
+  <tiles id="bedrock" y="95" empty="true" />
+  <tiles id="desert.dirt" start="0" end="0.5" empty="true" />
+  <tiles id="basalt" start="0.5" end="1" empty="true" />
+  <ore id="oil" start="0.0" end="0.5" percent="0.0375" tile="desert.dirt" />
+  <ore id="iron" start="0.2" end="0.5" percent="0.0125" tile="desert.dirt" />
+  <ore id="magnegem" start="0.4" end="0.5" percent="0.0025" tile="desert.dirt" />
+  <ore id="uranium" start="0.9" end="1.0" percent="0.000625" tile="basalt" />
+  <ore id="diamond" start="0.8" end="1.0" percent="0.0125" tile="basalt" />
+  <ore id="gold" start="0.5" end="1.0" percent="0.0125" tile="basalt" />
+  <init><runAreaLoad /></init>
+  <onLoad><music id="orbit_nocombat" seconds="1" /></onLoad>
+</area>
+
+</data>

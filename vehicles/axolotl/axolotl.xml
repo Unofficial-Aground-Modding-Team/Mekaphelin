@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<data>
+  <!-- LANG -->
+  <include id="lang.xml"/>
+  <!-- INTERIOR -->
+  <tilesheet id="axolotl_core.png" width="8" height="14"/>
+  <tile id="axolotl_core" sheet="axolotl_core.png" x="1" offsetY="-1"/>
+
+  <animation id="axolotl_core.slot.idle"><frame visible="false" /></animation>
+  <animation id="axolotl_core.slot.occupied" equals="item4" />
+  <object id="axolotl_core.slot" tile="axolotl_core" animation="this.health == 1?'axolotl_core.slot.occupied':'axolotl_core.slot.idle'" layer="npc">
+    <tooltip section="actions" id="take_power_core" if="this.health == 1" />
+    <tooltip section="actions" id="put_power_core" />
+    <addedToArea><action>setTile(this.tile_x, this.tile_y, "empty");</action></addedToArea>
+    <operate><choose>
+      <section if="this.health == 1">
+        <item id="axolotl_core" /><action>this.health = 0; player.clearOverlap(); player.overlapChanged();</action>
+        <play object="this" animation="axolotl_core.slot.idle" />
+      </section>
+      <section if="player.getItemCountStorehouse('axolotl_core') > 0">
+        <item id="axolotl_core" count="-1" storehouse="true" /><action>this.health = 1; player.clearOverlap(); player.overlapChanged();</action>
+        <play object="this" animation="axolotl_core.slot.occupied" loop="true" />
+      </section>
+      <dialogue section="warning" id="no_axolotl_core" />
+    </choose></operate>
+  </object>
+
+  <action>
+    function getAxolotlCores(ship){
+      var ret = 0;
+      if(ship.interior != null && ship.interior.getObjectsById('axolotl_core.slot')[0].health == 1)  ret += 2;
+      var tech = ship.equipment.get('tech').get();
+      if(tech != null){
+        if(tech.info.id == 'axolotl.power')  ret += 1;
+        if(tech.info.id == 'axolotl.fabricator')  ret -= 1;
+        if(tech.info.id == 'axolotl.shield')  ret -= 1;
+      }
+      return ret;
+    }
+  </action>
+  <include id="axolotl_interior.xml"/>
+
+  <tile id="axolotl.command" sheet="axolotl_interior.1" x="0" />
+  <animation id="axolotl.command.over" x="1" count="4"/>
+  <structure id="axolotl.command" tile="axolotl.command" room="true" name="operate">
+    <over><action>this.loopAnimation("over")</action></over>
+    <out><action>this.loopAnimation("idle")</action></out>
+    <operate>
+      <section if="getAxolotlCores(area.vehicle) > 0">
+        <action with="ellipse_fast">var v = area.vehicle; v.doExit(player); setGameScale(2); v.doMount(player, true);</action><stop />
+      </section><dialogue section="warning" id="no_axolotl_cores" />
+    </operate>
+  </structure>
+
+  <tile id="axolotl.filler" sheet="axolotl_interior.1" x="5" />
+  <structure id="axolotl.filler" tile="axolotl.filler" room="true"/>
+
+  <tile id="axolotl.center" sheet="axolotl_interior.1" x="6" />
+  <animation id="axolotl.center.over" x="1" count="8"/>
+  <structure id="axolotl.center" tile="axolotl.center" room="true">
+    <over><action>this.loopAnimation("over")</action></over>
+    <out><action>this.loopAnimation("idle")</action></out>
+  </structure>
+
+  <tile id="axolotl.engine" sheet="axolotl_interior.2" x="0" />
+  <animation id="axolotl.engine.over" x="1" count="3"/>
+  <structure id="axolotl.engine" tile="axolotl.engine" room="true">
+    <over><action if="getAxolotlCores(area.vehicle) > 0 && player.getPower() < player.getMaxPower()-25">player.restorePower();</action></over>
+    <out><run structure="axolotl.engine" event="over" /></out>
+    <over><action>this.loopAnimation("over")</action></over>
+    <out><action>this.loopAnimation("idle")</action></out>
+  </structure>
+
+  <tile id="axolotl.weaps" sheet="axolotl_interior.2" x="4" />
+  <animation id="axolotl.weaps.over" x="1" count="4"/>
+  <structure id="axolotl.weaps" tile="axolotl.weaps" name="operate" room="true">
+		<over><action>this.loopAnimation("over")</action></over>
+		<out><action>this.loopAnimation("idle")</action></out>
+		<operate><action>area.vehicle.manageEquipment(player)</action></operate>
+	</structure>
+
+  <tile id="axolotl.exit" sheet="axolotl_interior.2" x="9" />
+  <animation id="axolotl.exit.over" x="1" count="4"/>
+  <structure id="axolotl.exit" tile="axolotl.exit" room="true" name="exit">
+    <over><action>this.loopAnimation("over")</action></over>
+    <out><action>this.loopAnimation("idle")</action></out>
+    <operate><dialogue section="warning" id="spaceship_exit" if="var flight = player.getFlight(); return area.vehicle.exitFlying() && (flight == null || area.vehicle.tile_y <= -flight.flight.height)" /><action>area.vehicle.exit(player)</action></operate>
+  </structure>
+
+  <tile id="axolotl.cargo" sheet="axolotl_interior.3" x="0" />
+  <animation id="axolotl.cargo.over" x="1" count="4"/>
+  <structure id="axolotl.cargo" tile="axolotl.cargo" room="true" name="manage_cargo">
+    <operate><action>area.vehicle.manageInventory(player)</action></operate>
+    <over><action>this.loopAnimation("over")</action></over>
+    <out><action>this.loopAnimation("idle")</action></out>
+  </structure>
+
+  <tilesheet id="axolotl_door.png" width="2" height="16" />
+  <tile id="axolotl.doorh" sheet="axolotl_door.png" x="0" />
+  <animation id="axolotl.door.open" x="0" count="3" />
+  <animation id="axolotl.door.close" x="0" count="3" reverse="true" />
+  <object id="axolotl.doorh" tile="axolotl.doorh" width="16" height="16" behind="true" doorway="horizontal" overlapVehicle="true">
+    <over><play object="this" animation="axolotl.door.open" /></over>
+    <out><play object="this" animation="axolotl.door.close" /></out>
+  </object>
+  <object id="axolotl.doorv" extends="axolotl.doorh" rotate="true" doorway="vertical" />
+
+  <area id="axolotl.interior" name="axolotl" shouldLight="false">
+		<action>for(y in 0...6) for(x in 0...7) setBack(x, y, "empty")</action>
+
+		<structure id="axolotl.command" x="1" y="2" />
+		<structure id="axolotl.filler" x="0" y="2" />
+		<structure id="axolotl.weaps" x="0" y="3" />
+		<structure id="axolotl.cargo" x="3" y="4" />
+		<structure id="axolotl.engine" x="2" y="2" />
+    <object id="axolotl_core.slot" x="3.45" y="2" />
+    <structure id="axolotl.center" x="2" y="3" />
+    <structure id="axolotl.exit" x="1" y="4" />
+
+		<object id="axolotl.doorh" x="1.5" y="3" />
+		<object id="axolotl.doorv" x="2" y="2.5" />
+		<object id="axolotl.doorv" x="2" y="3.5" />
+		<object id="axolotl.doorh" x="2.5" y="3" />
+    <object id="axolotl.doorv" x="1" y="2.5" />
+
+		<init><music id="technically" seconds="1" /></init>
+		<onLoad><music id="technically" seconds="1" /></onLoad>
+	</area>
+
+  <!-- EXTERIOR -->
+  <include id="axolotl_exterior.xml" includeRoot="true"/>
+
+  <tile id="axolotl" sheet="axolotl_exterior.png" x="0" />
+  <animation id="axolotl.idle" x="0" count="1" length="7">
+    <append tile="axolotl.stuff" animation="axolotl.stuff"/>
+    <append tile="axolotl.gear" animation="axolotl.gear.down" />
+  </animation>
+  <animation id="axolotl.hover" x="0" count="1" length="8">
+    <append tile="axolotl.stuff" animation="axolotl.stuff"/>
+    <append tile="axolotl.antigrav" animation="axolotl.antigrav"/>
+  </animation>
+  <animation id="axolotl.fly" x="0" count="1" length="8">
+    <append tile="axolotl.stuff" animation="axolotl.stuff"/>
+    <append tile="axolotl.thrust" animation="axolotl.thrust"/>
+  </animation>
+  <animation id="axolotl.empty" x="0" count="1" length="4">
+    <append tile="axolotl.gear" animation="axolotl.gear.down2" />
+  </animation>
+  <animation id="axolotl.takeoff" count="1" length="7">
+    <append tile="axolotl.gear" animation="axolotl.gear.retract" />
+    <append tile="axolotl.antigrav" animation="axolotl.antigrav" />
+    <append tile="axolotl.stuff" animation="axolotl.stuff"/>
+  </animation>
+  <animation id="axolotl.land" count="1" length="7">
+    <append tile="axolotl.gear" animation="axolotl.gear.extend" />
+    <append tile="axolotl.antigrav" animation="axolotl.antigrav" />
+    <append tile="axolotl.stuff" animation="axolotl.stuff"/>
+  </animation>
+
+  <tile id="axolotl.shields" sheet="axolotl_exterior.png" x="1" />
+  <animation id="axolotl.shields" x="0" count="5" glow="true"/>
+
+  <tile id="axolotl.antigrav" sheet="axolotl_exterior.png" x="6" />
+  <animation id="axolotl.antigrav" x="0" count="4" glow="true"/>
+
+  <tile id="axolotl.thrust" sheet="axolotl_exterior.png" x="10" />
+  <animation id="axolotl.thrust" x="0" count="4" glow="true"/>
+
+  <tile id="axolotl.stuff" sheet="axolotl_exterior.png" x="14" />
+  <animation id="axolotl.stuff" x="0" count="4" length="2"/>
+
+  <tile id="axolotl.launcher" sheet="axolotl_exterior.png" x="18" />
+  <animation id="equipment.axolotl.launcher" x="1" count="5" length="2"/>
+
+  <tilesheet id="spiker_attack.png" width="32" height="32"/>
+  <tile id="spiker_attack" sheet="spiker_attack.png" x="0" offsetX="-22" offsetY="40"/>
+  <animation id="spiker_attack" count="8"/>
+
+  <tile id="axolotl.spiker" sheet="axolotl_exterior.png" x="24" />
+  <animation id="equipment.axolotl.spiker" x="0" count="5" length="1.6">
+    <append tile="spiker_attack" animation="spiker_attack"/>
+  </animation>
+
+
+
+  <tile id="axolotl.flak" sheet="axolotl_exterior.png" x="30" />
+  <animation id="equipment.axolotl.flak" x="0" count="5"/>
+  <animation id="equipment.axolotl.flak.idle" x="5" count="5" length="2"/>
+
+  <tile id="axolotl.gear" sheet="axolotl_exterior.png" x="40"/>
+  <animation id="axolotl.gear.retract" x="0" count="7"/>
+  <animation id="axolotl.gear.extend" x="0" count="7" reverse="true"/>
+  <animation id="axolotl.gear.down" x="0" count="1" />
+  <animation id="axolotl.gear.down2" x="12" count="1" />
+  <animation id="axolotl.gear.open" x="7" count="6" length="2"/>
+  <animation id="axolotl.gear.close" x="7" count="6" length="2" reverse="true"/>
+
+  <!-- SHIP -->
+  <vehicle id="axolotl" tile="axolotl" health="750" fuel="750" useBatteries="false" efficiency="0" fuelName="power" defense="5" speed="14" speedY="10" type="spaceship" blood="science.explosion.med" title="world.axolotl" underground="false" flight_height="999" max_weight="3000" death_sfx="explosion" block_icon="axolotl.shields.ico" block_behind="true" block_move="true" icon="escort_fighter.ico">
+    <interior area="axolotl.interior" offsetX="-6" enterX="1" enterY="4" exitX="1.2" operateX="1" operateY="2" />
+    <repair id="titanium" value="250" />
+    <operateHitbox x="15" y="75" width="15" height="10" />
+    <dismount><action>setGameScale(1); if(this.renderer != null) this.renderer.scaleX = 1; player.inventory.setItemCount(getItem('missile_pack.fabricator'),0);</action></dismount>
+    <light tile="light.fighter" /><slot id="attack" /><slot id="tech"/>
+    <onDeath><run procedure="launch.lifepod" /></onDeath>
+    <init><set id="partial" value="0" /></init>
+    <onFrame>
+      var of = Math.floor(frames); partial += frames-of; if(partial >= 1){of++; partial -= 1;}
+      var cores = getAxolotlCores(this);
+      var p = of*cores;
+      if(this.blocking){
+        if(this.equipment.get('tech').value != null && this.equipment.get('tech').value.info.id == 'axolotl.shield') p += 0;
+        else p -= of*4;
+      }
+      if(p > 0) this.addFuel(p); else if(p &lt; 0) this.useFuel(-p);
+    </onFrame>
+    <shield tile="axolotl.shields" animation="axolotl.shields"/>
+  </vehicle>
+
+
+
+</data>

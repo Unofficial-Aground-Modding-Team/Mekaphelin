@@ -1,0 +1,48 @@
+<data>
+<renderOverlay id="star" extends="star">
+<tile id="distress_signal" renderer="static" animation="distress_signal" fps="10" scale="1" x="-15/Tile.SIZE" y="-20/Tile.SIZE" if="eval(this.xml.get('distress')) == true"/>
+</renderOverlay>
+<animation id="planet.mekaphelin.gas">
+  <append tile="planet10" animation="single" color="d285d4" colorScale="2" />
+  <append tile="planet10.gas2" animation="single" color="e394e3" colorScale="1.5" />
+  <append tile="planet10.shadow" animation="single" /><frame visible="false" />
+</animation>
+<animation id="planet.mekaphelin.desert">
+    <append tile="planet4" animation="single" front="true" color="8c855c" colorScale="2" />
+    <append tile="planet4.land1" animation="single" front="true" color="ada77c" colorScale="2" />
+    <append tile="planet4.shadow" animation="single" front="true"/><frame visible="false" />
+</animation>
+<animation id="planet.mekaphelin.dead">
+    <append tile="planet4" animation="single" front="true" color="595959" colorScale="3" />
+    <append tile="planet4.land2" animation="single" front="true" color="494949" colorScale="3" />
+    <append tile="planet4.shadow" animation="single" front="true"/><frame visible="false" />
+</animation>
+<animation id="planet.mekaphelin.meks">
+  <append tile="planet7" animation="single" color="8fa9a9" colorScale="2" />
+  <append tile="planet7.land2" animation="single" color="6a8163" colorScale="2" />
+  <append tile="planet7.clouds" animation="single" color="6a8163" colorScale="2" />
+  <append tile="planet7.shadow" animation="single" /><frame visible="false" />
+</animation>
+<planet id="mekaphelin.gas" height="80">
+  <orbit id="mekaphelin.gas.orbit" width="1024" height="96" background="meks.gas.orbit" name="system.planet.mekaphelin.gas.orbit" type="none">
+    <init><runAreaLoad /></init>
+    <onLoad><action>if(!getFlag('mekaphelin.signal')){setFlag('mekaphelin.signal',true);}</action><music id="orbit" seconds="1" /><radar tile="orbit.radar" animation="orbit.radar" padding="2" /></onLoad>
+  </orbit>
+</planet>
+
+<planet id="mekaphelin.dead" height="80">
+  <orbit id="mekaphelin.dead.orbit" width="1024" height="96" background="stars.asteroids.orbit" name="system.mekaphelin.dead.orbit" type="none">
+    <area id="mekaphelin.dead_moon"/>
+    <init><runAreaLoad /></init>
+    <onLoad><action>if(!getFlag('mekaphelin.signal')){setFlag('mekaphelin.signal',true);}</action><music id="orbit" seconds="1" /><radar tile="orbit.radar" animation="orbit.radar" padding="2" /></onLoad>
+  </orbit>
+</planet>
+
+<!-- available="getFlag('meks_available')" -->
+<system id="mekaphelin" bgm="voyage" x="230" y="90" available="getFlag('meks_available')" distress="!getFlag('mekaphelin.signal')">
+  <planet id="mekaphelin.gas" tile="planet10" animation="planet.mekaphelin.gas" orbit="orbit2" orbitOffX="0" orbitOffY="0" offsetX="-30" offsetY="0" name="system.planet.mekaphelin.gas" />
+  <planet id="mekaphelin.desert" tile="planet2" animation="planet.mekaphelin.desert" offsetX="-20" offsetY="-30" name="system.planet.mekaphelin.desert" />
+  <planet id="mekaphelin.dead" tile="planet2" animation="planet.mekaphelin.dead" offsetX="-50" offsetY="23" name="system.planet.mekaphelin.dead" />
+  <planet id="mekaphelin.meks" tile="planet4" animation="planet.mekaphelin.meks" orbit="orbit4" offsetX="65" offsetY="10" name="system.planet.mekaphelin.meks" />
+</system>
+</data>

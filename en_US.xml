@@ -1,0 +1,60 @@
+<data>
+  <lang id="en_US">
+    <section id='item.names'>
+      <text id="chrome_plating">Chrome Plating</text>
+      <text id="carbon_lattice">Carbon Lattice</text>
+      <text id="advanced_circuitry">Advanced Circuitry</text>
+      <text id="polymers">Polymers</text>
+    </section>
+    <section id='item.descriptions'>
+    </section>
+    <section id="equipment">
+    </section>
+    <section id="common">
+    </section>
+    <section id="world">
+    </section>
+    <section id="quests">
+      <text id="mekaphelin_signal">Mysterious Signal</text>
+      <text id="mekaphelin_signal_find">???</text>
+    </section>
+    <section id="quest.description">
+      <text id="mekaphelin_signal">wants you to investigate the mysterious signal.</text>
+    </section>
+    <section id="player">
+      <text id="broken">It's fried! Maybe the [object=mechanic] can fix it...</text>
+      <text id="ouch" >Ouch! The com device is burning hot!</text>
+      <text id="com_device_fried"> It's fried... I wonder how that happened. </text>
+      <text id="mechanic_fix">I should head back home and see if the [object=mechanic] can fix it...</text>
+    </section>
+    <section id="mechanic">
+      <text id="mechanic.repair_com">Your com device is fried? How is that possible?!</text>
+      <text id="mekaphelin.repair">Let me repair that...</text>
+      <text id="mekaphelin.signal_1">It seems there was a signal so strong that it fried the comm device! I've used the data it collected before breaking to pinpoint the origin of the signal! You should head over to that system and find out what caused the signal!</text>
+    </section>
+    <section id="uefd">
+      <text id="warning">You have interfered with the ecosystem of this planet. This is your [global=uefd_warning] warning.</text>
+      <text id="warning_last">You have interfered with the ecosystem of this planet. This is your [global=uefd_warning] and last warning.</text>
+      <text id="mekaphelin.repair">Let me repair that...</text>
+      <text id="mekaphelin.signal_1">It seems there was a signal so strong that it fried the comm device! I've used the data it collected before breaking to pinpoint the origin of the signal! You should head over to that system and find out what caused the signal!</text>
+    </section>
+    <section id="system">
+      <text id="mekaphelin">Mekaphelin CF-64</text>
+    </section>
+    <section id="system.desc">
+      <text id="mekaphelin">M-type star 1000 light years from Earth. 2 confirmed exoplanets.</text>
+    </section>
+    <section id="system.planet">
+      <text id="mekaphelin.gas">Mekaphelin CF-64a</text>
+      <text id="mekaphelin.desert">Mekaphelin CF-64b</text>
+      <text id="mekaphelin.dead">Mekaphelin CF-64c</text>
+      <text id="mekaphelin.meks">Mekaphelin CF-64d</text>
+    </section>
+    <section id="system.planet.desc">
+      <text id="mekaphelin.gas">K-Type gas giant</text>
+      <text id="mekaphelin.meks"></text>
+      <text id="mekaphelin.desert"></text>
+      <text id="mekaphelin.dead"></text>
+    </section>
+  </lang>
+</data>
