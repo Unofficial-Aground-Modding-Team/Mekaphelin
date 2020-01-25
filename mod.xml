@@ -9,27 +9,7 @@
 	<loadAfter>Full Version</loadAfter>
 	<loadAfter>Planets Extended</loadAfter>
 	<init>
-		<!-- TODO :
-		1st [Alpha] Release (Proof-of-concept):
-		* Set up the Mekaphelin system.
-		- Green star, 1st planet is green/skyblue colored terrestrial planet, 2nd planet is lavender gas giant, with 2 moons, the sand-colored desert moon and the grey dead moon.
 
-		* Create the UEFD Outpost base on the desert moon of the purple gas giant, 1st in orbit from the star.
-		- The outpost is a mishmash of bunker buildings and tech. (Airom, you might wanna mash together some bunker buildings together and gimme some concepts for that.)
-
-		* Add the dead moon around the gas giant as well, filled with basic resources.
-		- Basic as in iron, quartz, gold, diamond, exo matter. Any other basic mining resources as needed.
-
-		(* Add mechs, exosuits, potentially the corvette.
-		* Drone Mechs are part of this update.)
-		Waiting on Airom for the last two parts.
-		On the topic of resources,
-		Desert moon can have oil, titanium, uranium, gold and chromium, and maybe a mountain range with trees for wood and coal mines.
-
-		Vast tracts of desert land can be used for farming as well, after its terraformed.
-
-
-	 -->
 	 <music id="outpost">
 		 <track id="{mod:full_version}/music/heights" x="86" width="100" y="79" height="-79" fade_tiles="2" />
 		 <track id="{mod:full_version}/music/desert"/>
@@ -41,9 +21,7 @@
 		<include id="items/items.xml" />
 		<include id="npcs/npcs.xml"/>
 		<include id="structures/structures.xml" />
+		<include id="_dev/mod.xml" child="init" if="getMod('project_zeta') != null"/>
 
-		<credits time="10" title="Mekaphelin System Team">
-        ChesireX42, Airom, Apprentice Alchemist
-      </credits>
   </init>
 </mod>

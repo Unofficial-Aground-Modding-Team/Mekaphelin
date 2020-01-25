@@ -1,0 +1,25 @@
+<airom>
+  <!-- Local Version 2.0 -->
+  <action>
+    function loadCorvette(player){
+      //the interior area top-left is (0,0)
+      // player.vehicle.getOverlappingObjects()[1].getId()
+      for(v in player.vehicle.getOverlappingObjects()){
+        if(v.getXml().get('canLoadVehicles')  == 'true'){
+          bayLocation = getAvailableBay(v, player.vehicle);
+          if(bayLocation != null) player.doTeleport(null,bayLocation.x * Tile.SIZE,bayLocation.y * Tile.SIZE,false,false,v.interior);
+          break;
+        }
+      }
+    }
+    function getAvailableBay(v, small){
+      bayName = small.getXml().get('loadInto');
+      for(b in v.interior.getStructuresById(bayName)){
+        if(!v.interior.hasObjectIdInTile(small.getId(), b.tile_x+1, b.tile_y-1)) return {x:b.tile_x+1, y:b.tile_y-1};
+      }
+    }
+    function unloadCorvette(player){
+      player.doTeleport(null,(player.vehicle.area.vehicle.tile_x + player.vehicle.tile_x) * Tile.SIZE,(player.vehicle.area.vehicle.tile_y + player.vehicle.tile_y) * Tile.SIZE,false,false,player.vehicle.area.vehicle.area);
+    }
+  </action>
+</airom>

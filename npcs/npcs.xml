@@ -1,4 +1,10 @@
 <data>
+  <!-- Engineer -->
+  <npc id="uefd_engineer"/>
+  <!-- Admiral -->
+  <npc id="uefd_leader"/>
+
+  <npc id="uefd_townfolk"/>
   <procedure id="mekaphelin.signal" >
     <section if="!getFlag('com_device_fried') && player.hasItem('com_device') && !getFlag('com_device_fried_earth')" >
     <dialogue section="player" id="ouch" speaker="player" />
