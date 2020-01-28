@@ -14,6 +14,7 @@
     </action>
     <dialogue section="player" id="com_device_fried" speaker="player" />
     <dialogue section="player" id="mechanic_fix" speaker="player" />
+    <stop/>
   </section>
   </procedure>
 <item id="com_device" type="tool" cost="0" weight="0" icon="com_device.ico" animation="item10" canStore="false">
