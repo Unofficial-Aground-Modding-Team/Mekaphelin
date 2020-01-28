@@ -24,8 +24,9 @@
   </procedure>
 <include id="parallax/parallax.xml" />
 <include id="space_parralax/parralax.xml" />
-<include id="grass_planet/areas.xml"/>
-<include id="desert_outpost/area.xml"/>
+<include id="grass_planet/grass_planet.xml"/>
+<include id="desert_outpost/desert_outpost.xml"/>
+<include id="gas_giant/gas_giant.xml"/>
 <include id="system.xml" />
 <procedure id="scavenger.signal" extends="scavenger.signal">
   <run procedure="mekaphelin.signal"/>

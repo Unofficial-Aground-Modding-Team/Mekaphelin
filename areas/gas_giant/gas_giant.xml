@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<data>
+  <include id="parallax.xml"/>
+  <lang id="en_US">
+    <section id="common">
+      <text id="to_much_pressure">To much pressure! Losing health!</text>
+    </section>
+  </lang>
+
+  <!-- <action>
+    function maxPressure(player,area){
+    if (player.tile_y &lt; Area.getXml(area.id).get('max_p')){return true;}
+    else return false;
+    }
+    function doPressureDamage(area,player){
+    }
+  </action> -->
+  <procedure id="gas_giant.handleSecond">
+    <!-- <section if="getLocalPlayer().area.id == 'gas_giant'">
+      <section if="maxPressure(player,area)">
+        <show id="pressure" tooltip="popup" text="common.to_much_pressure" x="0.5" y="0.25" seconds="0"/>
+        <invokeLater seconds="2"><run procedure="gas_giant.pressure"/></invokeLater>
+      </section>
+    <invokeLater seconds="1">
+      <run procedure="gas_giant.handleSecond"/>
+    </invokeLater> -->
+  <!-- </section> -->
+  </procedure>
+  <procedure id="gas_giant.pressure">
+    <!-- <section if="getLocalPlayer().area.id == 'gas_giant'">
+      <section if="maxPressure(player,area)">
+        <action>
+          doPressureDamage(area,player);
+        </action>
+        <show tooltip="popup" text="common.to_much_pressure" x="0.5" y="0.25"/>
+      </section>
+    <invokeLater seconds="1">
+      <run procedure="gas_giant.pressure"/>
+    </invokeLater> -->
+  <!-- </section> -->
+  </procedure>
+  <area id="gas_giant" width="200" background="gas_giant" hasO2="false" planet="mekaphelin.gas">
+    <tiles id="bedrock" y="0" empty="true" />
+    <init>
+      <runAreaLoad/>
+    </init>
+    <onLoad>
+      <!-- <run procedure="gas_giant.handleSecond"/> -->
+    </onLoad>
+  </area>
+  <planet id="mekaphelin.gas" height="80">
+    <orbit id="mekaphelin.gas.orbit" width="1024" height="96" background="meks.gas.orbit" name="system.planet.mekaphelin.gas.orbit" type="none">
+      <area id="gas_giant"/>
+      <init><runAreaLoad /></init>
+      <onLoad>
+        <action>
+          if(!getFlag('mekaphelin.signal')){setFlag('mekaphelin.signal',true);}
+        </action><music id="orbit" seconds="1" />
+        <radar tile="orbit.radar" animation="orbit.radar" padding="2" />
+      </onLoad>
+    </orbit>
+  </planet>
+</data>

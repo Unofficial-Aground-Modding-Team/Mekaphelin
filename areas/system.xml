@@ -23,12 +23,7 @@
   <append tile="planet7.clouds" animation="single" color="6a8163" colorScale="2" />
   <append tile="planet7.shadow" animation="single" /><frame visible="false" />
 </animation>
-<planet id="mekaphelin.gas" height="80">
-  <orbit id="mekaphelin.gas.orbit" width="1024" height="96" background="meks.gas.orbit" name="system.planet.mekaphelin.gas.orbit" type="none">
-    <init><runAreaLoad /></init>
-    <onLoad><action>if(!getFlag('mekaphelin.signal')){setFlag('mekaphelin.signal',true);}</action><music id="orbit" seconds="1" /><radar tile="orbit.radar" animation="orbit.radar" padding="2" /></onLoad>
-  </orbit>
-</planet>
+
 
 <planet id="mekaphelin.dead" height="80">
   <orbit id="mekaphelin.dead.orbit" width="1024" height="96" background="stars.asteroids.orbit" name="system.mekaphelin.dead.orbit" type="none">

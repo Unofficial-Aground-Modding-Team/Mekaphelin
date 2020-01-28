@@ -21,7 +21,5 @@
 		<include id="items/items.xml" />
 		<include id="npcs/npcs.xml"/>
 		<include id="structures/structures.xml" />
-		<include id="_dev/mod.xml" child="init" if="getMod('project_zeta') != null"/>
-
   </init>
 </mod>

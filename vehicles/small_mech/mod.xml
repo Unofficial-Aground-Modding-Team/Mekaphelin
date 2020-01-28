@@ -23,10 +23,10 @@
 
       <vehicle id="small_mech" tile="small_mech" health="200" speed="2" defense="8" fps="9" fuel="5000" efficiency="0" tooltip="structure.tooltip.operate" icon="exo_mech.ico" blood="science.explosion.sm" max_weight="1000" hitDamage="1" death_sfx="explosion" block_move="true" oxygen="100" underwater="true">
         <!-- <slot id="head"><run procedure="check_meks_equip" /></slot> -->
-        <slot id="head" />
+        <slot id="mech_head" />
         <slot id="attack"/>
         <slot id="defend"/>
-        <slot id="back" />
+        <slot id="mech_back" />
         <slot id="mech_boots" />
         <init><set id="partial" value="0" /></init>
         <onFrame>
@@ -125,6 +125,8 @@
 
         </section>
         <section id="equipment">
+          <text id="mech_head">Headgear:</text>
+          <text id="mech_back">Back:</text>
           <text id="mech_boots">Boots:</text>
         </section>
         <section id="warning">

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <data>
-  <!-- Local Version 1.0 -->
+
   <tilesheet id="manufactory.png" width="217" height="80"/>
   <tile id="manufactory" sheet="manufactory.png" x="0"/>
   <animation id="manufactory.door.open" x="9" count="8"/>
@@ -29,7 +29,11 @@
     <operate><section if="!this.isPowered()"><dialogue section="warning" id="not_powered" /><stop /></section></operate>
     <light tile="light.large" color="9ce1eb" offsetX="53" offsetY="45" /><!-- Check -->
   </structure>
-
+  <recipe id="small_mech" object="small_mech" description="item.descriptions.small_mech" type="manufactory" achievement="">
+		<item id="titanium" count="5" />
+		<item id="steel_bar" count="5" />
+		<item id="silicon" count="5" />
+	</recipe>
   <!-- <recipe id="pp_fuel_tritium" fuel="5000" type="fusion_plant"><item id="tritium" /></recipe>
   <recipe id="pp_fuel_helium" fuel="5000" type="fusion_plant"><item id="mek_helium" /></recipe>
   <recipe id="pp_fuel_uefd_fuel_rod" fuel="10000" type="fusion_plant"><item id="uefd_fuel_rod" /></recipe>
@@ -107,9 +111,9 @@
     function uefd_outpost(area,?x,?y) {
         if (x == null){x = 0;}
         if (y == null){y = -1;}
-        var dx = x + 100;
-        for (o in x...dx){mine(o,-1); setOre(o,-1,'cable');}
-        area.dispatchEvent(new Event("update_cables"));
+        //var dx = x + 100;
+        //for (o in x...dx){mine(o,-1); setOre(o,-1,'cable');}
+        //area.dispatchEvent(new Event("update_cables"));
         var eStructure = getStructure('bunker_barracks_left');
         area.addStructure(eStructure.create((x * Tile.SIZE) + 0, (y * Tile.SIZE)));
         var eStructure = getStructure('bunker_barracks_mid');
@@ -121,17 +125,5 @@
         }
 
   </action>
-  <!-- <tilesheet id="dockthing.png" width="256" height="192"/>
-  <tile id="spaceport" sheet="dockthing.png" x="10"/> -->
-  <!-- <tile id="spaceport2" sheet="dockthing.png" x="0"/>
-  <tile id="spaceport3" sheet="dockthing.png" x="1"/> -->
-  <!-- <animation id="spaceport1" x="10" count="1"/>
-  <animation id="spaceport3" x="1" count="8"/>
-  <animation id="spaceport2" x="0" count="1"/>
-  <structure id="spaceport" tile="spaceport" animation="spaceport1">
-  <tile id="spaceport" animation="spaceport3" fps="8" y="5" front="true"/>
-  <tile id="spaceport" animation="spaceport2" y="20" front="true"/>
-</structure> -->
 
-  <!-- <structure id="bunker_barracks_left" x="0"/> <structure id="bunker_barracks_mid" x="3.375"/> <structure id="bunker_barracks_right" x="6.75"/>-->
 </data>
