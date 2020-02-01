@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <data>
 <include id="axolotl/axolotl.xml"/>
-<include id="carrier_corvette/ships.xml" if="getMod('Meks Ships') == null"/>
-<include id="small_mech/mod.xml" child="init" if="getMod('Meks Mechs') == null"/>
+
+<include id="carrier_corvette/ships.xml" if="getMod('mekaphelin_airom') == null"/>
+<include id="small_mech/mod.xml" child="init" if="getMod('mekaphelin_airom') == null"/>
 </data>

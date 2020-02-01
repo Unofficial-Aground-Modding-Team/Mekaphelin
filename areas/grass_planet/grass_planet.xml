@@ -11,23 +11,6 @@
       if(e.killer != null &amp;&amp; p.getCurrentArea() == e.area)
       runProcedure("uefd_security.warn", null, p);
     }
-    funtion convertCount(count){
-    switch count {
-        case 1: {
-              string = 'first';
-            };
-        case 2: {
-                string = 'second';
-            };
-        case 3: {
-                string = 'third';
-            };
-        case 4: {
-                string = 'fourth';
-            };
-    }
-    }
-
   </action> -->
   <procedure id="uefd_security.arrive">
 		<action>
@@ -115,10 +98,10 @@
   <dialogue section="uefd" id="punish" speaker="uefd_security_enraged"/>
     <objects id="uefd_security.drone.enraged" start="-0.5" end="0" percent="0.001"/>
   </procedure>
-
-  <planet id="mekaphelin.meks" height="80">
-    <orbit id="mekaphelin.meks.orbit" width="1024" height="96" background="colony.orbit" name="system.planet.mekaphelin.meks.orbit" type="none" distress="false">
-        <!-- <area id="mekaphelin.meks.island1"/> -->
+  <include id="area.xml"/>
+  <planet id="mekaphelin.grass" height="80">
+    <orbit id="mekaphelin.grass.orbit" width="1024" height="96" background="colony.orbit" name="system.planet.mekaphelin.meks.orbit" type="none" distress="false">
+        <area id="mekaphelin.grass.island1"/>
       <init><runAreaLoad /></init>
       <onLoad><action>if(!getFlag('mekaphelin.signal')){setFlag('mekaphelin.signal',true);}</action><music id="orbit" seconds="1" /><radar tile="orbit.radar" animation="orbit.radar" padding="2" /></onLoad>
     </orbit>

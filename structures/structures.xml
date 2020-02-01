@@ -1,4 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <data>
-  <include id="outpost/structures.xml" if="getMod('Meks Structures') == null"/>
+  <include id="outpost/structures.xml" if="getMod('mekaphelin_airom') == null"/>
 </data>

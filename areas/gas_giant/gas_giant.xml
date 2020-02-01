@@ -45,8 +45,14 @@
       <runAreaLoad/>
     </init>
     <onLoad>
+      <action>
+        setFlag('gas_loaded',false)
+      </action>
       <!-- <run procedure="gas_giant.handleSecond"/> -->
     </onLoad>
+    <onTick>
+      if(getFlag('gas_loaded') == false){trace('Success');};
+    </onTick>
   </area>
   <planet id="mekaphelin.gas" height="80">
     <orbit id="mekaphelin.gas.orbit" width="1024" height="96" background="meks.gas.orbit" name="system.planet.mekaphelin.gas.orbit" type="none">
