@@ -5,14 +5,45 @@
       <text id="carbon_lattice">Carbon Lattice</text>
       <text id="advanced_circuitry">Advanced Circuitry</text>
       <text id="polymers">Polymers</text>
+
+      <text id="axolotl.flak">Flak Cannon</text>
+      <text id="axolotl.launcher">Missile Pods</text>
+      <text id="axolotl.spiker">Plasma Spiker</text>
+      <text id="axolotl.warp">Hyperdrive</text>
+      <text id="axolotl.fabricator">Missile Fabricator</text>
+      <text id="axolotl.laser">Laser Gun</text>
+      <text id="axolotl_core">Axolotl Core</text>
+      <text id="missile_pack">Missile Pack</text>
+      <text id="missile_pack.fabricator">Fabricated Missile Pack</text>
+      <text id="axolotl.power">Auxillary Power</text>
+      <text id="axolotl.shield">Shield Booster</text>
     </section>
     <section id='item.descriptions'>
+      <text id="axolotl.power">+1 Power Generation</text>
+      <text id="axolotl.fabricator">-1 Power Generation \nCreates Missiles</text>
+      <text id="axolotl.shield">-1 Power Generation \nNo Shield Cost</text>
+    </section>
+    <section id="warning">
+      <text id="no_axolotl_core">You have no [item=axolotl_core]s to install...</text>
+      <text id="no_axolotl_cores">Insufficient power for operation!</text>
     </section>
     <section id="equipment">
+      <text id="tech">Tech:</text>
     </section>
     <section id="common">
     </section>
+    <section id="vehicle">
+      <text id="load_corvette">Load</text>
+      <text id="unload_corvette">Unload</text>
+    </section>
     <section id="world">
+      <text id="axolotl">Axolotl</text>
+      <text id="corvette">Corvette</text>
+      <text id="frigate">Frigate</text>
+      <text id="carrier">Carrier</text>
+    </section>
+    <section id="structure.tooltip">
+      <text id="exit">Exit</text>
     </section>
     <section id="quests">
       <text id="mekaphelin_signal">Mysterious Signal</text>

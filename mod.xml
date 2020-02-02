@@ -6,10 +6,9 @@
 	<version>None</version>
   <website>https://discord.gg/ZDyYpTE</website>
   <requires>Full Version</requires>
-	<loadAfter>Full Version</loadAfter>
 	<loadAfter>Planets Extended</loadAfter>
+	<loadAfter>Asteroids</loadAfter>
 	<init>
-
 	 <music id="outpost">
 		 <track id="{mod:full_version}/music/heights" x="86" width="100" y="79" height="-79" fade_tiles="2" />
 		 <track id="{mod:full_version}/music/desert"/>
