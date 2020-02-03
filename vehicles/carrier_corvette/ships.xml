@@ -12,7 +12,7 @@
   <tile id="empty2" /><!-- the "empty" tile has special handling, vehicles can still move-->
   <structure id="uefd_carrier.bg" tile="uefd_carrier" priority="-2" back="true" remove="false" />
   <area id="uefd_carrier.interior">
-    <!-- <structure id="uefd_carrier.bg" x="0" y="0" /> -->
+    <structure id="uefd_carrier.bg" x="0" y="0" />
     <object id="ship.exit3" x="15" y="-10" />
 
     <structure id="corvette_bay" x="10" y="0"/>
@@ -85,8 +85,6 @@
   <tile id="corvette_bay_back" sheet="corvette_bay.png" x="0"/>
   <tile id="corvette_bay_front" sheet="corvette_bay.png" x="1"/>
   <structure id="corvette_bay" tile="corvette_bay_back" remove="false" spaceship="true" layer="npc">
-    <!-- <tile id="station.dock" name="back" animation="hidden" fps="9" y="0" behind="true" /> -->
-    <!-- <tile id="station.dock" name="top" animation="station.dock.idle.top" fps="9" x="0" y="0" /> -->
     <rideableExit>
       <section if="rideable.info.xml.get('type') == 'spaceship'">
         <action>player.doTeleport(null, (this.tile_x+6.5)*Tile.SIZE, (this.tile_y-2.5)*Tile.SIZE, false, false, this.area);</action><stop />
