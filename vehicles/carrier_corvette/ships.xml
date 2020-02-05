@@ -1,24 +1,26 @@
 <data>
   <include id="vehicleLoading.xml"/>
-  <!-- Local Version 1.0 -->
+
   <tilesheet id="uefd_carrier.png" width="832" height="256"/>
   <tile id="uefd_carrier" sheet="uefd_carrier.png"/>
   <vehicle id="uefd_carrier" extends="colony_ship" tile="uefd_carrier" canLoadVehicles="true" spaceship="true">
     <interior area="uefd_carrier.interior" offsetX="0" offsetY="-464" enterX="10" enterY="-1" exitX="7" operateX="6" operateY="-24" />
-    <tooltip section="structure.tooltip" id="spaceship" if="player.vehicle.getId() == 'corvette'" />
+    <tooltip section="vehicle" id="load_corvette" if="player.vehicle != null && player.vehicle.getId() == 'corvette'"/>
     <operate><action with="ellipse_fast">if(player.vehicle == null) this.enter(player); else loadCorvette(player);</action><stop/></operate>
   </vehicle>
 
+  <tile id="empty2" /><!-- the "empty" tile has special handling, vehicles can still move-->
   <structure id="uefd_carrier.bg" tile="uefd_carrier" priority="-2" back="true" remove="false" />
   <area id="uefd_carrier.interior">
-    <structure id="uefd_carrier.bg" x="0" y="0" />
+    <!-- <structure id="uefd_carrier.bg" x="0" y="0" /> -->
     <object id="ship.exit3" x="15" y="-10" />
-    <structure id="corvette_bay" x="9" y="0"/>
-    <structure id="corvette_bay" x="18" y="0"/>
-    <structure id="corvette_bay" x="27" y="0"/>
-    <structure id="corvette_bay" x="36" y="0"/>
 
-    <tiles from="uefd_carrier_tiles.png" x="0" y="-16"><tile id="empty" color="000000" /><tile id="empty" layer="back" color="ffffff" /><tile id="no_place" color="ff0000" layer="back" /></tiles>
+    <structure id="corvette_bay" x="10" y="0"/>
+    <object id="corvette_bay_front" x="10" y="0"/>
+    <structure id="corvette_bay" x="20" y="0"/>
+    <object id="corvette_bay_front" x="20" y="0"/>
+
+    <tiles from="uefd_carrier_tiles.png" x="0" y="-16"><tile id="empty" color="000000" /><tile id="empty2" layer="back" color="ffffff" /><tile id="no_place" color="ff0000" layer="back" /></tiles>
     <init><runAreaLoad /></init>
   </area>
 
@@ -79,20 +81,19 @@
     <shield tile="fighter.shields" animation="fighter.shields" hit_front="fighter.shields.front" hit_back="fighter.shields.back" hit_sfx="ship_shield" />
   </vehicle>
 
-  <structure id="corvette_bay" width="160" height="98" image="corvette_bay.png" priority="-1" remove="false" layer="npc">
+  <tilesheet id="corvette_bay.png" width="160" height="92" />
+  <tile id="corvette_bay_back" sheet="corvette_bay.png" x="0"/>
+  <tile id="corvette_bay_front" sheet="corvette_bay.png" x="1"/>
+  <structure id="corvette_bay" tile="corvette_bay_back" remove="false" spaceship="true" layer="npc">
     <!-- <tile id="station.dock" name="back" animation="hidden" fps="9" y="0" behind="true" /> -->
     <!-- <tile id="station.dock" name="top" animation="station.dock.idle.top" fps="9" x="0" y="0" /> -->
     <rideableExit>
       <section if="rideable.info.xml.get('type') == 'spaceship'">
-        <action>player.doTeleport(null, (this.tile_x+11)*Tile.SIZE, (this.tile_y-Math.round(this.info.height/Tile.SIZE)+7)*Tile.SIZE, false, false, this.area);</action><stop />
+        <action>player.doTeleport(null, (this.tile_x+6.5)*Tile.SIZE, (this.tile_y-2.5)*Tile.SIZE, false, false, this.area);</action><stop />
       </section>
     </rideableExit>
+    <tooltip section="vehicle" id="unload_corvette" if="player.vehicle != null" />
+    <operate><section if="player.vehicle != null"><action>unloadCorvette(player)</action><stop /></section></operate>
   </structure>
-
-  <lang id="en_US">
-    <section id="vehicle">
-      <text id="load_corvette">Load</text>
-      <text id="unload_corvette">Unload</text>
-    </section>
-  </lang>
+  <object id="corvette_bay_front" tile="corvette_bay_front" layer="top"/>
 </data>
