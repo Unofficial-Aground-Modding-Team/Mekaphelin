@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <data>
-
-  <tilesheet id="manufactory.png" width="217" height="80"/>
+  <include id="manufactory.xml"/>
   <tile id="manufactory" sheet="manufactory.png" x="0"/>
   <animation id="manufactory.door.open" x="9" count="8"/>
   <animation id="manufactory.door.close" x="9" count="8" reverse="true"/>
@@ -29,7 +28,7 @@
     <operate><section if="!this.isPowered()"><dialogue section="warning" id="not_powered" /><stop /></section></operate>
     <light tile="light.large" color="9ce1eb" offsetX="53" offsetY="45" /><!-- Check -->
   </structure>
-  <recipe id="small_mech" object="small_mech" description="item.descriptions.small_mech" type="manufactory" achievement="">
+  <recipe id="small_mech" object="small_mech" description="item.descriptions.small_mech" type="manufactory">
 		<item id="titanium" count="5" />
 		<item id="steel_bar" count="5" />
 		<item id="silicon" count="5" />

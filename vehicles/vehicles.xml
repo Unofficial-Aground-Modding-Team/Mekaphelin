@@ -3,4 +3,5 @@
   <include id="axolotl/axolotl.xml"/>
   <include id="carrier_corvette/ships.xml"/>
   <include id="small_mech/mod.xml" child="init"/>
+  <include id="med_mech/mech.xml"/>
 </data>

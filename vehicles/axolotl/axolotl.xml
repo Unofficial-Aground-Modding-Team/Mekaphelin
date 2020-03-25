@@ -6,17 +6,26 @@
 
   <animation id="axolotl_core.slot.idle"><frame visible="false" /></animation>
   <animation id="axolotl_core.slot.occupied" equals="item4" />
+  <!-- TODO: Power core anim -->
   <object id="axolotl_core.slot" tile="axolotl_core" animation="this.health == 1?'axolotl_core.slot.occupied':'axolotl_core.slot.idle'" layer="npc">
-    <tooltip section="actions" id="take_power_core" if="this.health == 1" />
+    <tooltip section="actions" id="take_power_core" if="this.health == 1 || this.health == 2" />
     <tooltip section="actions" id="put_power_core" />
     <addedToArea><action>setTile(this.tile_x, this.tile_y, "empty");</action></addedToArea>
     <operate><choose>
       <section if="this.health == 1">
+        <item id="power_core" /><action>this.health = 0; player.clearOverlap(); player.overlapChanged();</action>
+        <play object="this" animation="axolotl_core.slot.idle" />
+      </section>
+      <section if="this.health == 2">
         <item id="axolotl_core" /><action>this.health = 0; player.clearOverlap(); player.overlapChanged();</action>
         <play object="this" animation="axolotl_core.slot.idle" />
       </section>
       <section if="player.getItemCountStorehouse('axolotl_core') > 0">
         <item id="axolotl_core" count="-1" storehouse="true" /><action>this.health = 1; player.clearOverlap(); player.overlapChanged();</action>
+        <play object="this" animation="axolotl_core.slot.occupied" loop="true" />
+      </section>
+      <section if="player.getItemCountStorehouse('power_core') > 0">
+        <item id="power_core" count="-1" storehouse="true" /><action>this.health = 1; player.clearOverlap(); player.overlapChanged();</action>
         <play object="this" animation="axolotl_core.slot.occupied" loop="true" />
       </section>
       <dialogue section="warning" id="no_axolotl_core" />
@@ -263,7 +272,9 @@
     <projectile tile="spiker_projectile.4" speed="8" offsetX="-35" offsetY="13" delay="5" overlap="0.25" aimX="1" aimY=".25"/>
     <projectile tile="spiker_projectile.5" speed="8" offsetX="-35" offsetY="13" delay="5" overlap="0.25" aimX=".75" aimY=".5"/>
   </item>
-  <item id="axolotl.power" type="equipment" slot="tech" equipOn="axolotl" cost="8000" weight="20" icon="axolotl.power.ico"/>
+  <item id="axolotl.power" type="equipment" slot="tech" equipOn="axolotl" cost="8000" weight="20" icon="axolotl.power.ico">
+    <equipOn id="med_mech"/>
+  </item>
   <item id="axolotl.fabricator" type="equipment" slot="tech" equipOn="axolotl" cost="8000" weight="20" icon="axolotl.fabricator.ico">
     <handleSecond><action>player.inventory.setItemCount(getItem('missile_pack.fabricator'),1)</action></handleSecond>
   </item>
