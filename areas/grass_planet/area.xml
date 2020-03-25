@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <data>
+  <procedure id="grass_planet1.onLoad">
+    
+  </procedure>
   <area id="mekaphelin.grass.island1" width="150" height="96" background="start" planet="mekaphelin.grass" name="system.planet.mekaphelin.grass">
     <tiles id="sci1.grass" y="0" empty="true" />
 		<tiles id="bedrock" y="95" empty="true" />
@@ -23,10 +26,8 @@
     </fishing>
     <init><runAreaLoad /></init>
     <onLoad>
-      <!-- <weather type="rain" fromX="0" toX="128" fromY="-22" toY="0" power="0.5" velocity="15" />
-      <weather type="snow" fromY="-50" toY="-24" /> -->
+      <run procedure="grass_planet1.onLoad"/>
       <music id="colony" seconds="1" />
     </onLoad>
   </area>
-
 </data>
