@@ -92,8 +92,6 @@
   <tile id="corvette_bay_back" sheet="corvette_bay.png" x="0"/>
   <tile id="corvette_bay_front" sheet="corvette_bay.png" x="1"/>
   <structure id="corvette_bay" tile="corvette_bay_back" remove="false" spaceship="true" layer="npc">
-    <!-- <tile id="station.dock" name="back" animation="hidden" fps="9" y="0" behind="true" /> -->
-    <!-- <tile id="station.dock" name="top" animation="station.dock.idle.top" fps="9" x="0" y="0" /> -->
     <rideableExit>
       <section if="rideable.info.xml.get('type') == 'spaceship'">
         <action>player.doTeleport(null, (this.tile_x+6.5)*Tile.SIZE, (this.tile_y-2.5)*Tile.SIZE, false, false, this.area);</action><stop />

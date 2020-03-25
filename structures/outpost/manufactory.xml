@@ -1,0 +1,27 @@
+<tilesheet id='manufactory.png' width='217' height='80'>
+	<image frame='0' x='0' y='0' width='217' height='67' offsetX='0' offsetY='13' />
+	<image frame='1' x='217' y='0' width='217' height='67' offsetX='0' offsetY='13' />
+	<image frame='2' x='0' y='67' width='217' height='67' offsetX='0' offsetY='13' />
+	<image frame='3' x='217' y='67' width='217' height='67' offsetX='0' offsetY='13' />
+	<image frame='4' x='0' y='134' width='217' height='67' offsetX='0' offsetY='13' />
+	<image frame='5' x='0' y='201' width='217' height='67' offsetX='0' offsetY='13' />
+	<image frame='6' x='0' y='268' width='217' height='67' offsetX='0' offsetY='13' />
+	<image frame='7' x='217' y='134' width='217' height='67' offsetX='0' offsetY='13' />
+	<image frame='8' x='217' y='201' width='217' height='67' offsetX='0' offsetY='13' />
+	<image frame='9' x='0' y='335' width='105' height='20' offsetX='56' offsetY='60' />
+	<image frame='10' x='0' y='355' width='105' height='20' offsetX='56' offsetY='60' />
+	<image frame='11' x='105' y='335' width='105' height='20' offsetX='56' offsetY='60' />
+	<image frame='12' x='105' y='355' width='105' height='20' offsetX='56' offsetY='60' />
+	<image frame='13' x='217' y='268' width='105' height='20' offsetX='56' offsetY='60' />
+	<image frame='14' x='217' y='288' width='105' height='20' offsetX='56' offsetY='60' />
+	<image frame='15' x='217' y='308' width='105' height='20' offsetX='56' offsetY='60' />
+	<image frame='16' x='217' y='328' width='105' height='20' offsetX='56' offsetY='60' />
+	<image frame='17' x='217' y='348' width='105' height='20' offsetX='56' offsetY='60' />
+	<image frame='18' x='322' y='268' width='105' height='20' offsetX='56' offsetY='60' />
+	<image frame='19' x='322' y='288' width='105' height='20' offsetX='56' offsetY='60' />
+	<image frame='20' x='322' y='308' width='105' height='20' offsetX='56' offsetY='60' />
+	<image frame='21' x='322' y='328' width='105' height='20' offsetX='56' offsetY='60' />
+	<image frame='22' x='322' y='348' width='105' height='20' offsetX='56' offsetY='60' />
+	<image frame='23' equals='15' offsetX='56' offsetY='60' />
+	<image frame='24' equals='16' offsetX='56' offsetY='60' />
+</tilesheet>
