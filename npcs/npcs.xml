@@ -6,7 +6,7 @@
 
   <npc id="uefd_townfolk"/>
   <procedure id="mekaphelin.signal" >
-    <section if="player.hasItem('com_device') && !player.hasSeenItem('com_device')" >
+    <section if="player.hasItem('com_device') && !player.hasSeenItem('com_device_fried')" >
       <dialogue section="player" id="ouch" speaker="player" />
       <item id="com_device" count="-1" hidden="true"/>
       <item id="com_device_fried" count="1" hidden="true"/>
