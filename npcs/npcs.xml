@@ -6,42 +6,33 @@
 
   <npc id="uefd_townfolk"/>
   <procedure id="mekaphelin.signal" >
-    <section if="!getFlag('com_device_fried') && player.hasItem('com_device') && !getFlag('com_device_fried_earth')" >
-    <dialogue section="player" id="ouch" speaker="player" />
-    <action>
-      setFlag('com_device_fried', true);
-      setFlag('com_device_fried_earth', true);
-    </action>
-    <dialogue section="player" id="com_device_fried" speaker="player" />
-    <dialogue section="player" id="mechanic_fix" speaker="player" />
-    <stop/>
-  </section>
-  </procedure>
-<item id="com_device" type="tool" cost="0" weight="0" icon="com_device.ico" animation="item10" canStore="false">
-  <action id="use">
-    <section if="!getFlag('com_device_fried')">
-      <window type="contacts" />
-    </section>
-    <section if="getFlag('com_device_fried')">
-      <dialogue section="player" id="broken" speaker="player" />
+    <section if="player.hasItem('com_device') && !player.hasSeenItem('com_device')" >
+      <dialogue section="player" id="ouch" speaker="player" />
+      <item id="com_device" count="-1" hidden="true"/>
+      <item id="com_device_fried" count="1" hidden="true"/>
+      <dialogue section="player" id="com_device_fried" speaker="player" />
+      <dialogue section="player" id="mechanic_fix" speaker="player" />
       <stop/>
     </section>
+  </procedure>
+<item id="com_device_fried" type="tool" cost="0" weight="0" icon="com_device.ico" animation="item10" canStore="false">
+  <action id="use">
+    <dialogue section="player" id="broken" speaker="player"/>
   </action>
+</item>
   <!--  achievement="mekaphelin_find"
 <achievement id="mekaphelin_find" sheet="achievements.png" locked="0" unlocked="+1" hidden="true" />
 -->
-</item>
    <quest id="mekaphelin_signal" giver="mechanic" exp="500" >
     <flag id="mekaphelin_signal" name="quest.mekaphelin_signal_find" hidden="true"/>
   </quest>
 <npc id="mechanic" extends="mechanic" >
   <operate>
-          <section if="!player.hasQuest('mekaphelin_signal') && !getFlag('meks_available') && getFlag ('com_device_fried_earth')">
+          <section if="!player.hasQuest('mekaphelin_signal') && player.hasItem('com_device_fried')">
             <dialogue section="mechanic" id="mechanic.repair_com" speaker="player" />
             <dialogue section="mechanic" id="mekaphelin.repair" speaker="player" />
-            <action>
-              setFlag('com_device_fried', false)
-            </action>
+            <item id="com_device" count="1" hidden="true"/>
+            <item id="com_device_fried" count="-1" hidden="true"/>
             <dialogue section="mechanic" id="mekaphelin.signal_1" speaker="player" />
             <action> setFlag('meks_available',true) </action>
             <quest id="mekaphelin_signal" />
