@@ -1,13 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <data>
-<tilesheet id="adv-materials.png" width="16" height= "10"/>
-<tile id="chrome_plating.ico" sheet ="adv-materials.png" x="0"/>
-<tile id="carbon_lattice.ico" sheet ="adv-materials.png" x="1"/>
-<tile id="advanced_circuitry.ico" sheet ="adv-materials.png" x="2"/>
-<tile id="polymers.ico" sheet ="adv-materials.png" x="3"/>
+  <tilesheet id="adv-materials.png" width="16" height= "10"/>
+  <tile id="chrome_plating.ico" sheet ="adv-materials.png" x="0"/>
+  <tile id="carbon_lattice.ico" sheet ="adv-materials.png" x="1"/>
+  <tile id="advanced_circuitry.ico" sheet ="adv-materials.png" x="2"/>
+  <tile id="polymers.ico" sheet ="adv-materials.png" x="3"/>
 
-<item id="chrome_plating" icon="chrome_plating.ico" type="resource" cost="0" weight="0" />
-<item id="carbon_lattice" icon="carbon_lattice.ico" type="resource" cost="0" weight="0"/>
-<item id="advanced_circuitry" icon="advanced_circuitry.ico" type="resource" cost="0" weight="0"/>
-<item id="polymers" icon="polymers.ico" type="resource" cost="0" weight="0"/>
+  <item id="chrome_plating" icon="chrome_plating.ico" type="resource" cost="0" weight="0" />
+  <item id="carbon_lattice" icon="carbon_lattice.ico" type="resource" cost="0" weight="0"/>
+  <item id="advanced_circuitry" icon="advanced_circuitry.ico" type="resource" cost="0" weight="0"/>
+  <item id="polymers" icon="polymers.ico" type="resource" cost="0" weight="0"/>
+
+  <item id="tritium" icon="coal.ico" type="resource" cost="100" weight="5"/>
+  <item id="helium" icon="coal.ico" type="resource" cost="100" weight="5"/>
+  <item id="uefd_fuel_rod" icon="coal.ico" type="resource" cost="100" weight="5"/>
 </data>

@@ -1,51 +1,46 @@
 <data>
-  <!-- Engineer -->
   <npc id="uefd_engineer"/>
-  <!-- Admiral -->
   <npc id="uefd_leader"/>
-
   <npc id="uefd_townfolk"/>
-  <procedure id="mekaphelin.signal" >
-    <section if="!getFlag('com_device_fried') && player.hasItem('com_device') && !getFlag('com_device_fried_earth')" >
-    <dialogue section="player" id="ouch" speaker="player" />
-    <action>
-      setFlag('com_device_fried', true);
-      setFlag('com_device_fried_earth', true);
-    </action>
-    <dialogue section="player" id="com_device_fried" speaker="player" />
-    <dialogue section="player" id="mechanic_fix" speaker="player" />
-    <stop/>
-  </section>
+
+  <npc id="com_station" tile="com_device.ico"/>
+  <procedure id="mekaphelin.signal">
+    <section if="player.questComplete('com_station') && !player.hasQuest('repair_com_station')" >
+      <call id="com_station" incoming="true"/>
+      <dialogue section="mekaphelin" id="mek_signal"/>
+      <call id="com_station" end="true" />
+      <call id="mechanic" incoming="true"/>
+      <dialogue section="mechanic" id="mek_signal1" speaker="mechanic"/>
+      <dialogue section="mechanic" id="mek_signal2" speaker="mechanic"/>
+      <call id="mechanic" end="true" />
+      <quest id="repair_com_station" ask="false"/>
+    </section>
   </procedure>
-<item id="com_device" type="tool" cost="0" weight="0" icon="com_device.ico" animation="item10" canStore="false">
-  <action id="use">
-    <section if="!getFlag('com_device_fried')">
-      <window type="contacts" />
+  
+  <procedure id="call_mechanic" extends="call_mechanic">
+    <run procedure="mechanic.repair_com_station" if="player.canCompleteQuest('repair_com_station') && player.area.id == 'science2'"/>
+  </procedure>
+
+  <procedure id="mechanic.repair_com_station">
+    <sound id="build" /><complete quest="repair_com_station" />
+    <section with="fade">
+      <teleport area="science2" x="58" y="-33" />
+      <object id="fake_jet" x="52" y="-33" /><action>fake_jet.moveToFront()</action><facing object="player" dir="left" />
+      <object id="mechanic" name="mechanic_object" x="54" y="-33" facing="right" />
     </section>
-    <section if="getFlag('com_device_fried')">
-      <dialogue section="player" id="broken" speaker="player" />
-      <stop/>
-    </section>
-  </action>
-  <!--  achievement="mekaphelin_find"
-<achievement id="mekaphelin_find" sheet="achievements.png" locked="0" unlocked="+1" hidden="true" />
--->
-</item>
-   <quest id="mekaphelin_signal" giver="mechanic" exp="500" >
+    <dialogue section="mechanic" id="mek_signal3" speaker='mechanic_object' />
+    <quest id="mekaphelin_signal"/>
+    <lerp object="mechanic_object" alpha="0" seconds="0.25" /><remove object="mechanic_object" />
+    <play object="fake_jet" animation="jet.mount" modal="true" />
+    <play object="fake_jet" animation="jet.takeoff" modal="true" /><play object="fake_jet" animation="jet.hover" loop="true" />
+    <lerp object="fake_jet" deltaY="-7" seconds="2" modal="true" /><remove object="fake_jet" />
+  </procedure>
+
+  <quest id="repair_com_station" giver="mechanic" exp="100">
+    <item id="titanium" count="2"/>
+    <flag id="meks_available" name="quests.highest_mountain"/>
+  </quest>
+  <quest id="mekaphelin_signal" giver="mechanic" exp="500" >
     <flag id="mekaphelin_signal" name="quest.mekaphelin_signal_find" hidden="true"/>
   </quest>
-<npc id="mechanic" extends="mechanic" >
-  <operate>
-          <section if="!player.hasQuest('mekaphelin_signal') && !getFlag('meks_available') && getFlag ('com_device_fried_earth')">
-            <dialogue section="mechanic" id="mechanic.repair_com" speaker="player" />
-            <dialogue section="mechanic" id="mekaphelin.repair" speaker="player" />
-            <action>
-              setFlag('com_device_fried', false)
-            </action>
-            <dialogue section="mechanic" id="mekaphelin.signal_1" speaker="player" />
-            <action> setFlag('meks_available',true) </action>
-            <quest id="mekaphelin_signal" />
-          </section>
-    </operate>
-</npc>
 </data>
