@@ -24,19 +24,37 @@
     <append tile="planet7.shadow" animation="single" /><frame visible="false" />
   </animation>
 
+  <include id="parallax.xml"/><include id="space_parralax/parralax.xml" />
+  <include id="gas/gas.xml"/>
+  <include id="desert/desert.xml"/>
+  <include id="grass/grass.xml"/>
 
   <planet id="mekaphelin.dead" height="80">
     <orbit id="mekaphelin.dead.orbit" width="1024" height="96" background="stars.asteroids.orbit" name="system.mekaphelin.dead.orbit" type="none">
-      <area id="mekaphelin.dead_moon"/>
+      <area id="mekaphelin.dead.main"/>
       <init><runAreaLoad /></init>
       <onLoad><action>if(!getFlag('mekaphelin.signal')){setFlag('mekaphelin.signal',true);}</action><music id="orbit" seconds="1" /><radar tile="orbit.radar" animation="orbit.radar" padding="2" /></onLoad>
     </orbit>
   </planet>
+  <area id="mekaphelin.dead.main" width="256" height="96" hasO2="false" background="mekaphelin.dead_moon" planet="mekaphelin.dead" looping="true" name="mekaphelin.dead_moon" >
+    <tiles id="desert.dirt_top" y="0" empty="true" />
+    <tiles id="bedrock" y="95" empty="true" />
+    <tiles id="desert.dirt" start="0" end="0.5" empty="true" />
+    <tiles id="basalt" start="0.5" end="1" empty="true" />
+    <ore id="oil" start="0.0" end="0.5" percent="0.0375" tile="desert.dirt" />
+    <ore id="iron" start="0.2" end="0.5" percent="0.0125" tile="desert.dirt" />
+    <ore id="magnegem" start="0.4" end="0.5" percent="0.0025" tile="desert.dirt" />
+    <ore id="uranium" start="0.9" end="1.0" percent="0.000625" tile="basalt" />
+    <ore id="diamond" start="0.8" end="1.0" percent="0.0125" tile="basalt" />
+    <ore id="gold" start="0.5" end="1.0" percent="0.0125" tile="basalt" />
+    <init><runAreaLoad /></init>
+    <onLoad><music id="orbit_nocombat" seconds="1" /></onLoad>
+  </area>
 
   <system id="mekaphelin" bgm="voyage" x="230" y="90" available="player.hasQuest('mekaphelin_signal')" distress="!getFlag('mekaphelin.signal')">
-    <planet id="mekaphelin.gas" tile="planet10" animation="planet.mekaphelin.gas" orbit="orbit2" orbitOffX="0" orbitOffY="0" offsetX="-30" offsetY="0" name="system.planet.mekaphelin.gas" />
+    <planet id="mekaphelin.gas" tile="planet10" animation="planet.mekaphelin.gas" orbit="orbit2" orbitOffX="0" orbitOffY="0" offsetX="-30" offsetY="0" name="system.planet.mekaphelin.gas"/>
     <planet id="mekaphelin.desert" tile="planet2" animation="planet.mekaphelin.desert" offsetX="-20" offsetY="-30" name="system.planet.mekaphelin.desert" />
-    <planet id="mekaphelin.dead" tile="planet2" animation="planet.mekaphelin.dead" offsetX="-50" offsetY="23" name="system.planet.mekaphelin.dead" />
+    <planet id="mekaphelin.dead" tile="planet2" animation="planet.mekaphelin.dead" offsetX="-52" offsetY="25" name="system.planet.mekaphelin.dead" />
     <planet id="mekaphelin.grass" tile="planet4" animation="planet.mekaphelin.grass" orbit="orbit4" offsetX="65" offsetY="10" name="system.planet.mekaphelin.meks" />
   </system>
 </data>

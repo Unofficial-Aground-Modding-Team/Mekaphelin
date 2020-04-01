@@ -14,7 +14,7 @@
 		 <track id="{mod:full_version}/music/desert"/>
 	 </music>
 		<include id="en_US.xml" />
-		<include id="areas/areas.xml" />
+		<include id="areas/system.xml" />
 		<include id="enemies/enemies.xml" />
 		<include id="vehicles/vehicles.xml" />
 		<include id="items/items.xml" />

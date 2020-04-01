@@ -17,9 +17,16 @@
     </section>
   </procedure>
 
-  <procedure id="call_mechanic" extends="call_mechanic">
-    <run procedure="mechanic.repair_com_station" if="player.canCompleteQuest('repair_com_station') && player.area.id == 'science2'"/>
-  </procedure>
+  <structure id="com_station" extends="com_station" >
+    <tooltip id="summon_mechanic" if="player.canCompleteQuest('repair_com_station')"/>
+    <tooltip id="operate" if="!player.hasQuest('repair_com_station') || player.questComplete('repair_com_station')"/>
+    <operate>
+      <section if="player.canCompleteQuest('repair_com_station')">
+        <run procedure="mechanic.repair_com_station"/>
+        <stop />
+      </section>
+    </operate>
+  </structure>
 
   <procedure id="mechanic.repair_com_station">
     <sound id="build" /><complete quest="repair_com_station" />
@@ -38,7 +45,7 @@
 
   <quest id="repair_com_station" giver="mechanic" exp="100">
     <item id="titanium" count="2"/>
-    <flag id="meks_available" name="quests.highest_mountain"/>
+    <location id="science2" x="32" y="-33" width="32" height="1" name="quests.highest_mountain" />
   </quest>
   <quest id="mekaphelin_signal" giver="mechanic" exp="500" >
     <flag id="mekaphelin_signal" name="quest.mekaphelin_signal_find" hidden="true"/>

@@ -36,6 +36,7 @@
       <text id="tech">Tech:</text>
     </section>
     <section id="common">
+      <text id="to_much_pressure">To much pressure! Losing health!</text>
     </section>
     <section id="vehicle">
       <text id="load_corvette">Load</text>
@@ -49,6 +50,7 @@
     </section>
     <section id="structure.tooltip">
       <text id="exit">Exit</text>
+      <text id="summon_mechanic">Call Mechanic</text>
     </section>
     <section id="quests">
       <text id="repair_com_station">Repair Com Station</text>
