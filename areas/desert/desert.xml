@@ -2,7 +2,7 @@
 <data>
   <include id="mountain_range.xml"/>
 
-  <area id="mekaphelin.desert_moon" width="512" height="96" background="mekaphelin.desert_moon" planet="mekaphelin.desert" looping="true" name="mekaphelin.uefd_outpost" >
+  <area id="mekaphelin.desert.outpost" width="512" height="96" background="mekaphelin.desert_moon" planet="mekaphelin.desert" looping="true" name="mekaphelin.uefd_outpost" >
     <appendArea id="desert.mountain" offsetX="100" offsetY="1"/>
     <tiles id="desert.dirt_top" y="0" empty="true" />
     <tiles id="bedrock" y="95" empty="true" />
@@ -20,13 +20,37 @@
     <objects id="conifer_snow" y="-16" startX="179" endX="207" minDist="6" maxDist="6" />
     <objects id="conifer_snow" y="-52" startX="140" endX="168" minDist="6" maxDist="6" />
     <objects id="conifer_snow" y="-19" startX="95" endX="105" minDist="6" maxDist="6" />
+
+    <structure id="bunker_barracks" x="33" y="-1"/>
+    <structure id="powerline1" x="43" y="-1"/>
+    <structure id="bunker_depot" x="45" y="-1"/>
+    <structure id="powerline1" x="49" y="-1"/>
+    <structure id="fusion_plant" x="50" y="-1"/>
+    <structure id="powerline1" x="58" y="-1"/>
+    <structure id="manufactory" x="58" y="-1"/>
+
+    <action>
+      for(x in 33...56) for(y in 0...4) mine(x,y);
+      var c = area.addTileIndex("cable");
+      for(x in 35...56) area.setTile(x, 3, ORE_LAYER, c);
+      for(x in 45...56) area.setTile(x, 1, ORE_LAYER, c);
+      for(y in -1...3) area.setTile(55, y, ORE_LAYER, c);
+    </action>
+    <structure id="bunker_barracks" x="33" y="3"/>
+    <structure id="hydroponics" x="44" y="1"><addAnimal id="wheat_seed" count="1" /></structure>
+    <structure id="hydroponics" x="47" y="1"><addAnimal id="wheat_seed" count="1" /></structure>
+    <structure id="hydroponics" x="50" y="1"><addAnimal id="orchard_seed" count="1" /></structure>
+    <structure id="hydroponics" x="53" y="1"><addAnimal id="orchard_seed" count="1" /></structure>
+    <structure id="hydroponics" x="44" y="3"><addAnimal id="sugar_seed" count="1" /></structure>
+    <structure id="hydroponics" x="47" y="3"><addAnimal id="sugar_seed" count="1" /></structure>
+    <structure id="hydroponics" x="50" y="3"><addAnimal id="rice_seed" count="1" /></structure>
+    <structure id="hydroponics" x="53" y="3"><addAnimal id="rice_seed" count="1" /></structure>
     <init><runAreaLoad /></init>
-    <onLoad><music id="outpost" seconds="1" />
-  <run procedure="uefd_outpost"/></onLoad>
+    <onLoad><music id="outpost" seconds="1" /></onLoad>
   </area>
   <planet id="mekaphelin.desert" height="80">
     <orbit id="mekaphelin.desert.orbit" width="1024" height="96" background="stars.dwarf.orbit" name="system.mekaphelin.desert.orbit" type="none">
-      <area id="mekaphelin.desert_moon" />
+      <area id="mekaphelin.desert.outpost" />
       <init><runAreaLoad /></init>
       <onLoad><action>if(!getFlag('mekaphelin.signal')){setFlag('mekaphelin.signal',true);}</action><music id="orbit" seconds="1" /><radar tile="orbit.radar" animation="orbit.radar" padding="2" /></onLoad>
     </orbit>

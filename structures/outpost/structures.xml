@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <data>
-  <include id="manufactory.xml"/>
+  <include id="manufactory.xml" includeRoot="true"/>
   <tile id="manufactory" sheet="manufactory.png" x="0"/>
   <animation id="manufactory.door.open" x="9" count="8"/>
   <animation id="manufactory.door.close" x="9" count="8" reverse="true"/>
   <animation id="manufactory.door.operate" x="17" count="8"/>
+  <animation id="manufactory.door.off" x="9" count="1"/>
   <animation id="manufactory.off" x="0" count="1">
-    <append tile="manufactory" animation="single"/>
+    <append tile="manufactory" animation="manufactory.door.off"/>
   </animation>
   <animation id="manufactory.on" x="1" count="1">
-    <append tile="manufactory" animation="single"/>
+    <append tile="manufactory" animation="manufactory.door.off"/>
   </animation>
   <animation id="manufactory.open" x="1" count="8">
     <append tile="manufactory" animation="manufactory.door.open"/>
@@ -28,14 +29,15 @@
     <operate><section if="!this.isPowered()"><dialogue section="warning" id="not_powered" /><stop /></section></operate>
     <light tile="light.large" color="9ce1eb" offsetX="53" offsetY="45" /><!-- Check -->
   </structure>
+
   <recipe id="small_mech" object="small_mech" description="item.descriptions.small_mech" type="manufactory">
 		<item id="titanium" count="5" />
 		<item id="steel_bar" count="5" />
 		<item id="silicon" count="5" />
 	</recipe>
-  
+
   <recipe id="pp_fuel_tritium" fuel="5000" type="fusion_plant"><item id="tritium" /></recipe>
-  <recipe id="pp_fuel_helium" fuel="5000" type="fusion_plant"><item id="mek_helium" /></recipe>
+  <recipe id="pp_fuel_helium" fuel="5000" type="fusion_plant"><item id="helium" /></recipe>
   <recipe id="pp_fuel_uefd_fuel_rod" fuel="10000" type="fusion_plant"><item id="uefd_fuel_rod" /></recipe>
   <recipe id="craft_uefd_fuel_rod" creates="uefd_fuel_rod" type="fusion_plant">
     <item id="chrome_plating" count="1"/>
