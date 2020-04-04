@@ -1,5 +1,10 @@
 <data>
   <lang id="en_US">
+    <section id="common">
+      <text id="to_much_pressure">To much pressure! Losing health!</text>
+      <text id="fusion_plant">Fusion Plant</text>
+      <text id="manufactory">Manufactory</text>
+    </section>
     <section id='item.names'>
       <text id="chrome_plating">Chrome Plating</text>
       <text id="carbon_lattice">Carbon Lattice</text>
@@ -39,9 +44,6 @@
     <section id="equipment">
       <text id="tech">Tech:</text>
     </section>
-    <section id="common">
-      <text id="to_much_pressure">To much pressure! Losing health!</text>
-    </section>
     <section id="vehicle">
       <text id="load_corvette">Load</text>
       <text id="unload_corvette">Unload</text>
@@ -55,6 +57,8 @@
     <section id="structure.tooltip">
       <text id="exit">Exit</text>
       <text id="summon_mechanic">Call Mechanic</text>
+      <text id="fusion_plant">Operate Fusion Plant</text>
+      <text id="manufactory">Operate Manufactory</text>
     </section>
     <section id="quests">
       <text id="repair_com_station">Repair Com Station</text>

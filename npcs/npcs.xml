@@ -1,8 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <data>
-  <npc id="uefd_engineer"/>
-  <npc id="uefd_leader"/>
-  <npc id="uefd_townfolk"/>
+  <npc id="uefd_engineer" tile="mechanic" action="talk" talk_sfx="talking6" animation="mechanic">
+    <idle class="repair"><repair type="uefd_engineer"/><repair type="mechanic"/></idle>
+  </npc>
+  <!-- <npc id="uefd_leader" tile="builder" action="talk" talk_sfx="talking1">
+    <operate>
 
+    </operate>
+  </npc> -->
+
+  <tile id="uefd_drone1" sheet="uefd_drone1.png" x="0"/>
+  <animation id="uefd_drone1.walk" x="0" count="4"/>
+  <animation id="uefd_drone1.idle" x="4" count="4"/>
+  <npc id="uefd_drone1" tile="uefd_drone1" speed="2" night="true" behind="true" title="item.names.worker_bot"><idle class="wander" fromX="25" toX="75"/></npc>
+
+  <tilesheet id="uefd_drone2.png" width="20" height="26"/>
+  <tile id="uefd_drone2" sheet="uefd_drone2.png" x="0"/>
+  <animation id="uefd_drone2.idle" x="0" count="4"/>
+  <animation id="uefd_drone2.walk" x="4" count="4"/>
+  <npc id="uefd_drone2" tile="uefd_drone2" speed="3" night="true" behind="true" title="item.names.worker_bot"><idle class="wander" fromX="25" toX="75"/></npc>
+
+  <npc id="uefd.townfolk" extends="science1.townfolk.base">
+    <idle class="wander" fromX="30" toX="70"/>
+  </npc>
+
+  <!-- Mekaphelin Signal -->
   <npc id="com_station" tile="com_device.ico"/>
   <procedure id="mekaphelin.signal">
     <section if="player.questComplete('com_station') && !player.hasQuest('repair_com_station')" >

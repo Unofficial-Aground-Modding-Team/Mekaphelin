@@ -1,16 +1,15 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <mod>
 	<name>Mekaphelin</name>
-	<description>N/A</description>
-	<author>UAMT</author>
+	<description>Discover the secrets of the Mekaphelin CF-64!</description>
+	<author>ChesireX42, Airom, and Apprentice Alchemist</author>
 	<version>None</version>
   <requires>Full Version</requires>
-	<loadAfter>Planets Extended</loadAfter>
 	<loadAfter>Asteroids</loadAfter>
-	<!-- Mods that load after this one: Drones, Minigames -->
+	<loadAfter>Planets Extended</loadAfter>
 	<init>
 	 <music id="outpost">
-		 <track id="{mod:full_version}/music/heights" x="86" width="100" y="79" height="-79" fade_tiles="2" />
+		 <track id="{mod:full_version}/music/heights" x="150" width="150" y="79" height="-79" fade_tiles="2" />
 		 <track id="{mod:full_version}/music/desert"/>
 	 </music>
 		<include id="en_US.xml" />

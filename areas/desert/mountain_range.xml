@@ -1,73 +1,58 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <data>
   <area id="desert.mountain">
-    <appendArea id="desert.mountain_start" offsetX="115" offsetY="-16"/>
-    <appendArea id="desert.mountain_sci1"/>
-    <appendArea id="desert.mountain_science2.mid" offsetX="5" offsetY="-16" />
-    <appendArea id="desert.mountain_science2.top" offsetX="5" offsetY="-32" />
+    <appendArea id="desert.mountain1"/>
+    <appendArea id="desert.mountain2" offsetX="20"/>
+    <appendArea id="desert.mountain3" offsetX="130"/>
 	</area>
-  <area id="desert.mountain_start">
-    <shape type="trapezoid">
-      <top y="-16" fromX="11" toX="29" />
-      <bottom y="11" fromX="3" toX="35" />
-    </shape>
-    <shape type="trapezoid" bottom="112">
-      <top y="10" fromX="-5" toX="35" />
-      <bottom y="15" fromX="-5" toX="37" />
-    </shape>
-    <tiles id="stone" start="0" end="1" />
-    <tiles id="snow" top="0" />
-    <tiles id="snow_stone" top="1" />
-
-    <ore id="coal" start="0" end="0.5" percent="0.025" tile="stone" />
-
-    <onLoad>
-      <action>_x = offsetX+13</action>
-      <repeat count="4">
-        <tile id="mountain_snow" tile_x="random()*8" x="_x" y="offsetY-2" back="true" />
-        <action>_x += 4;</action>
-      </repeat>
-      <!-- <setTile x="32" y="13" tile="empty" /><action>mine(offsetX+32,offsetY+13)</action> -->
-      <repeat count="6">
-        <tile id="mountain_snow" tile_x="random()*8" x="offsetX+11+random()*16" y="offsetY-2" back="true" />
-      </repeat>
-    </onLoad>
-  </area>
-  <area id="desert.mountain_sci1">
+  <area id="desert.mountain1">
 		<shape type="trapezoid" bottom="64">
-			<top y="-19" fromX="-5" toX="6" />
-			<bottom y="32" fromX="-16" toX="17" />
+			<top y="-18" fromX="11" toX="22" />
+			<bottom y="0" fromX="8" toX="27" />
 		</shape>
-    <shape type="trapezoid" bottom="5">
-			<top y="-5" fromX="-15" toX="2" />
-			<bottom y="5" fromX="-17" toX="10" />
-		</shape>
+    <shape type="trapezoid">
+      <top y="-4" fromX="2" toX="18" />
+      <bottom y="0" fromX="1" toX="26" />
+    </shape>
     <tiles id="stone" start="0" end="1" />
     <tiles id="snow" top="0" />
     <tiles id="snow_stone" top="1" />
-      <ore id="coal" start="0" end="0.5" percent="0.025" tile="stone" />
+    <ore id="coal" start="0" end="0.5" percent="0.025" tile="stone" />
+    <object id="conifer_snow" x="13" y="-19"/>
+    <object id="conifer_snow" x="20" y="-19"/>
 	</area>
-  <area id="desert.mountain_science2.top">
-		<shape type="trapezoid">
-			<top y="-20" fromX="35" toX="64" />
-			<bottom y="17" fromX="25" toX="75" />
-		</shape>
-    <tiles id="stone" start="0" end="1" />
-		<tiles id="snow" top="0" />
-		<tiles id="snow_stone" top="1" />
-      <ore id="coal" start="0" end="0.5" percent="0.025" tile="stone" />
 
-
-	</area>
-	<area id="desert.mountain_science2.mid">
-		<shape type="trapezoid" bottom="112">
-			<top y="0" fromX="20" toX="104" />
-			<bottom y="48" fromX="0" toX="128" />
-		</shape>
+  <area id="desert.mountain2">
+    <shape type="trapezoid" bottom="95">
+      <top y="-15" fromX="20" toX="104" />
+      <bottom y="33" fromX="0" toX="128" />
+    </shape>
+    <shape type="trapezoid">
+      <top y="-51" fromX="35" toX="64" />
+      <bottom y="-14" fromX="25" toX="75" />
+    </shape>
     <tiles id="stone" start="0" end="1" />
     <tiles id="snow" top="0" />
     <tiles id="snow_stone" top="1" />
-      <ore id="coal" start="0" end="0.5" percent="0.025" tile="stone" />
+    <ore id="coal" start="0" end="0.5" percent="0.025" tile="stone" />
+    <object id="conifer_snow" x="23" y="-16"/>
+    <objects id="conifer_snow" y="-52" startX="35" endX="63" minDist="6" maxDist="7" />
+    <objects id="conifer_snow" y="-16" startX="74" endX="103" minDist="6" maxDist="7" />
+  </area>
 
-	</area>
+  <area id="desert.mountain3">
+    <shape type="trapezoid">
+      <top y="-31" fromX="11" toX="29" />
+      <bottom y="-4" fromX="3" toX="35" />
+    </shape>
+    <shape type="trapezoid" bottom="95">
+      <top y="-5" fromX="-5" toX="35" />
+      <bottom y="0" fromX="-5" toX="37" />
+    </shape>
+    <tiles id="stone" start="0" end="1" />
+    <tiles id="snow" top="0" />
+    <tiles id="snow_stone" top="1" />
+    <ore id="coal" start="0" end="0.5" percent="0.025" tile="stone" />
+    <objects id="conifer_snow" y="-32" startX="11" endX="28" minDist="6" maxDist="7" />
+  </area>
 </data>

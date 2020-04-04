@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <data>
   <renderOverlay id="star" extends="star">
     <tile id="distress_signal" renderer="static" animation="distress_signal" fps="10" scale="1" x="-15/Tile.SIZE" y="-20/Tile.SIZE" if="eval(this.xml.get('distress')) == true"/>
@@ -30,7 +31,7 @@
   <include id="grass/grass.xml"/>
 
   <planet id="mekaphelin.dead" height="80">
-    <orbit id="mekaphelin.dead.orbit" width="1024" height="96" background="stars.asteroids.orbit" name="system.mekaphelin.dead.orbit" type="none">
+    <orbit id="mekaphelin.dead.orbit" width="256" height="64" background="stars.asteroids.orbit" name="system.mekaphelin.dead.orbit" type="none">
       <area id="mekaphelin.dead.main"/>
       <init><runAreaLoad /></init>
       <onLoad><music id="orbit" seconds="1" /><radar tile="orbit.radar" animation="orbit.radar" padding="2" /></onLoad>
@@ -48,7 +49,7 @@
     <ore id="diamond" start="0.8" end="1.0" percent="0.0125" tile="basalt" />
     <ore id="gold" start="0.5" end="1.0" percent="0.0125" tile="basalt" />
     <init><runAreaLoad /></init>
-    <onLoad><music id="orbit_nocombat" seconds="1" /></onLoad>
+    <onLoad><run procedure="uefd_welcome"/><music id="orbit_nocombat" seconds="1" /></onLoad>
   </area>
 
   <system id="mekaphelin" bgm="voyage" x="230" y="90" available="player.hasQuest('mekaphelin_signal')" distress="!getFlag('mekaphelin.signal')">

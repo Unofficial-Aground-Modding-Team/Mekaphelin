@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <data>
   <planet id="mekaphelin.grass" height="80">
-    <orbit id="mekaphelin.grass.orbit" width="1024" height="96" background="colony.orbit" name="system.planet.mekaphelin.meks.orbit" type="none" distress="false">
+    <orbit id="mekaphelin.grass.orbit" width="256" height="64" background="colony.orbit" name="system.planet.mekaphelin.meks.orbit" type="none" distress="false">
         <area id="mekaphelin.grass.island1"/>
       <init><runAreaLoad /></init>
-      <onLoad><action>if(!getFlag('mekaphelin.signal')){setFlag('mekaphelin.signal',true);}</action><music id="orbit" seconds="1" /><radar tile="orbit.radar" animation="orbit.radar" padding="2" /></onLoad>
+      <onLoad><run procedure="uefd_welcome"/><music id="orbit" seconds="1" /><radar tile="orbit.radar" animation="orbit.radar" padding="2" /></onLoad>
     </orbit>
   </planet>
   <area id="mekaphelin.grass.island1" width="150" height="96" background="start" planet="mekaphelin.grass" name="system.planet.mekaphelin.grass">
