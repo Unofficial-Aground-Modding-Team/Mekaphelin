@@ -1,3 +1,4 @@
+
 <?xml version="1.0" encoding="utf-8" ?>
 <mod>
     <name>Mek Mechs</name>
@@ -101,7 +102,7 @@
       </item>
 
       <!-- Back -->
-      <item id="small_mech.power_core" type="equipment" slot="back" equipOn="small_mech" icon="power_core.ico" cost="0" weight="0" unequip="true">
+      <item id="small_mech.power_core" type="equipment" slot="mech_back" equipOn="small_mech" icon="power_core.ico" cost="0" weight="0" unequip="true">
         <handleSecond><action>player.vehicle.addFuel(5);</action></handleSecond>
       </item>
 
