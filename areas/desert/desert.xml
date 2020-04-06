@@ -5,7 +5,7 @@
     <orbit id="mekaphelin.desert.orbit" width="512" height="64" background="stars.dwarf.orbit" name="system.mekaphelin.desert.orbit" type="none">
       <area id="mekaphelin.desert.outpost" />
       <init><runAreaLoad /></init>
-      <onLoad><run procedure="uefd_welcome"/><music id="orbit" seconds="1" /><radar tile="orbit.radar" animation="orbit.radar" padding="2" /></onLoad>
+      <onLoad><run procedure="uefd.intro"/><music id="orbit" seconds="1" /><radar tile="orbit.radar" animation="orbit.radar" padding="2" /></onLoad>
     </orbit>
   </planet>
 
@@ -51,7 +51,7 @@
     <object id="npc_bot.farmer" x="50" y="-1"/>
     <object id="npc_bot.farmer" x="50" y="-1"/>
 
-    <objects id="uefd.townfolk" startX="30" endX="70" minDist="10" maxDist="15" if="area.getObject('uefd.townfolk') == null"/>
+    <objects id="uefd_marine" startX="30" endX="70" minDist="10" maxDist="15" if="area.getObject('uefd_marine') == null"/>
     <objects id="uefd_drone1" startX="25" endX="75" minDist="10" maxDist="15" if="area.getObject('uefd_drone1') == null"/>
     <objects id="uefd_drone2" startX="25" endX="75" minDist="10" maxDist="15" if="area.getObject('uefd_drone2') == null"/>
     <init><runAreaLoad /></init>

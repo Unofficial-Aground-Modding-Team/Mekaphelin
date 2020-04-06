@@ -1,5 +1,47 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <data>
+  <!-- UEFD Welcome -->
+  <action>
+    function confiscateVehicle(player){
+      player.vehicle.dismount();
+    }
+  </action>
+  <procedure id="uefd.arrive">
+    <action>
+      var x = Math.round(player.getVCenterX())-8; var y = Math.round(player.getVCenterY()); facing = player._getFacing(); scale = getGameScale();
+      drone = ObjectInfo.make("drone.ship", x-facing*150, y-8); area.addObject(drone); drone.renderer.scaleX = -facing; drone.renderer.x -= facing*160;
+    </action>
+    <section if="scale != 2"><action>setGameScale(2)</action><pan toObject="player.vehicle == null?player:player.vehicle" /></section>
+    <lerp object="drone" deltaX="facing*160/Tile.SIZE" modal="true" seconds="3" />
+  </procedure>
+  <procedure id="uefd.leave">
+    <action>drone.renderer.scaleX = - drone.renderer.scaleX;</action><lerp object="drone" deltaX="-facing*160/Tile.SIZE" modal="true" seconds="3" />
+    <section if="scale != 2"><action>setGameScale(scale)</action><pan toObject="player.vehicle == null?player:player.vehicle" /></section>
+    <action>drone.renderer.alpha = 0; area.removeObject(drone)</action>
+  </procedure>
+  <procedure id="uefd.escort">
+    <section if="area.id != 'mekaphelin.desert.orbit'">
+      <teleport area="mekaphelin.desert.orbit" x="128" y="32"/>
+      <section if="player.vehicle != null"><action>confiscateVehicle(player)</action></section>
+      <invokeLater>
+        <!-- Teleport player into the UEFD space base -->
+      </invokeLater>
+    </section>
+  </procedure>
+
+  <procedure id="uefd.intro">
+    <section if="!getFlag('uefd_welcome')">
+      <action>setFlag('uefd_welcome',true);</action>
+      <run procedure="uefd.arrive" />
+      <dialogue section="unnature" id="intro1"/>
+      <!-- Approach the player, and ask where they are from. Then take the player back to the outpost -->
+      <run procedure="uefd.leave" />
+      <!-- Move the player to the UEFD orbit -->
+      <run procedure="uefd.escort"/>
+    </section>
+  </procedure>
+
+  <!-- UEFD -->
   <npc id="uefd_engineer" tile="mechanic" action="talk" talk_sfx="talking6" animation="mechanic">
     <idle class="repair"><repair type="uefd_engineer"/><repair type="mechanic"/></idle>
   </npc>
@@ -20,9 +62,12 @@
   <animation id="uefd_drone2.walk" x="4" count="4"/>
   <npc id="uefd_drone2" tile="uefd_drone2" speed="3" night="true" behind="true" title="item.names.worker_bot"><idle class="wander" fromX="25" toX="75"/></npc>
 
-  <npc id="uefd.townfolk" extends="science1.townfolk.base">
-    <idle class="wander" fromX="30" toX="70"/>
-  </npc>
+
+  <tilesheet id="uefd_marine.png" width="15" height="19"/>
+  <tile id="uefd_marine" sheet="uefd_marine.png" x="0"/>
+  <animation id="uefd_marine.idle" x="0" count="4"/>
+  <animation id="uefd_marine.walk" x="4" count="6"/>
+  <npc id="uefd_marine" tile="uefd_marine" behind="true"><idle class="wander" fromX="30" toX="70"/></npc>
 
   <!-- Mekaphelin Signal -->
   <npc id="com_station" tile="com_device.ico"/>

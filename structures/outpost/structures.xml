@@ -27,7 +27,7 @@
     <over><play object="this" animation="open" /><action>this.loopAnimation("operate")</action></over>
     <out><play object="this" animation="close" /><action>this.loopAnimation("idle")</action></out>
     <operate><section if="!this.isPowered()"><dialogue section="warning" id="not_powered" /><stop /></section></operate>
-    <light tile="light.large" color="9ce1eb" offsetX="53" offsetY="45" /><!-- Check -->
+    <light tile="light.largest" color="9ce1eb" offsetX="108" offsetY="45" />
   </structure>
 
   <recipe id="small_mech" object="small_mech" description="item.descriptions.small_mech" type="manufactory">
@@ -55,7 +55,7 @@
     <listItem icon="power" title="common.recharge_batteries" enabled="this.isPowered()" fail="warning.not_powered">
       <action>player.restorePowerFrom(this, 25)</action>
     </listItem>
-    <light tile="nuclear_plant" offsetX="75" offsetY="64" /><!-- Check -->
+    <light tile="light.large" color="9ce1eb" offsetX="70" offsetY="32" />
   </structure>
 
   <tilesheet id="bunker_barracks.png" width="56" height="55"/>
