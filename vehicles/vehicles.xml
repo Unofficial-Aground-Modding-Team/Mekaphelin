@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <data>
   <include id="axolotl/axolotl.xml"/>
-  <include id="carrier_corvette/ships.xml"/>
+  <include id="ships/ships.xml"/>
   <include id="small_mech/mod.xml" child="init"/>
   <include id="med_mech/mech.xml"/>
+  <include id="mining_drone/mining_drone.xml"/>
 </data>

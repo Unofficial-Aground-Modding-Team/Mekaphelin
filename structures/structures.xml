@@ -1,4 +1,51 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <data>
   <include id="outpost/structures.xml"/>
+
+  <tilesheet id="corvette_bay.png" width="160" height="92" />
+  <tile id="corvette_bay_back" sheet="corvette_bay.png" x="0"/>
+  <tile id="corvette_bay_front" sheet="corvette_bay.png" x="1"/>
+  <structure id="corvette_bay" tile="corvette_bay_back" remove="false" spaceship="true" layer="npc">
+    <tooltip section="vehicle" id="unload" if="player.vehicle != null" />
+    <operate>
+      <section if="player.vehicle != null">
+        <menu section="vehicle" closeable="true" autoselect="true" darken="false" yalign="0.55">
+          <choice id="unload">
+            <section with="fade_fast">
+            <action>unloadCorvette(player)</action>
+            </section>
+          </choice>
+          <choice id="dismount">
+            <action>player.vehicle.dismount();</action>
+            <invokeLater><action>player.area.vehicle.doExit(player);</action></invokeLater>
+          </choice>
+        </menu>
+        </section>
+  </operate>
+  </structure>
+  <object id="corvette_bay_front" tile="corvette_bay_front" layer="top"/>
+
+  <tilesheet id="frigate_bay.png" width="256" height="160" />
+  <tile id="frigate_bay_back" sheet="frigate_bay.png" x="0"/>
+  <tile id="frigate_bay_front" sheet="frigate_bay.png" x="1"/>
+  <structure id="frigate_bay" tile="frigate_bay_back" remove="false" spaceship="true" layer="npc">
+    <tooltip section="vehicle" id="unload" if="player.vehicle != null" />
+    <operate>
+      <section if="player.vehicle != null">
+        <menu section="vehicle" closeable="true" autoselect="true" darken="false" yalign="0.55">
+          <choice id="unload">
+            <section with="fade_fast">
+            <action>unloadCorvette(player)</action>
+            </section><stop />
+          </choice>
+          <choice id="dismount">
+            <action>player.vehicle.dismount();</action>
+            <invokeLater><action>player.area.vehicle.doExit(player);</action></invokeLater>
+          </choice>
+        </menu>
+          <stop />
+        </section>
+  </operate>
+  </structure>
+  <object id="frigate_bay_front" tile="frigate_bay_front" layer="top"/>
 </data>

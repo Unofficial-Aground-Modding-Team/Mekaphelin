@@ -2,12 +2,15 @@
 <data>
   <planet id="mekaphelin.gas" height="80">
     <orbit id="mekaphelin.gas.orbit" width="512" height="64" background="meks.gas.orbit" name="system.planet.mekaphelin.gas.orbit" type="none" distress="!getFlag('mekaphelin.signal')">
-      <area id="mekaphelin.gas.main"/>
+      <!-- <area id="mekaphelin.gas.main"/> -->
       <init><runAreaLoad /></init>
       <onLoad><run procedure="uefd.intro"/><music id="orbit" seconds="1" /><radar tile="orbit.radar" animation="orbit.radar" padding="2" /></onLoad>
     </orbit>
   </planet>
 
+  <parallax id="mekaphelin.gas.main">
+    <run procedure="start.water"/>
+  </parallax>
   <area id="mekaphelin.gas.main" width="200" background="gas_giant" hasO2="false" planet="mekaphelin.gas">
     <tiles id="bedrock" y="0" empty="true" />
     <init><runAreaLoad/></init>
@@ -16,13 +19,12 @@
 
   <action>
     function playerMaxGasPressure(player){
-      //find the max depth on the player's vehicle
-      // if(player.vehicle != null){
-      //   return player.vehicle.xml.get('pressure_depth')
-      // }
-      //return unaided player(since there will be no non-vehicle equipments that help with gas pressure)
-      // else return 16;
-      return 16;
+      // find the max depth on the player's vehicle
+      if(player.vehicle != null && player.vehicle.xml.get('pressure_depth') != null){
+        return player.vehicle.xml.get('pressure_depth');
+      }
+      // return unaided player(since there will be no non-vehicle equipments that help with gas pressure)
+      else return 0;
     }
     function getPlayerPressure(player){
       if(player.vehicle != null) player = player.vehicle;

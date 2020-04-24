@@ -1,23 +1,25 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <data>
+  <!-- java -jar AgroundTilesheet.jar -i 100 97 ext.png -i 16 16 int1.png -i 32 16 int2.png -i 16 32 int3.png -i 32 32 spiker_attack.png -i 10 6 spiker_projectile.png -i 2 16 axolotl_door.png -i 8 14 axolotl_core.png -i 16 5 axolotl_missile.png -o axolotl_sheet -->
+  <include id="axolotl_sheet.xml" />
   <!-- INTERIOR -->
-  <tilesheet id="axolotl_core.png" width="8" height="14"/>
-  <tile id="axolotl_core" sheet="axolotl_core.png" x="1" offsetY="-1"/>
+  <tile id="axolotl_core" sheet="axolotl_sheet.8" x="1" offsetY="-1"/>
 
   <animation id="axolotl_core.slot.idle"><frame visible="false" /></animation>
   <animation id="axolotl_core.slot.occupied" equals="item4" />
   <!-- TODO: Power core anim -->
-  <object id="axolotl_core.slot" tile="axolotl_core" animation="this.health == 1?'axolotl_core.slot.occupied':'axolotl_core.slot.idle'" layer="npc">
-    <tooltip section="actions" id="take_power_core" if="this.health == 1 || this.health == 2" />
+  <object id="axolotl_core.slot" tile="axolotl_core" animation="this.health > 0?'axolotl_core.slot.occupied':'axolotl_core.slot.idle'" layer="npc">
+    <tooltip section="actions" id="take_axolotl_core" if="this.health == 1" />
+    <tooltip section="actions" id="take_power_core" if="this.health == 2" />
     <tooltip section="actions" id="put_power_core" />
     <addedToArea><action>setTile(this.tile_x, this.tile_y, "empty");</action></addedToArea>
     <operate><choose>
       <section if="this.health == 1">
-        <item id="power_core" /><action>this.health = 0; player.clearOverlap(); player.overlapChanged();</action>
+        <item id="axolotl_core" /><action>this.health = 0; player.clearOverlap(); player.overlapChanged();</action>
         <play object="this" animation="axolotl_core.slot.idle" />
       </section>
       <section if="this.health == 2">
-        <item id="axolotl_core" /><action>this.health = 0; player.clearOverlap(); player.overlapChanged();</action>
+        <item id="power_core" /><action>this.health = 0; player.clearOverlap(); player.overlapChanged();</action>
         <play object="this" animation="axolotl_core.slot.idle" />
       </section>
       <section if="player.getItemCountStorehouse('axolotl_core') > 0">
@@ -25,7 +27,7 @@
         <play object="this" animation="axolotl_core.slot.occupied" loop="true" />
       </section>
       <section if="player.getItemCountStorehouse('power_core') > 0">
-        <item id="power_core" count="-1" storehouse="true" /><action>this.health = 1; player.clearOverlap(); player.overlapChanged();</action>
+        <item id="power_core" count="-1" storehouse="true" /><action>this.health = 2; player.clearOverlap(); player.overlapChanged();</action>
         <play object="this" animation="axolotl_core.slot.occupied" loop="true" />
       </section>
       <dialogue section="warning" id="no_axolotl_core" />
@@ -35,7 +37,7 @@
   <action>
     function getAxolotlCores(ship){
       var ret = 0;
-      if(ship.interior != null && ship.interior.getObjectsById('axolotl_core.slot')[0].health == 1)  ret += 2;
+      if(ship.interior != null && ship.interior.getObjectsById('axolotl_core.slot')[0].health > 0)  ret += 2;
       var tech = ship.equipment.get('tech').get();
       if(tech != null){
         if(tech.info.id == 'axolotl.power')  ret += 1;
@@ -45,9 +47,8 @@
       return ret;
     }
   </action>
-  <include id="axolotl_interior.xml"/>
 
-  <tile id="axolotl.command" sheet="axolotl_interior.1" x="0" />
+  <tile id="axolotl.command" sheet="axolotl_sheet.2" x="0" />
   <animation id="axolotl.command.over" x="1" count="4"/>
   <structure id="axolotl.command" tile="axolotl.command" room="true" name="operate">
     <over><action>this.loopAnimation("over")</action></over>
@@ -59,17 +60,17 @@
     </operate>
   </structure>
 
-  <tile id="axolotl.filler" sheet="axolotl_interior.1" x="5" />
+  <tile id="axolotl.filler" sheet="axolotl_sheet.2" x="5" />
   <structure id="axolotl.filler" tile="axolotl.filler" room="true"/>
 
-  <tile id="axolotl.center" sheet="axolotl_interior.1" x="6" />
+  <tile id="axolotl.center" sheet="axolotl_sheet.2" x="6" />
   <animation id="axolotl.center.over" x="1" count="8"/>
   <structure id="axolotl.center" tile="axolotl.center" room="true">
     <over><action>this.loopAnimation("over")</action></over>
     <out><action>this.loopAnimation("idle")</action></out>
   </structure>
 
-  <tile id="axolotl.engine" sheet="axolotl_interior.2" x="0" />
+  <tile id="axolotl.engine" sheet="axolotl_sheet.3" x="0" />
   <animation id="axolotl.engine.over" x="1" count="3"/>
   <structure id="axolotl.engine" tile="axolotl.engine" room="true">
     <over><action if="getAxolotlCores(area.vehicle) > 0 && player.getPower() < player.getMaxPower()-25">player.restorePower();</action></over>
@@ -78,7 +79,7 @@
     <out><action>this.loopAnimation("idle")</action></out>
   </structure>
 
-  <tile id="axolotl.weaps" sheet="axolotl_interior.2" x="4" />
+  <tile id="axolotl.weaps" sheet="axolotl_sheet.3" x="4" />
   <animation id="axolotl.weaps.over" x="1" count="4"/>
   <structure id="axolotl.weaps" tile="axolotl.weaps" name="operate" room="true">
 		<over><action>this.loopAnimation("over")</action></over>
@@ -86,15 +87,15 @@
 		<operate><action>area.vehicle.manageEquipment(player)</action></operate>
 	</structure>
 
-  <tile id="axolotl.exit" sheet="axolotl_interior.2" x="9" />
+  <tile id="axolotl.exit" sheet="axolotl_sheet.3" x="9" />
   <animation id="axolotl.exit.over" x="1" count="4"/>
   <structure id="axolotl.exit" tile="axolotl.exit" room="true" name="exit">
     <over><action>this.loopAnimation("over")</action></over>
     <out><action>this.loopAnimation("idle")</action></out>
-    <operate><dialogue section="warning" id="spaceship_exit" if="var flight = player.getFlight(); return area.vehicle.exitFlying() && (flight == null || area.vehicle.tile_y <= -flight.flight.height)" /><action>area.vehicle.exit(player)</action></operate>
+    <operate><dialogue section="warning" id="spaceship_exit" if="var flight = player.getFlight(); return area.vehicle.exitFlying() && (flight == null || area.vehicle.tile_y <= -flight.flight.height)" /><action>area.vehicle.doExit(player)</action></operate>
   </structure>
 
-  <tile id="axolotl.cargo" sheet="axolotl_interior.3" x="0" />
+  <tile id="axolotl.cargo" sheet="axolotl_sheet.4" x="0" />
   <animation id="axolotl.cargo.over" x="1" count="4"/>
   <structure id="axolotl.cargo" tile="axolotl.cargo" room="true" name="manage_cargo">
     <operate><action>area.vehicle.manageInventory(player)</action></operate>
@@ -102,8 +103,7 @@
     <out><action>this.loopAnimation("idle")</action></out>
   </structure>
 
-  <tilesheet id="axolotl_door.png" width="2" height="16" />
-  <tile id="axolotl.doorh" sheet="axolotl_door.png" x="0" />
+  <tile id="axolotl.doorh" sheet="axolotl_sheet.7" x="0" />
   <animation id="axolotl.door.open" x="0" count="3" />
   <animation id="axolotl.door.close" x="0" count="3" reverse="true" />
   <object id="axolotl.doorh" tile="axolotl.doorh" width="16" height="16" behind="true" doorway="horizontal" overlapVehicle="true">
@@ -135,22 +135,20 @@
 	</area>
 
   <!-- EXTERIOR -->
-  <include id="axolotl_exterior.xml" includeRoot="true"/>
-
-  <tile id="axolotl" sheet="axolotl_exterior.png" x="0" />
-  <animation id="axolotl.idle" x="0" count="1" length="7">
+  <tile id="axolotl" sheet="axolotl_sheet.1" x="0" />
+  <animation id="axolotl.idle" count="1" length="7">
     <append tile="axolotl.stuff" animation="axolotl.stuff"/>
     <append tile="axolotl.gear" animation="axolotl.gear.down" />
   </animation>
-  <animation id="axolotl.hover" x="0" count="1" length="8">
+  <animation id="axolotl.hover" count="1" length="8">
     <append tile="axolotl.stuff" animation="axolotl.stuff"/>
     <append tile="axolotl.antigrav" animation="axolotl.antigrav"/>
   </animation>
-  <animation id="axolotl.fly" x="0" count="1" length="8">
+  <animation id="axolotl.fly" count="1" length="8">
     <append tile="axolotl.stuff" animation="axolotl.stuff"/>
     <append tile="axolotl.thrust" animation="axolotl.thrust"/>
   </animation>
-  <animation id="axolotl.empty" x="0" count="1" length="4">
+  <animation id="axolotl.empty" count="1" length="4">
     <append tile="axolotl.gear" animation="axolotl.gear.down2" />
   </animation>
   <animation id="axolotl.takeoff" count="1" length="7">
@@ -163,38 +161,41 @@
     <append tile="axolotl.antigrav" animation="axolotl.antigrav" />
     <append tile="axolotl.stuff" animation="axolotl.stuff"/>
   </animation>
+  <animation id="axolotl.ftl" count="1" length="7">
+    <append tile="axolotl.thrust" animation="axolotl.thrust"/>
+    <append tile="fighter.shields" animation="fighter.ftl_bubble" />
+  </animation>
 
-  <tile id="axolotl.shields" sheet="axolotl_exterior.png" x="1" />
+  <tile id="axolotl.shields" sheet="axolotl_sheet.1" x="1" />
   <animation id="axolotl.shields" x="0" count="5" glow="true"/>
 
-  <tile id="axolotl.antigrav" sheet="axolotl_exterior.png" x="6" />
+  <tile id="axolotl.antigrav" sheet="axolotl_sheet.1" x="6" />
   <animation id="axolotl.antigrav" x="0" count="4" glow="true"/>
 
-  <tile id="axolotl.thrust" sheet="axolotl_exterior.png" x="10" />
+  <tile id="axolotl.thrust" sheet="axolotl_sheet.1" x="10" />
   <animation id="axolotl.thrust" x="0" count="4" glow="true"/>
 
-  <tile id="axolotl.stuff" sheet="axolotl_exterior.png" x="14" />
+  <tile id="axolotl.stuff" sheet="axolotl_sheet.1" x="14" />
   <animation id="axolotl.stuff" x="0" count="4" length="2"/>
 
-  <tile id="axolotl.launcher" sheet="axolotl_exterior.png" x="18" />
+  <tile id="axolotl.launcher" sheet="axolotl_sheet.1" x="18" />
   <animation id="equipment.axolotl.launcher" x="1" count="5" length="2"/>
 
-  <tilesheet id="spiker_attack.png" width="32" height="32"/>
-  <tile id="spiker_attack" sheet="spiker_attack.png" x="0" offsetX="-22" offsetY="40"/>
+  <tile id="spiker_attack" sheet="axolotl_sheet.5" x="0" offsetX="-22" offsetY="40"/>
   <animation id="spiker_attack" count="8"/>
 
-  <tile id="axolotl.spiker" sheet="axolotl_exterior.png" x="24" />
+  <tile id="axolotl.spiker" sheet="axolotl_sheet.1" x="24" />
   <animation id="equipment.axolotl.spiker" x="0" count="5" length="1.6">
     <append tile="spiker_attack" animation="spiker_attack"/>
   </animation>
 
 
 
-  <tile id="axolotl.flak" sheet="axolotl_exterior.png" x="30" />
+  <tile id="axolotl.flak" sheet="axolotl_sheet.1" x="30" />
   <animation id="equipment.axolotl.flak" x="0" count="5"/>
   <animation id="equipment.axolotl.flak.idle" x="5" count="5" length="2"/>
 
-  <tile id="axolotl.gear" sheet="axolotl_exterior.png" x="40"/>
+  <tile id="axolotl.gear" sheet="axolotl_sheet.1" x="40"/>
   <animation id="axolotl.gear.retract" x="0" count="7"/>
   <animation id="axolotl.gear.extend" x="0" count="7" reverse="true"/>
   <animation id="axolotl.gear.down" x="0" count="1" />
@@ -225,17 +226,6 @@
   </vehicle>
 
   <!-- EQUIPMENT -->
-  <tilesheet id="icons.png" width="16" height="10"/>
-  <tile id="axolotl.flak.ico" sheet="icons.png" x="0"/>
-  <tile id="axolotl.launcher.ico" sheet="icons.png" x="1"/>
-  <tile id="axolotl.spiker.ico" sheet="icons.png" x="2"/>
-  <tile id="axolotl.power.ico" sheet="icons.png" x="3"/>
-  <!-- Power icon was originally the warp icon -->
-  <tile id="axolotl.fabricator.ico" sheet="icons.png" x="4"/>
-  <tile id="axolotl.laser.ico" sheet="icons.png" x="5"/>
-  <tile id="axolotl_core.ico" sheet="icons.png" x="6"/>
-  <tile id="axolotl.shields.ico" sheet="icons.png" x="7"/>
-
   <item id="axolotl.flak" type="equipment" slot="attack" equipOn="axolotl" cost="10000" power="30" repeat="8" weight="40" range="18" attack="14" icon="axolotl.flak.ico" multiProjectile="true" sfx="plasma_gun">
     <projectile tile="fighter.gun.bolt" animation="fighter.gun.bolt" speed="10" offsetX="10" offsetY="18" delay="1" overlap="0.25" />
     <projectile tile="fighter.gun.bolt" animation="fighter.gun.bolt" speed="10" offsetX="10" offsetY="26" delay="1" overlap="0.25" />
@@ -244,8 +234,8 @@
   <item id="axolotl.launcher" type="equipment" slot="attack" equipOn="axolotl" cost="10000" weight="40" range="30" icon="axolotl.launcher.ico" projectile="missile_pack" delay="4">
     <action id="setProjectile" />
   </item>
-  <tilesheet id="axolotl_missile.png" width="16" height="5"/>
-  <tile id="axolotl_missile" sheet="axolotl_missile.png" x="0"/>
+
+  <tile id="axolotl_missile" sheet="axolotl_sheet.9" x="0"/>
   <item id="missile_pack" type="equipment" cost="1200" weight="5" icon="missile.ico" attack="20" with="axolotl.launcher" fireAll="true">
     <projectile tile="axolotl_missile" animation="item4" speed="10" offsetX="50" offsetY="-35" homing="true"/>
     <projectile tile="axolotl_missile" animation="item4" speed="10" offsetX="65" offsetY="-30" homing="true"/>
@@ -263,9 +253,8 @@
     <projectile tile="axolotl_missile" animation="item4" speed="10" offsetX="65" offsetY="45"/>
   </item>
 
-  <tilesheet id="spiker_projectile.png" width="10" height="6"/>
-  <action>for(i in 0...5) evalXml('&lt;tile id="spiker_projectile.'+(i+1)+'" sheet="spiker_projectile.png" x="'+i+'"/>');</action>
-  <item id="axolotl.spiker" type="equipment" slot="attack" equipOn="axolotl" cost="10000" power="200" weight="60" range="5" attack="35" icon="axolotl.spiker.ico" sfx="plasma_cannon" fireAll="true">
+  <action>for(i in 0...5) evalXml('&lt;tile id="spiker_projectile.'+(i+1)+'" sheet="axolotl_sheet.6" x="'+i+'"/>');</action>
+  <item id="axolotl.spiker" type="equipment" slot="attack" equipOn="axolotl" cost="10000" power="200" weight="60" range="7" attack="35" icon="axolotl.spiker.ico" sfx="plasma_cannon" fireAll="true">
     <projectile tile="spiker_projectile.1" speed="8" offsetX="-35" offsetY="13" delay="5" overlap="0.25" aimX=".75" aimY="-.5"/>
     <projectile tile="spiker_projectile.2" speed="8" offsetX="-35" offsetY="13" delay="5" overlap="0.25" aimX="1" aimY="-.25"/>
     <projectile tile="spiker_projectile.3" speed="8" offsetX="-35" offsetY="13" delay="5" overlap="0.25" aimX="1" aimY="0"/>

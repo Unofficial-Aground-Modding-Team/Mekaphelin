@@ -1,0 +1,180 @@
+<data>
+  <include id="vehicleLoading.xml"/>
+
+  <tilesheet id="uefd_carrier.png" width="832" height="256"/>
+  <tile id="uefd_carrier" sheet="uefd_carrier.png"/>
+
+  <structure id="uefd_carrier.bg" tile="uefd_carrier" priority="-4" behind="true" remove="false" />
+  <vehicle id="uefd_carrier" extends="colony_ship" tile="uefd_carrier" canLoadVehicles="true" tooltipVehicle="true" spaceship="true">
+    <interior area="uefd_carrier.interior" offsetX="0" offsetY="-464" enterX="10" enterY="-1" exitX="7" operateX="6" operateY="-24" />
+    <tooltip section="vehicle" id="load" if="player.vehicle != null && (player.vehicle.info.xml.get('loadInto') == 'frigate_bay' || player.vehicle.info.xml.get('loadInto') == 'corvette_bay')"/>
+    <operate><action with="fade_fast">if(player.vehicle == null) this.enter(player); else loadCorvette(player,this);</action><stop/></operate>
+  </vehicle>
+
+  <tilesheet id="engine.png" width="48" height="80"/>
+  <tile id="uefd_carrier.engine" sheet="engine.png"/>
+  <structure id="uefd_carrier.engine" tile="uefd_carrier.engine" extends="fighter.engine" room="false" fullHeight="true" />
+
+  <!-- <object id="uefd_carrier" x="player.tile_x" y="player.tile_y"/> -->
+  <tile id="empty2" /><!-- the "empty" tile has special handling, vehicles can still move-->
+  <structure id="uefd_carrier.bg" tile="uefd_carrier" priority="-2" back="true" remove="false" />
+  <area id="uefd_carrier.interior">
+    <structure id="uefd_carrier.bg" x="0" y="0" />
+    <object id="ship.exit3" x="15" y="-10" />
+
+    <structure id="uefd_carrier.engine" x="46" y="-11"/>
+
+    <structure id="corvette_bay" x="10" y="0"/>
+    <object id="corvette_bay_front" x="10" y="0"/>
+    <structure id="corvette_bay" x="20" y="0"/>
+    <object id="corvette_bay_front" x="20" y="0"/>
+
+    <structure id="frigate_bay" x="30" y="0"/>
+    <object id="frigate_bay_front" x="30" y="0"/>
+
+
+    <object id="power_core.slot" x="48" y="-11" /><object id="power_core.slot" x="48" y="-12" /><object id="power_core.slot" x="48" y="-13" /><object id="power_core.slot" x="48" y="-14" /><object id="power_core.slot" x="48" y="-15" />
+    <tiles from="uefd_carrier_tiles.png" x="0" y="-16">
+      <tile id="empty" color="000000" />
+      <tile id="ship.grate" color="0f00ff"/>
+      <tile id="ship.floor" color="00ff00" layer="back"/>
+      <tile id="empty2" layer="back" color="ff0000" />
+    </tiles>
+    <init><runAreaLoad /></init>
+  </area>
+
+  <area id="corvette.interior" name="fighter" shouldLight="false" powered="getPowerCores(this) > 0">
+		<structure id="fighter.command" x="2" y="2" />
+		<structure id="fighter.weaps" x="2" y="3" />
+		<structure id="fighter.cargo" x="1" y="4" />
+		<structure id="fighter.engine" x="5" y="4" />
+
+    <structure id="axolotl.exit" x="5" y="5" />
+
+		<object id="power_core.slot" x="6" y="2" />
+		<object id="power_core.slot" x="6" y="3" />
+		<object id="power_core.slot" x="6" y="4" />
+
+    <object id="ship.doorh" x="4.5" y="2" />
+    <object id="ship.doorh" x="4.5" y="3" />
+    <object id="ship.doorh" x="4.5" y="4" />
+    <object id="ship.doorv" x="5" y="4.5" />
+
+
+		<action>for(y in 0...10) for(x in 0...14) setBack(x, y, "empty"); cleanShipInterior(area, 14, 10);</action>
+
+    <init><music id="technically" seconds="1" /></init>
+    <onLoad><music id="technically" seconds="1" /></onLoad>
+	</area>
+
+  <tilesheet id="corvette.png" width="128" height="64"/>
+  <tile id="corvette" sheet="corvette.png" x="0"/>
+  <animation id="corvette.fly" x="0" count="3"/>
+  <animation id="corvette.hover" x="3" count="3"/>
+  <animation id="corvette.idle" x="3" count="3"/>
+  <vehicle id="corvette" tile="corvette" health="750" fuel="1000" useBatteries="false" efficiency="0" fuelName="power" defense="6" speed="14" speedY="7" attack_move="true" type="spaceship" blood="science.explosion.med" title="world.fighter" underground="false" flight_height="999" max_weight="3000" death_sfx="explosion" block_icon="fighter.shields.ico" block_behind="true" block_move="true" icon="escort_fighter.ico" takeoff_sfx="ship_takeoff" land_sfx="ship_land" loadInto="corvette_bay" accessObject="true">
+    <tooltip section="structure.tooltip" id="manage_ship" if="this.area.vehicle != null"/>
+    <operate>
+      <section if="this.area.vehicle != null">
+        <menu section="structure.tooltip" closeable="true" autoselect="true" darken="false" yalign="0.55">
+          <choice id="spaceship">
+            <section with="ellipse_fast"><action>this.doMount(player);setGameScale(2);</action></section>
+          </choice>
+          <choice id="manage_cargo">
+            <action>
+              this.manageInventory(player);
+            </action>
+          </choice>
+          <choice id="change_equip">
+            <action>
+              this.manageEquipment(player);
+            </action>
+          </choice>
+        </menu>
+        <stop />
+      </section>
+    </operate>
+    <interior area="corvette.interior" offsetX="17" offsetY="20" enterX="6" enterY="5" exitX="5.5" operateX="3" operateY="2" />
+    <repair id="titanium" value="250" />
+    <!-- <operateHitbox x="118" y="81" width="47" height="35" /> -->
+    <dismount><action>setGameScale(1); if(this.renderer != null) this.renderer.scaleX = 1;</action></dismount>
+    <light tile="light.fighter" /><slot id="attack" />
+    <onDeath><run procedure="launch.lifepod" /></onDeath>
+    <init><set id="partial" value="0" /><set id="cores" value="0" /></init>
+    <onFrame>
+      var f2 = frames*2; var of = Math.floor(f2); partial += f2-of; if(partial >= 1){of++; partial -= 1;}
+      var p = of*cores; if(this.blocking) p -= of*4; if(p > 0) this.addFuel(p); else if(p &lt; 0) this.useFuel(-p);
+    </onFrame>
+    <!-- <mount><set id="cores" value="getPowerCores(this.interior)" /></mount> -->
+    <shield tile="fighter.shields" animation="fighter.shields" hit_front="fighter.shields.front" hit_back="fighter.shields.back" hit_sfx="ship_shield" />
+  </vehicle>
+
+  <area id="frigate.interior" name="fighter" shouldLight="false" powered="getPowerCores(this) > 0">
+    <structure id="fighter.command" x="3" y="2" />
+    <structure id="fighter.ladder" x="6" y="6" />
+    <structure id="fighter.engine" x="7" y="4" />
+    <structure id="axolotl.exit" x="7" y="6" />
+    <structure id="fighter.weaps" x="3" y="4" />
+    <structure id="fighter.cargo" x="2" y="3" />
+
+    <object id="power_core.slot" x="8" y="2" />
+    <object id="power_core.slot" x="8" y="3" />
+    <object id="power_core.slot" x="8" y="4" />
+
+    <object id="ship.doorh" x="5.5" y="2" />
+    <object id="ship.doorh" x="5.5" y="3" />
+    <object id="ship.doorh" x="5.5" y="4" />
+    <object id="ship.doorh" x="6.5" y="2" />
+    <object id="ship.doorh" x="6.5" y="6" />
+
+
+    <action>for(y in 0...10) for(x in 0...14) setBack(x, y, "empty"); cleanShipInterior(area, 14, 10);</action>
+
+    <init><music id="technically" seconds="1" /></init>
+    <onLoad><music id="technically" seconds="1" /></onLoad>
+  </area>
+
+  <tilesheet id="frigate.png" width="256" height="128"/>
+  <tile id="frigate" sheet="frigate.png"/>
+  <vehicle id="frigate" tile="frigate" health="1500" fuel="1000" useBatteries="false" efficiency="0" fuelName="power" defense="7" speed="8" speedY="5" attack_move="true" type="spaceship" blood="science.explosion.med" title="world.fighter" underground="false" flight_height="999" max_weight="5000" death_sfx="explosion" block_icon="fighter.shields.ico" block_behind="true" block_move="true" icon="escort_fighter.ico" takeoff_sfx="ship_takeoff" land_sfx="ship_land" loadInto="frigate_bay" accessObject="true">
+    <tooltip section="structure.tooltip" id="manage_ship" if="this.area.vehicle != null"/>
+    <operate>
+      <section if="this.area.vehicle != null">
+        <menu section="structure.tooltip" closeable="true" autoselect="true" darken="false" yalign="0.55">
+          <choice id="spaceship">
+            <section with="ellipse_fast"><action>this.doMount(player);setGameScale(2);</action></section>
+          </choice>
+          <choice id="manage_cargo">
+            <action>
+              this.manageInventory(player);
+            </action>
+          </choice>
+          <choice id="change_equip">
+            <action>
+              this.manageEquipment(player);
+            </action>
+          </choice>
+          <choice id="manage_ship">
+            <action>
+              //This is where the player loads drones and marines
+            </action>
+          </choice>
+        </menu>
+        <stop />
+      </section>
+    </operate>
+    <interior area="frigate.interior" offsetX="0" offsetY="0" enterX="7" enterY="6" exitX="5.5" operateX="4" operateY="2" />
+    <repair id="titanium" value="250" />
+    <!-- <operateHitbox x="118" y="81" width="47" height="35" /> -->
+    <dismount><action>setGameScale(1); if(this.renderer != null) this.renderer.scaleX = 1;</action></dismount>
+    <light tile="light.fighter" /><slot id="attack" />
+    <onDeath><run procedure="launch.lifepod" /></onDeath>
+    <init><set id="partial" value="0" /><set id="cores" value="0" /></init>
+    <onFrame>
+      var f2 = frames*2; var of = Math.floor(f2); partial += f2-of; if(partial >= 1){of++; partial -= 1;}
+      var p = of*cores; if(this.blocking) p -= of*4; if(p > 0) this.addFuel(p); else if(p &lt; 0) this.useFuel(-p);
+    </onFrame>
+    <!-- <mount><set id="cores" value="getPowerCores(this.interior)" /></mount> -->
+    <shield tile="fighter.shields" animation="fighter.shields" hit_front="fighter.shields.front" hit_back="fighter.shields.back" hit_sfx="ship_shield" />
+  </vehicle>
+</data>

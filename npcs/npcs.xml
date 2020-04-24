@@ -24,7 +24,7 @@
       <teleport area="mekaphelin.desert.orbit" x="128" y="32"/>
       <section if="player.vehicle != null"><action>confiscateVehicle(player)</action></section>
       <invokeLater>
-        <!-- Teleport player into the UEFD space base -->
+        <!-- Teleport player into the UEFD carrier -->
       </invokeLater>
     </section>
   </procedure>
@@ -45,7 +45,7 @@
   <npc id="uefd_engineer" tile="mechanic" action="talk" talk_sfx="talking6" animation="mechanic">
     <idle class="repair"><repair type="uefd_engineer"/><repair type="mechanic"/></idle>
   </npc>
-  <!-- <npc id="uefd_leader" tile="builder" action="talk" talk_sfx="talking1">
+  <!-- <npc id="uefd_leader" tile="president" action="talk" talk_sfx="talking1">
     <operate>
 
     </operate>

@@ -37,6 +37,9 @@
       <text id="axolotl.fabricator">-1 Power Generation \nCreates Missiles</text>
       <text id="axolotl.shield">-1 Power Generation \nNo Shield Cost</text>
     </section>
+    <section id="actions">
+      <text id="take_axolotl_core">Take Tritium Core</text>
+    </section>
     <section id="warning">
       <text id="no_axolotl_core">You have no cores to install...</text>
       <text id="no_axolotl_cores">Insufficient power for operation!</text>
@@ -45,8 +48,8 @@
       <text id="tech">Tech:</text>
     </section>
     <section id="vehicle">
-      <text id="load_corvette">Load</text>
-      <text id="unload_corvette">Unload</text>
+      <text id="load">Load</text>
+      <text id="unload">Unload</text>
     </section>
     <section id="world">
       <text id="axolotl">Axolotl</text>
