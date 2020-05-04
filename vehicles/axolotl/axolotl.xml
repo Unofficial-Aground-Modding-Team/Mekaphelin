@@ -1,43 +1,13 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <data>
-  <!-- java -jar AgroundTilesheet.jar -i 100 97 ext.png -i 16 16 int1.png -i 32 16 int2.png -i 16 32 int3.png -i 32 32 spiker_attack.png -i 10 6 spiker_projectile.png -i 2 16 axolotl_door.png -i 8 14 axolotl_core.png -i 16 5 axolotl_missile.png -o axolotl_sheet -->
+  <!-- java -jar AgroundTilesheet.jar -i 100 97 ext.png -i 16 16 int1.png -i 32 16 int2.png -i 16 32 int3.png -i 32 32 spiker_attack.png -i 10 6 spiker_projectile.png -i 2 16 axolotl_door.png -i 8 14 phlebotnium_core.png -i 16 5 axolotl_missile.png -o axolotl_sheet -->
   <include id="axolotl_sheet.xml" />
   <!-- INTERIOR -->
-  <tile id="axolotl_core" sheet="axolotl_sheet.8" x="1" offsetY="-1"/>
-
-  <animation id="axolotl_core.slot.idle"><frame visible="false" /></animation>
-  <animation id="axolotl_core.slot.occupied" equals="item4" />
-  <!-- TODO: Power core anim -->
-  <object id="axolotl_core.slot" tile="axolotl_core" animation="this.health > 0?'axolotl_core.slot.occupied':'axolotl_core.slot.idle'" layer="npc">
-    <tooltip section="actions" id="take_axolotl_core" if="this.health == 1" />
-    <tooltip section="actions" id="take_power_core" if="this.health == 2" />
-    <tooltip section="actions" id="put_power_core" />
-    <addedToArea><action>setTile(this.tile_x, this.tile_y, "empty");</action></addedToArea>
-    <operate><choose>
-      <section if="this.health == 1">
-        <item id="axolotl_core" /><action>this.health = 0; player.clearOverlap(); player.overlapChanged();</action>
-        <play object="this" animation="axolotl_core.slot.idle" />
-      </section>
-      <section if="this.health == 2">
-        <item id="power_core" /><action>this.health = 0; player.clearOverlap(); player.overlapChanged();</action>
-        <play object="this" animation="axolotl_core.slot.idle" />
-      </section>
-      <section if="player.getItemCountStorehouse('axolotl_core') > 0">
-        <item id="axolotl_core" count="-1" storehouse="true" /><action>this.health = 1; player.clearOverlap(); player.overlapChanged();</action>
-        <play object="this" animation="axolotl_core.slot.occupied" loop="true" />
-      </section>
-      <section if="player.getItemCountStorehouse('power_core') > 0">
-        <item id="power_core" count="-1" storehouse="true" /><action>this.health = 2; player.clearOverlap(); player.overlapChanged();</action>
-        <play object="this" animation="axolotl_core.slot.occupied" loop="true" />
-      </section>
-      <dialogue section="warning" id="no_axolotl_core" />
-    </choose></operate>
-  </object>
-
+  <tile id="phlebotnium_core" sheet="axolotl_sheet.8" x="1" offsetY="-1"/>
   <action>
     function getAxolotlCores(ship){
       var ret = 0;
-      if(ship.interior != null && ship.interior.getObjectsById('axolotl_core.slot')[0].health > 0)  ret += 2;
+      if(ship.interior != null && ship.interior.getObjectsById('power_core.slot')[0].health == 1)  ret += 2;
       var tech = ship.equipment.get('tech').get();
       if(tech != null){
         if(tech.info.id == 'axolotl.power')  ret += 1;
@@ -56,7 +26,7 @@
     <operate>
       <section if="getAxolotlCores(area.vehicle) > 0">
         <action with="ellipse_fast">var v = area.vehicle; v.doExit(player); setGameScale(2); v.doMount(player, true);</action><stop />
-      </section><dialogue section="warning" id="no_axolotl_cores" />
+      </section><dialogue section="vehicle" id="no_power_cores" />
     </operate>
   </structure>
 
@@ -120,7 +90,7 @@
 		<structure id="axolotl.weaps" x="0" y="3" />
 		<structure id="axolotl.cargo" x="3" y="4" />
 		<structure id="axolotl.engine" x="2" y="2" />
-    <object id="axolotl_core.slot" x="3.45" y="2" />
+    <object id="power_core.slot" x="3" y="2" />
     <structure id="axolotl.center" x="2" y="3" />
     <structure id="axolotl.exit" x="1" y="4" />
 
@@ -189,8 +159,6 @@
     <append tile="spiker_attack" animation="spiker_attack"/>
   </animation>
 
-
-
   <tile id="axolotl.flak" sheet="axolotl_sheet.1" x="30" />
   <animation id="equipment.axolotl.flak" x="0" count="5"/>
   <animation id="equipment.axolotl.flak.idle" x="5" count="5" length="2"/>
@@ -214,8 +182,7 @@
     <init><set id="partial" value="0" /></init>
     <onFrame>
       var of = Math.floor(frames); partial += frames-of; if(partial >= 1){of++; partial -= 1;}
-      var cores = getAxolotlCores(this);
-      var p = of*cores;
+      var p = of * getAxolotlCores(this);;
       if(this.blocking){
         if(this.equipment.get('tech').value != null && this.equipment.get('tech').value.info.id == 'axolotl.shield') p += 0;
         else p -= of*4;
@@ -269,14 +236,11 @@
   </item>
   <item id="axolotl.shield" type="equipment" slot="tech" equipOn="axolotl" cost="8000" weight="20" icon="axolotl.shields.ico"/>
 
-  <item id="axolotl_core" type="equipment" cost="2500" weight="15" icon="axolotl_core.ico" />
-
-  <!-- RECIPES (will be changed later) -->
+  <!-- RECIPES -->
+  <!-- TODO: Change crafting location -->
   <recipe id="axolotl" object="axolotl" fuel_cost="50" type="station.dock">
-    <item id="ship_parts" count="4" />
-    <item id="titanium" count="20" />
-    <item id="silicon" count="8" />
-    <item id="chromium" count="5"/>
+    <item id="advanced_circuitry" count="4" />
+    <item id="chrome_plating" count="5"/>
   </recipe>
 
   <recipe id="axolotl.flak" creates="axolotl.flak" type="advanced_lab">
@@ -294,26 +258,19 @@
 
   <recipe id="missile_pack" creates="missile_pack" type="advanced_lab">
     <item id="missile" count="2"/>
-    <item id="titanium" count="2"/>
+    <item id="titanium" count="1"/>
   </recipe>
 
   <recipe id="axolotl.power" creates="axolotl.power" type="advanced_lab">
-    <item id="axolotl_core" count="1"/>
+    <item id="power_core" count="1"/>
     <item id="battery" count="5"/>
   </recipe>
   <recipe id="axolotl.fabricator" creates="axolotl.fabricator" type="advanced_lab">
-    <item id="axolotl_core" count="1"/>
-    <item id="exotic_matter" count="1"/>
+    <item id="ship_parts" count="2"/>
     <item id="missile" count="5"/>
   </recipe>
   <recipe id="axolotl.shield" creates="axolotl.shield" type="advanced_lab">
-    <item id="axolotl_core" count="1"/>
-    <item id="exotic_matter" count="2"/>
-  </recipe>
-
-  <recipe id="axolotl_core" creates="axolotl_core" type="advanced_lab">
     <item id="power_core" count="1"/>
-    <item id="ship_parts" count="2"/>
-    <!-- TODO: Add some special item from mek -->
+    <item id="titanium" count="4"/>
   </recipe>
 </data>

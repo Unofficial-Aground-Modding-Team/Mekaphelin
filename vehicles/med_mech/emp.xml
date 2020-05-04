@@ -1,7 +1,0 @@
-<tilesheet id='emp.png' width='500' height='500'>
-	<image frame='0' x='687' y='249' width='16' height='16' offsetX='242' offsetY='242' />
-	<image frame='1' x='624' y='249' width='63' height='63' offsetX='219' offsetY='219' />
-	<image frame='2' x='497' y='249' width='127' height='127' offsetX='187' offsetY='187' />
-	<image frame='3' x='497' y='0' width='248' height='249' offsetX='127' offsetY='126' />
-	<image frame='4' x='0' y='0' width='497' height='498' offsetX='3' offsetY='1' />
-</tilesheet>

@@ -11,11 +11,8 @@
       <text id="advanced_circuitry">Advanced Circuitry</text>
       <text id="polymers">Polymers</text>
 
-      <text id="tritium">Tritium</text>
-      <text id="helium">Helium-3</text>
-      <text id="uefd_fuel_rod">Advanced Fuel Rod</text>
-
-      <text id="axolotl_core">Tritium Core</text>
+      <text id="phlebotnium">Meknium</text>
+      <text id="phlebotnium_core">Meknium Core</text>
 
       <text id="axolotl.flak">Flak Cannon</text>
       <text id="axolotl.launcher">Missile Pods</text>
@@ -36,13 +33,6 @@
       <text id="axolotl.power">+1 Power Generation</text>
       <text id="axolotl.fabricator">-1 Power Generation \nCreates Missiles</text>
       <text id="axolotl.shield">-1 Power Generation \nNo Shield Cost</text>
-    </section>
-    <section id="actions">
-      <text id="take_axolotl_core">Take Tritium Core</text>
-    </section>
-    <section id="warning">
-      <text id="no_axolotl_core">You have no cores to install...</text>
-      <text id="no_axolotl_cores">Insufficient power for operation!</text>
     </section>
     <section id="equipment">
       <text id="tech">Tech:</text>

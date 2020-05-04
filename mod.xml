@@ -15,8 +15,8 @@
 		<include id="en_US.xml" />
 		<include id="areas/system.xml" />
 		<include id="enemies/enemies.xml" />
-		<include id="vehicles/vehicles.xml" />
 		<include id="items/items.xml" />
+		<include id="vehicles/vehicles.xml" />
 		<include id="npcs/npcs.xml"/>
 		<include id="structures/structures.xml" />
   </init>

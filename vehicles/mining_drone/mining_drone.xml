@@ -2,13 +2,13 @@
 <data>
   <vehicle id="uefd.mining_drone" tile="drone.ship" health="500" fuel="10000" useBatteries="false" efficiency="0" fuelName="power" defense="8" drone="true" droneControl="uefd_control" speed="5" underwater="true" type="spaceship" tooltip="structure.tooltip.operate" blood="science.explosion.med" flight_height="999" death_sfx="explosion" max_depth="200">
     <repair id="titanium" value="250" />
-    <fuel id="uranium" fuel="2000" /><fuel id="tritium" fuel="2000" /><fuel id="uefd_fuel_rod" fuel="2000" />
+    <fuel id="phlebotnium" fuel="1000" />
     <light tile="light.largest" />
   </vehicle>
 
   <vehicle id="uefd.mining_drone2" tile="drone.ship" health="1000" fuel="20000" useBatteries="false" efficiency="0" fuelName="power" defense="10" drone="true" droneControl="uefd_control" speed="7" underwater="true" type="spaceship" tooltip="structure.tooltip.operate" blood="science.explosion.med" flight_height="999" death_sfx="explosion" max_depth="300">
     <repair id="titanium" value="250" />
-    <fuel id="uranium" fuel="2000" /><fuel id="tritium" fuel="2000" /><fuel id="uefd_fuel_rod" fuel="2000" />
+    <fuel id="phlebotnium" fuel="1000" />
     <light tile="light.largest" />
   </vehicle>
 </data>

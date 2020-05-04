@@ -1,25 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <data>
-  <include id="emp.xml" includeRoot="true"/>
-  <tile id="mech_mech_emp" sheet="emp.png"/>
-  <animation id="mech_mech_emp" count="4" />
-  <object id="mech_mech_emp" tile="mech_mech_emp" animation="mech_mech_emp" layer="top" fps="10" removeOnComplete="true" save="false">
+  <include id="med_mech.xml"/>
+  <tile id="mech_mech_emp" sheet="med_mech.2"/>
+  <animation id="mech_mech_emp" count="8" />
+  <object id="mech_mech_emp" tile="mech_mech_emp" animation="mech_mech_emp" layer="top" fps="12" removeOnComplete="true" save="false">
     <addedToArea><action>
       count = 0.0; function canDamage(o){
-        return o.attackPower(1, 1, 0, null, false) > 0 &amp;&amp; o.getDefense(false, false, false) &lt; 16;
-      } function damageTile(x, y){area.breakBrick(x, y, 5, 12, true, spawner); return false;}
+        return o != spawner && o.attackPower(1, 1, 0, null, false) > 0 &amp;&amp; o.getDefense(false, false, false) &lt; damage * 2;
+      }
     </action><sound id="nuclear_missile" /></addedToArea>
-    <onFrame>count += frames; if(count >= 8){count -= 8; for(o in this.getOverlappingObjects(canDamage, damageTile)) o.damage(2, FLAG_IGNORE_DEFENSE|FLAG_HIDE_ATTACKER, spawner);}</onFrame>
+    <onFrame>count += frames; if(count >= 8){count -= 8; for(o in this.getOverlappingObjects(canDamage)) o.damage(damage, FLAG_IGNORE_DEFENSE|FLAG_HIDE_ATTACKER, spawner);}</onFrame>
   </object>
 
-
-  <tilesheet id="med_mech.png" width="48" height="32"/>
-  <tile id="med_mech" sheet="med_mech.png"/>
-
+  <tile id="med_mech" sheet="med_mech.1"/>
   <animation id="med_mech.move" x="1" count="14"/>
   <animation id="med_mech.cannons" x="15" count="8"/>
 
-  <vehicle id="med_mech" tile="med_mech" health="1000" speed="3" defense="10" fuel="1000" efficiency="0" type="" fps="10" icon="exo_mech.ico" title="item.names.med_mech" blood="science.explosion.med" max_weight="3000" hitDamage="2" death_sfx="explosion" item="med_mech" block_icon="laser_gun.ico">
+  <vehicle id="med_mech" tile="med_mech" health="500" speed="2" defense="10" fuel="2000" efficiency="0" fps="10" icon="exo_mech.ico" title="item.names.med_mech" blood="science.explosion.med" max_weight="3000" hitDamage="1" death_sfx="explosion" item="med_mech" block_icon="laser_gun.ico">
     <listItem title="vehicle.pack_up">
       <closeWindows /><action>this.dismount();</action>
       <invokeLater><section if="player.vehicle == null">
@@ -27,41 +24,22 @@
         <item id="med_mech" value="this.health"><parameter id="l" value="this.equipment.getItemId('attack')" /><parameter id="p" value="this.equipment.getItemId('tech')" /><parameter id="f" value="Std.string(this.fuel)" /></item>
       </section></invokeLater>
     </listItem>
-    <init><set id="partial" value="0" /></init>
-    <onFrame>
-      if(core) this.addFuel(1);
-    </onFrame>
     <repair id="chrome_plating" value="500" />
-    <fuel id="tritium" fuel="1000" />
-    <slot id="attack"/><slot id="tech" noneItem="power_core"/>
+    <fuel id="phlebotnium" fuel="1000" />
+    <slot id="attack"/>
     <light tile="light.medium" color="6cd3f0" flicker="true" />
-    <mount><set id="core" value="this.equipment.get('tech').value != null" /></mount>
-    <!-- <attack type="cannons">
-      Endergy blasts
-      Fast repeat, moderate damage, low power usage
-    </attack> -->
-
     <attack type="projectile" useDefend="true" attack="10" range="10" animation="cannons" cost="10" scaleCost="false" sfx="laser_bolt">
       <projectile tile="laser_bolt" animation="laser_bolt" speed="5" offsetY="6" delay="1" />
       <projectile tile="laser_bolt" animation="laser_bolt" speed="5" offsetY="6" delay="1" />
     </attack>
 
-    <ability hotkey="8" icon="bombardment.ico" animation="item6" available="this.renderer != null && !this.renderer.attacking">
-      <object id="mech_mech_emp" x="(player.vehicle.getCenterX()-250)/Tile.SIZE" y="(player.vehicle.getCenterY()+240)/Tile.SIZE">this.vars.set("spawner", this);</object>
-      <!-- <object id="chilling_howl" x="(player.vehicle.getCenterX()-72)/Tile.SIZE" y="(player.vehicle.getCenterY()+48)/Tile.SIZE" pre="true">this.vars.set("spawner", player); this.vars.set("damage", 3);</object> -->
-      <!-- Massive AOE EMP pulse
-      Very slow recharge, Moderate(area) damage, uses all remaining power -->
+    <ability hotkey="8" icon="bombardment.ico" animation="item6" available="player.vehicle.fuel > 0">
+      <object id="mech_mech_emp" x="(player.vehicle.getCenterX() - 128)/Tile.SIZE" y="(player.vehicle.getCenterY() + 112)/Tile.SIZE">this.vars.set("spawner", player.vehicle); this.vars.set('damage', Math.ceil(player.vehicle.fuel / 200));</object>
+      <action>player.vehicle.setFuel(0);</action>
     </ability>
-    <!-- <ability hotkey="8" icon="bombardment.ico" animation="item6" cost="100" available="this.renderer != null && !this.renderer.attacking">
-      <action>this.renderer.attacking = true;</action><play object="this" animation="mine.fire" /><action>this.renderer.attacking = false;</action>
-      <projectile tile="magic_orb" animation="magic_orb.idle" color="00ff00" colorScale="2" speed="3" critical="false" width="16" height="16" damage="25" dx="this.getDX()" dy="0" hit_sfx="fireball" homing="true" spawner="player" spawnX="(this.xPos+((this.getFacing() == 1)?-8:this._width-3))/Tile.SIZE" spawnY="(this.yTile-49)/Tile.SIZE" relative="false" range="60">
-        <hitEffect tile="magic_orb" animation="magic_orb.impact" color="00ff00" colorScale="2"/>
-      </projectile>
-    </ability> -->
-
   </vehicle>
 
-  <item id="med_mech" type="object" cost="0" weight="100" icon="exo_mech.ico" durability="1000" durabilityName="common.health" durabilityIcon="vehicle_health">
+  <item id="med_mech" type="object" cost="0" weight="100" icon="exo_mech.ico" durability="500" durabilityName="common.health" durabilityIcon="vehicle_health">
     <action id="plant" name="vehicle.deploy" object="med_mech" onGrass="false" overlapBlueprints="true" overlapStructures="true" removeBushes="false" on_air="true" underground="true">
 			<action>
 				object.setHealth(this.getFeed()); p = Item.getParameter(this.getNameStr(), "l"); d = Item.getParameter(this.getNameStr(), "p");
@@ -79,5 +57,4 @@
   <item id="med_mech.rockets" type="equipment" slot="attack" equipOn="med_mech" cost="10000" weight="40" range="30" power="10" icon="fighter.launcher.ico" projectile="missile" group="rocket_launcher" offsetY="-12" offsetX="15">
     <action id="setProjectile" />
   </item>
-
 </data>

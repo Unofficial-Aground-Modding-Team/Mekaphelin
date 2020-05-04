@@ -51,9 +51,9 @@
 
     <structure id="axolotl.exit" x="5" y="5" />
 
-		<object id="power_core.slot" x="6" y="2" />
+		<!-- <object id="power_core.slot" x="6" y="2" />
 		<object id="power_core.slot" x="6" y="3" />
-		<object id="power_core.slot" x="6" y="4" />
+		<object id="power_core.slot" x="6" y="4" /> -->
 
     <object id="ship.doorh" x="4.5" y="2" />
     <object id="ship.doorh" x="4.5" y="3" />
@@ -72,7 +72,7 @@
   <animation id="corvette.fly" x="0" count="3"/>
   <animation id="corvette.hover" x="3" count="3"/>
   <animation id="corvette.idle" x="3" count="3"/>
-  <vehicle id="corvette" tile="corvette" health="750" fuel="1000" useBatteries="false" efficiency="0" fuelName="power" defense="6" speed="14" speedY="7" attack_move="true" type="spaceship" blood="science.explosion.med" title="world.fighter" underground="false" flight_height="999" max_weight="3000" death_sfx="explosion" block_icon="fighter.shields.ico" block_behind="true" block_move="true" icon="escort_fighter.ico" takeoff_sfx="ship_takeoff" land_sfx="ship_land" loadInto="corvette_bay" accessObject="true">
+  <vehicle id="corvette" tile="corvette" health="500" fuel="2000" useBatteries="false" efficiency="0" fuelName="power" defense="10" speed="12" attack_move="true" type="spaceship" blood="science.explosion.med" title="world.fighter" underground="false" flight_height="999" max_weight="3000" death_sfx="explosion" block_icon="fighter.shields.ico" block_behind="true" block_move="true" icon="escort_fighter.ico" takeoff_sfx="ship_takeoff" land_sfx="ship_land" loadInto="corvette_bay" accessObject="true">
     <tooltip section="structure.tooltip" id="manage_ship" if="this.area.vehicle != null"/>
     <operate>
       <section if="this.area.vehicle != null">
@@ -96,15 +96,15 @@
     </operate>
     <interior area="corvette.interior" offsetX="17" offsetY="20" enterX="6" enterY="5" exitX="5.5" operateX="3" operateY="2" />
     <repair id="titanium" value="250" />
+    <fuel id="phlebotnium" fuel="1000" />
     <!-- <operateHitbox x="118" y="81" width="47" height="35" /> -->
     <dismount><action>setGameScale(1); if(this.renderer != null) this.renderer.scaleX = 1;</action></dismount>
     <light tile="light.fighter" /><slot id="attack" />
     <onDeath><run procedure="launch.lifepod" /></onDeath>
-    <init><set id="partial" value="0" /><set id="cores" value="0" /></init>
-    <onFrame>
-      var f2 = frames*2; var of = Math.floor(f2); partial += f2-of; if(partial >= 1){of++; partial -= 1;}
-      var p = of*cores; if(this.blocking) p -= of*4; if(p > 0) this.addFuel(p); else if(p &lt; 0) this.useFuel(-p);
-    </onFrame>
+    <init><set id="partial" value="0" /></init>
+		<onFrame>
+			if(this.blocking){var of = Math.floor(frames*0.125); partial += frames*0.125-of; if(partial >= 1){of++; partial -= 1;} if(of > 0) this.useFuel(of);}
+		</onFrame>
     <!-- <mount><set id="cores" value="getPowerCores(this.interior)" /></mount> -->
     <shield tile="fighter.shields" animation="fighter.shields" hit_front="fighter.shields.front" hit_back="fighter.shields.back" hit_sfx="ship_shield" />
   </vehicle>
@@ -117,9 +117,9 @@
     <structure id="fighter.weaps" x="3" y="4" />
     <structure id="fighter.cargo" x="2" y="3" />
 
-    <object id="power_core.slot" x="8" y="2" />
+    <!-- <object id="power_core.slot" x="8" y="2" />
     <object id="power_core.slot" x="8" y="3" />
-    <object id="power_core.slot" x="8" y="4" />
+    <object id="power_core.slot" x="8" y="4" /> -->
 
     <object id="ship.doorh" x="5.5" y="2" />
     <object id="ship.doorh" x="5.5" y="3" />
@@ -136,7 +136,7 @@
 
   <tilesheet id="frigate.png" width="256" height="128"/>
   <tile id="frigate" sheet="frigate.png"/>
-  <vehicle id="frigate" tile="frigate" health="1500" fuel="1000" useBatteries="false" efficiency="0" fuelName="power" defense="7" speed="8" speedY="5" attack_move="true" type="spaceship" blood="science.explosion.med" title="world.fighter" underground="false" flight_height="999" max_weight="5000" death_sfx="explosion" block_icon="fighter.shields.ico" block_behind="true" block_move="true" icon="escort_fighter.ico" takeoff_sfx="ship_takeoff" land_sfx="ship_land" loadInto="frigate_bay" accessObject="true">
+  <vehicle id="frigate" tile="frigate" health="600" fuel="2000" useBatteries="false" efficiency="0" fuelName="power" defense="14" speed="8" speedY="5" attack_move="true" type="spaceship" blood="science.explosion.med" title="world.fighter" underground="false" flight_height="999" max_weight="5000" death_sfx="explosion" block_icon="fighter.shields.ico" block_behind="true" block_move="true" icon="escort_fighter.ico" takeoff_sfx="ship_takeoff" land_sfx="ship_land" loadInto="frigate_bay" accessObject="true">
     <tooltip section="structure.tooltip" id="manage_ship" if="this.area.vehicle != null"/>
     <operate>
       <section if="this.area.vehicle != null">
@@ -165,16 +165,15 @@
     </operate>
     <interior area="frigate.interior" offsetX="0" offsetY="0" enterX="7" enterY="6" exitX="5.5" operateX="4" operateY="2" />
     <repair id="titanium" value="250" />
+    <fuel id="phlebotnium" fuel="200" />
     <!-- <operateHitbox x="118" y="81" width="47" height="35" /> -->
     <dismount><action>setGameScale(1); if(this.renderer != null) this.renderer.scaleX = 1;</action></dismount>
     <light tile="light.fighter" /><slot id="attack" />
     <onDeath><run procedure="launch.lifepod" /></onDeath>
-    <init><set id="partial" value="0" /><set id="cores" value="0" /></init>
-    <onFrame>
-      var f2 = frames*2; var of = Math.floor(f2); partial += f2-of; if(partial >= 1){of++; partial -= 1;}
-      var p = of*cores; if(this.blocking) p -= of*4; if(p > 0) this.addFuel(p); else if(p &lt; 0) this.useFuel(-p);
-    </onFrame>
-    <!-- <mount><set id="cores" value="getPowerCores(this.interior)" /></mount> -->
+    <init><set id="partial" value="0" /></init>
+		<onFrame>
+			if(this.blocking){var of = Math.floor(frames*0.125); partial += frames*0.125-of; if(partial >= 1){of++; partial -= 1;} if(of > 0) this.useFuel(of);}
+		</onFrame>
     <shield tile="fighter.shields" animation="fighter.shields" hit_front="fighter.shields.front" hit_back="fighter.shields.back" hit_sfx="ship_shield" />
   </vehicle>
 </data>

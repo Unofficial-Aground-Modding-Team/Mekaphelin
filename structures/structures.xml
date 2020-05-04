@@ -16,8 +16,7 @@
             </section>
           </choice>
           <choice id="dismount">
-            <action>player.vehicle.dismount();</action>
-            <invokeLater><action>player.area.vehicle.doExit(player);</action></invokeLater>
+            <action>player.vehicle.doDismount();</action>
           </choice>
         </menu>
         </section>
@@ -39,8 +38,7 @@
             </section><stop />
           </choice>
           <choice id="dismount">
-            <action>player.vehicle.dismount();</action>
-            <invokeLater><action>player.area.vehicle.doExit(player);</action></invokeLater>
+            <action>player.vehicle.doDismount();</action>
           </choice>
         </menu>
           <stop />

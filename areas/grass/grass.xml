@@ -17,11 +17,12 @@
     <appendArea id="sea_floor"><params area_left="-240" area_right="390" area_width="128" area_height="96" /></appendArea>
     <ore id="coal" start="0.1" end="0.5" percent="0.005" tile="sci1.dirt"/>
     <ore id="iron" start="0.1" end="0.3" percent="0.0075" tile="sci1.dirt" />
-    <ore id="diamond" start="0.5" end="0.6" percent="0.0025" tile="sci1.stone" />
-    <ore id="gold" start="0.3" end="0.5" percent="0.0125" tile="sci1.stone" />
-    <ore id="iron" start="0.3" end="0.6" percent="0.0375" tile="sci1.stone" />
-    <ore id="titanium" start="0.7" end="1.0" percent="0.0125" tile="obsidian" />
-    <ore id="quartz" start="0.6" end="0.8" percent="0.0175" tile="obsidian" />
+    <ore id="sulfur" start="0.1" end="0.3" percent="0.0175" tile="sci1.dirt" />
+    <ore id="diamond" start="0.5" end="0.8" percent="0.0025" tile="sci1.stone" />
+    <ore id="gold" start="0.3" end="0.8" percent="0.0125" tile="sci1.stone" />
+    <ore id="iron" start="0.3" end="0.6" percent="0.02" tile="sci1.stone" />
+    <ore id="titanium" start="0.7" end="1.0" percent="0.0125" tile="sci1.stone" />
+    <ore id="quartz" start="0.6" end="0.8" percent="0.0175" tile="sci1.stone" />
     <fishing>
       <loot id="rockfish" p="12" difficulty="2" />
       <loot id="coral_cod" p="1" difficulty="3" />

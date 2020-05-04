@@ -2,8 +2,9 @@
 <data>
   <include id="mountain_range.xml"/>
   <planet id="mekaphelin.desert" height="80">
-    <orbit id="mekaphelin.desert.orbit" width="512" height="64" background="stars.dwarf.orbit" name="system.mekaphelin.desert.orbit" type="none">
+    <orbit id="mekaphelin.desert.orbit" width="256" height="64" background="stars.dwarf.orbit" name="system.mekaphelin.desert.orbit" type="none">
       <area id="mekaphelin.desert.outpost" />
+      <object id="uefd_carrier" x="102" y="40"/>
       <init><runAreaLoad /></init>
       <onLoad><run procedure="uefd.intro"/><music id="orbit" seconds="1" /><radar tile="orbit.radar" animation="orbit.radar" padding="2" /></onLoad>
     </orbit>
@@ -15,18 +16,17 @@
     <tiles id="blackstone" y="95" empty="true" />
     <tiles id="desert.dirt" start="0" end="0.5" empty="true" />
     <tiles id="basalt" start="0.5" end="1" empty="true" />
-    <ore id="oil" start="0.0" end="0.5" percent="0.0375" tile="desert.dirt" />
-    <ore id="uranium" start="0.9" end="1.0" percent="0.000625" tile="basalt" />
+    <ore id="oil" start="0.0" end="0.5" percent="0.03" tile="desert.dirt" />
     <ore id="diamond" start="0.8" end="1.0" percent="0.0125" tile="basalt" />
     <ore id="gold" start="0.5" end="1.0" percent="0.0125" tile="basalt" />
-    <ore id="oil" start="0.5" end="0.8" percent="0.0375" tile="basalt" />
-    <ore id="chromium" start="0.8" end="1" percent="0.0375" tile="basalt" />
+    <ore id="oil" start="0.5" end="0.8" percent="0.03" tile="basalt" />
+    <ore id="chromium" start="0.8" end="1" percent="0.01" tile="basalt" />
 
     <structure id="bunker_barracks" x="30" y="-1"/>
     <structure id="powerline1" x="41" y="-1"/>
     <structure id="bunker_depot" x="43" y="-1"/>
     <structure id="powerline1" x="48" y="-1"/>
-    <structure id="fusion_plant" x="49" y="-1"/>
+    <structure id="fusion_plant" x="49" y="-1">this.fuel = 2000;</structure>
     <structure id="powerline1" x="58" y="-1"/>
     <structure id="manufactory" x="58" y="-1"/>
 

@@ -1,0 +1,56 @@
+<sheets>
+<tilesheet id='med_mech.1' sheet='med_mech.png' width='20' height='32' offsetX="-20">
+	<image frame='0' x='210' y='397' width='30' height='30' offsetX='10' offsetY='2' />
+	<image frame='1' x='210' y='427' width='30' height='30' offsetX='10' offsetY='2' />
+	<image frame='2' x='471' y='172' width='30' height='30' offsetX='10' offsetY='2' />
+	<image frame='3' x='501' y='172' width='30' height='30' offsetX='10' offsetY='2' />
+	<image frame='4' x='210' y='247' width='31' height='30' offsetX='9' offsetY='2' />
+	<image frame='5' x='210' y='277' width='31' height='30' offsetX='9' offsetY='2' />
+	<image frame='6' x='210' y='307' width='31' height='30' offsetX='9' offsetY='2' />
+	<image frame='7' x='210' y='337' width='31' height='30' offsetX='9' offsetY='2' />
+	<image frame='8' x='531' y='172' width='30' height='30' offsetX='10' offsetY='2' />
+	<image frame='9' x='561' y='172' width='30' height='30' offsetX='10' offsetY='2' />
+	<image frame='10' x='591' y='172' width='30' height='30' offsetX='10' offsetY='2' />
+	<image frame='11' x='603' y='252' width='29' height='30' offsetX='11' offsetY='2' />
+	<image frame='12' x='603' y='282' width='29' height='30' offsetX='11' offsetY='2' />
+	<image frame='13' x='603' y='312' width='29' height='30' offsetX='11' offsetY='2' />
+	<image frame='14' x='564' y='412' width='29' height='30' offsetX='11' offsetY='2' />
+	<image frame='17' x='210' y='367' width='31' height='30' offsetX='10' offsetY='2' />
+	<image frame='18' x='603' y='222' width='30' height='30' offsetX='10' offsetY='2' />
+	<image frame='21' x='619' y='356' width='28' height='30' offsetX='12' offsetY='2' />
+	<image frame='22' x='593' y='412' width='29' height='30' offsetX='11' offsetY='2' />
+	<image frame='23' x='471' y='212' width='28' height='10' offsetX='16' offsetY='5' />
+	<image frame='27' x='471' y='202' width='30' height='10' offsetX='15' offsetY='5' />
+	<image frame='34' x='501' y='212' width='26' height='10' offsetX='17' offsetY='5' />
+	<image frame='38' x='501' y='202' width='28' height='10' offsetX='17' offsetY='5' />
+	<image frame='15' equals='0' offsetX='10' offsetY='2' />
+	<image frame='16' equals='0' offsetX='10' offsetY='2' />
+	<image frame='19' equals='0' offsetX='10' offsetY='2' />
+	<image frame='20' equals='0' offsetX='10' offsetY='2' />
+	<image frame='24' equals='23' offsetX='16' offsetY='5' />
+	<image frame='25' equals='23' offsetX='16' offsetY='5' />
+	<image frame='26' equals='23' offsetX='16' offsetY='5' />
+	<image frame='28' equals='27' offsetX='15' offsetY='5' />
+	<image frame='29' equals='27' offsetX='15' offsetY='5' />
+	<image frame='30' equals='27' offsetX='15' offsetY='5' />
+	<image frame='31' equals='23' offsetX='16' offsetY='5' />
+	<image frame='32' equals='23' offsetX='16' offsetY='5' />
+	<image frame='33' equals='23' offsetX='16' offsetY='5' />
+	<image frame='35' equals='34' offsetX='17' offsetY='5' />
+	<image frame='36' equals='34' offsetX='17' offsetY='5' />
+	<image frame='37' equals='34' offsetX='17' offsetY='5' />
+	<image frame='39' equals='38' offsetX='17' offsetY='5' />
+	<image frame='40' equals='23' offsetX='16' offsetY='5' />
+	<image frame='41' equals='23' offsetX='16' offsetY='5' />
+</tilesheet>
+<tilesheet id='med_mech.2' sheet='med_mech.png' width='256' height='256'>
+	<image frame='0' x='564' y='356' width='55' height='56' offsetX='99' offsetY='100' />
+	<image frame='1' x='471' y='356' width='93' height='95' offsetX='79' offsetY='81' />
+	<image frame='2' x='471' y='222' width='132' height='134' offsetX='60' offsetY='61' />
+	<image frame='3' x='471' y='0' width='171' height='172' offsetX='41' offsetY='42' />
+	<image frame='4' x='0' y='247' width='210' height='210' offsetX='23' offsetY='23' />
+	<image frame='5' x='0' y='0' width='249' height='247' offsetX='4' offsetY='4' />
+	<image frame='6' x='249' y='0' width='222' height='222' offsetX='17' offsetY='17' />
+	<image frame='7' x='249' y='222' width='222' height='222' offsetX='17' offsetY='17' />
+</tilesheet>
+</sheets>

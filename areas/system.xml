@@ -45,9 +45,9 @@
     <ore id="oil" start="0.0" end="0.5" percent="0.0375" tile="desert.dirt" />
     <ore id="iron" start="0.2" end="0.5" percent="0.0125" tile="desert.dirt" />
     <ore id="magnegem" start="0.4" end="0.5" percent="0.0025" tile="desert.dirt" />
-    <ore id="uranium" start="0.9" end="1.0" percent="0.000625" tile="basalt" />
-    <ore id="diamond" start="0.8" end="1.0" percent="0.0125" tile="basalt" />
-    <ore id="gold" start="0.5" end="1.0" percent="0.0125" tile="basalt" />
+    <ore id="uranium" start="0.8" end="1.0" percent="0.000625" tile="basalt" />
+    <ore id="diamond" start="0.6" end="1.0" percent="0.0125" tile="basalt" />
+    <ore id="titanium" start="0.5" end="1.0" percent="0.0125" tile="basalt" />
     <init><runAreaLoad /></init>
     <onLoad><run procedure="uefd.intro"/><music id="orbit_nocombat" seconds="1" /></onLoad>
   </area>

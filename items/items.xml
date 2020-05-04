@@ -11,15 +11,57 @@
   <tile id="axolotl.power.ico" sheet="icons.png" x="7"/>
   <tile id="axolotl.fabricator.ico" sheet="icons.png" x="8"/>
   <tile id="axolotl.laser.ico" sheet="icons.png" x="9"/>
-  <tile id="axolotl_core.ico" sheet="icons.png" x="10"/>
+  <tile id="phlebotnium_core.ico" sheet="icons.png" x="10"/>
   <tile id="axolotl.shields.ico" sheet="icons.png" x="11"/>
+  <tile id="phlebotnium.ico" sheet="icons.png" x="12"/>
 
   <item id="chrome_plating" icon="chrome_plating.ico" type="resource" cost="0" weight="0" />
   <item id="carbon_lattice" icon="carbon_lattice.ico" type="resource" cost="0" weight="0"/>
   <item id="advanced_circuitry" icon="advanced_circuitry.ico" type="resource" cost="0" weight="0"/>
   <item id="polymers" icon="polymers.ico" type="resource" cost="0" weight="0"/>
 
-  <item id="tritium" icon="coal.ico" type="resource" cost="100" weight="5"/>
-  <item id="helium" icon="coal.ico" type="resource" cost="100" weight="5"/>
-  <item id="uefd_fuel_rod" icon="coal.ico" type="resource" cost="100" weight="5"/>
+  <item id="phlebotnium" icon="phlebotnium.ico" animation="item6" type="resource" cost="100" weight="5" color="4400EE"/>
+
+  <item id="phlebotnium_core" type="object" cost="2500" weight="20" icon="phlebotnium_core.ico" underground="true" object="powerplant" tile="power_core">
+    <action id="place"><placeCost><item id="ship_parts" count="1" /></placeCost></action>
+    <operate>
+      <menu section="common" closeable="true" width="120" autoselect="true">
+        <choice id="recharge_batteries"><action>player.restorePower()</action></choice>
+        <choice id="actions.collect"><action>this.doCollect(player);</action></choice>
+      </menu><stop />
+    </operate>
+  </item>
+
+  <recipe id="phlebotnium_core" creates="phlebotnium_core" type="manufactory">
+    <item id="power_core" count="1"/>
+    <item id="phlebotnium" count="2"/>
+  </recipe>
+  <recipe id="craft_chrome_plating" creates="chrome_plating" type="manufactory">
+    <item id="titanium" count="1"/>
+    <item id="chromium" count="1"/>
+  </recipe>
+  <recipe id="craft_carbon_lattice" creates="carbon_lattice" type="manufactory">
+    <item id="diamond" count="1"/>
+    <item id="coal" count="2"/>
+  </recipe>
+  <recipe id="craft_polymers" creates="polymers" type="manufactory">
+    <item id="refined_oil" count="1"/>
+    <item id="sulfur" count="1"/>
+  </recipe>
+  <recipe id="craft_advanced_circuitry" creates="advanced_circuitry" type="manufactory">
+    <item id="ship_parts" count="1"/>
+    <item id="carbon_lattice" count="1"/>
+    <item id="polymers" count="1"/>
+  </recipe>
+
+  <recipe id="corvette" object="corvette" type="station.dock">
+    <item id="advanced_circuitry" count="4" />
+    <item id="chrome_plating" count="8"/>
+    <item id="phlebotnium_core" count="2"/>
+  </recipe>
+  <recipe id="frigate" object="frigate" type="station.dock">
+    <item id="advanced_circuitry" count="5" />
+    <item id="chrome_plating" count="10"/>
+    <item id="phlebotnium_core" count="3"/>
+  </recipe>
 </data>
