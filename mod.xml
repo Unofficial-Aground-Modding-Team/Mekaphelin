@@ -8,16 +8,16 @@
 	<loadAfter>Asteroids</loadAfter>
 	<loadAfter>Planets Extended</loadAfter>
 	<init>
-	 <music id="outpost">
-		 <track id="{mod:full_version}/music/heights" x="150" width="150" y="79" height="-79" fade_tiles="2" />
-		 <track id="{mod:full_version}/music/desert"/>
+	<music id="outpost">
+		<track id="{mod:full_version}/music/heights" x="150" width="150" y="79" height="-79" fade_tiles="2" />
+		<track id="{mod:full_version}/music/desert"/>
 	 </music>
-		<include id="en_US.xml" />
-		<include id="areas/system.xml" />
-		<include id="enemies/enemies.xml" />
-		<include id="items/items.xml" />
-		<include id="vehicles/vehicles.xml" />
-		<include id="npcs/npcs.xml"/>
-		<include id="structures/structures.xml" />
+	<include id="en_US.xml" />
+	<include id="areas/system.xml" />
+	<include id="enemies/enemies.xml" />
+	<include id="items/items.xml" />
+	<include id="vehicles/vehicles.xml" />
+	<include id="npcs/npcs.xml"/>
+	<include id="structures/structures.xml" />
   </init>
 </mod>

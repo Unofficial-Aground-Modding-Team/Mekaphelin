@@ -1,6 +1,5 @@
 <data>
   <include id="vehicleLoading.xml"/>
-
   <tilesheet id="uefd_carrier.png" width="832" height="256"/>
   <tile id="uefd_carrier" sheet="uefd_carrier.png"/>
 
@@ -21,18 +20,13 @@
   <area id="uefd_carrier.interior">
     <structure id="uefd_carrier.bg" x="0" y="0" />
     <object id="ship.exit3" x="15" y="-10" />
-
     <structure id="uefd_carrier.engine" x="46" y="-11"/>
-
     <structure id="corvette_bay" x="10" y="0"/>
     <object id="corvette_bay_front" x="10" y="0"/>
     <structure id="corvette_bay" x="20" y="0"/>
     <object id="corvette_bay_front" x="20" y="0"/>
-
     <structure id="frigate_bay" x="30" y="0"/>
     <object id="frigate_bay_front" x="30" y="0"/>
-
-
     <object id="power_core.slot" x="48" y="-11" /><object id="power_core.slot" x="48" y="-12" /><object id="power_core.slot" x="48" y="-13" /><object id="power_core.slot" x="48" y="-14" /><object id="power_core.slot" x="48" y="-15" />
     <tiles from="uefd_carrier_tiles.png" x="0" y="-16">
       <tile id="empty" color="000000" />
@@ -48,21 +42,15 @@
 		<structure id="fighter.weaps" x="2" y="3" />
 		<structure id="fighter.cargo" x="1" y="4" />
 		<structure id="fighter.engine" x="5" y="4" />
-
     <structure id="axolotl.exit" x="5" y="5" />
-
 		<!-- <object id="power_core.slot" x="6" y="2" />
 		<object id="power_core.slot" x="6" y="3" />
 		<object id="power_core.slot" x="6" y="4" /> -->
-
     <object id="ship.doorh" x="4.5" y="2" />
     <object id="ship.doorh" x="4.5" y="3" />
     <object id="ship.doorh" x="4.5" y="4" />
     <object id="ship.doorv" x="5" y="4.5" />
-
-
 		<action>for(y in 0...10) for(x in 0...14) setBack(x, y, "empty"); cleanShipInterior(area, 14, 10);</action>
-
     <init><music id="technically" seconds="1" /></init>
     <onLoad><music id="technically" seconds="1" /></onLoad>
 	</area>
@@ -78,7 +66,11 @@
       <section if="this.area.vehicle != null">
         <menu section="structure.tooltip" closeable="true" autoselect="true" darken="false" yalign="0.55">
           <choice id="spaceship">
-            <section with="ellipse_fast"><action>this.doMount(player);setGameScale(2);</action></section>
+            <section with="ellipse_fast">
+            <action>
+                exitCarrier(this,player);
+            </action>
+            </section>
           </choice>
           <choice id="manage_cargo">
             <action>
@@ -142,7 +134,7 @@
       <section if="this.area.vehicle != null">
         <menu section="structure.tooltip" closeable="true" autoselect="true" darken="false" yalign="0.55">
           <choice id="spaceship">
-            <section with="ellipse_fast"><action>this.doMount(player);setGameScale(2);</action></section>
+            <section with="ellipse_fast"><action>exitCarrier(this,player);</action></section>
           </choice>
           <choice id="manage_cargo">
             <action>

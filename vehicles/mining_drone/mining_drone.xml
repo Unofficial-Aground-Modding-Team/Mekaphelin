@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <data>
-  <vehicle id="uefd.mining_drone" tile="drone.ship" health="500" fuel="10000" useBatteries="false" efficiency="0" fuelName="power" defense="8" drone="true" droneControl="uefd_control" speed="5" underwater="true" type="spaceship" tooltip="structure.tooltip.operate" blood="science.explosion.med" flight_height="999" death_sfx="explosion" max_depth="200">
-    <repair id="titanium" value="250" />
-    <fuel id="phlebotnium" fuel="1000" />
-    <light tile="light.largest" />
-  </vehicle>
+  <tilesheet id="mining_drone" image="uefd-mining-droneship.png" width="36" height="36"/>
+  <tile id="mining_drone" sheet="mining_drone"/>
 
-  <vehicle id="uefd.mining_drone2" tile="drone.ship" health="1000" fuel="20000" useBatteries="false" efficiency="0" fuelName="power" defense="10" drone="true" droneControl="uefd_control" speed="7" underwater="true" type="spaceship" tooltip="structure.tooltip.operate" blood="science.explosion.med" flight_height="999" death_sfx="explosion" max_depth="300">
+  <animation id="mining_drone.idle" x="0" count="1"/>
+  <animation id="mining_drone.empty" equals="mining_drone.idle"/>
+  <animation id="mining_drone.hover" x="0" count="4"/>
+  <animation id="mining_drone.fly" x="4" count="4"/>
+
+  <vehicle id="uefd.mining_drone" tile="mining_drone" health="500" fuel="10000" useBatteries="false" efficiency="0" fuelName="power" defense="8" drone="true" droneControl="uefd_control" speed="5" underwater="true" type="spaceship" tooltip="structure.tooltip.operate" blood="science.explosion.med" flight_height="999" death_sfx="explosion" max_depth="200">
     <repair id="titanium" value="250" />
     <fuel id="phlebotnium" fuel="1000" />
     <light tile="light.largest" />

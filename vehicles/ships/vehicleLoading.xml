@@ -1,6 +1,11 @@
 <airom>
   <!-- Local Version 2.0 -->
   <action>
+    function exitCarrier(v,p){
+      v.doMount(p);
+      setGameScale(2);
+      v.area.vehicle.exit(p);
+    }
     function loadCorvette(player,carrier){
       //the interior area top-left is (0,0)
       // player.vehicle.getOverlappingObjects()[1].getId()

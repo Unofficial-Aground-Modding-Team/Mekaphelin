@@ -13,9 +13,22 @@
       <wait seconds="2" />
     </show>
   </scene>
+  <!-- TODO : Multiplayer! -->
   <action>
-    function confiscateVehicle(player){
-      player.vehicle.dismount();
+    function confiscateVehicle(player,area){
+      try{
+      var a = player.areas.get("spirit_box.void");
+      var v = player.vehicle;
+      v.dismount();
+      player.area.vehicle.exit();
+      area.removeObject(v);
+      a.addObject(v);
+      }catch(e:Dynamic){
+        trace(e);
+      }
+    }
+    function retrieveVehicle(player){
+      throw "Not implemented";
     }
   </action>
   <procedure id="uefd.arrive">
@@ -34,7 +47,7 @@
   <procedure id="uefd.escort">
     <section if="area.id != 'mekaphelin.desert.orbit'">
       <teleport area="mekaphelin.desert.orbit" x="128" y="32"/>
-      <section if="player.vehicle != null"><action>confiscateVehicle(player)</action></section>
+      <section if="player.vehicle != null"><action>confiscateVehicle(player,area)</action></section>
       <invokeLater>
         <!-- Teleport player into the UEFD carrier -->
       </invokeLater>
@@ -54,12 +67,28 @@
   </procedure>
 
   <!-- UEFD -->
-  <npc id="uefd_engineer" tile="mechanic" action="talk" talk_sfx="talking6" animation="mechanic">
+  <tilesheet id="uefd-engineer.png" width="16" height="16"/>
+  <tile id="uefd_engineer" sheet="uefd-engineer.png"/>
+  <animation id="uefd_engineer.talk" x="0" count="6"/>
+  <animation id="uefd_engineer.walk" x="6" count="10"/>
+  <animation id="uefd_engineer.idle" x="16" count="1"/>
+  <animation id="uefd_engineer.repair" equals="uefd_engineer.idle" length="10"/>
+
+  <tilesheet id="uefd-admiral.png" width="16" height="16"/>
+  <tile id="uefd_leader" sheet="uefd-admiral.png"/>
+  <animation id="uefd_leader.talk" x="0" count="10"/>
+  <animation id="uefd_leader.walk" x="10" count="10"/>
+  <animation id="uefd_leader.idle" x="20" count="1"/>
+  <npc id="uefd_engineer" tile="uefd_engineer" action="talk" talk_sfx="talking6" animation="mechanic">
     <idle class="repair"><repair type="uefd_engineer"/><repair type="mechanic"/></idle>
+    <operate>
+      <dialogue section="warning" id="incomplete" speaker="this"/>
+    </operate>
   </npc>
-  <npc id="uefd_leader" tile="president" action="talk" talk_sfx="talking7">
+  <npc id="uefd_leader" tile="uefd_leader" action="talk" talk_sfx="talking7">
     <idle class="wander" toX="116" />
     <operate>
+      <dialogue section="warning" id="incomplete" speaker="this"/>
       <!-- Gives initial quests and contact with the Meks -->
       <!-- Trigger capAIn-like cutscene with lore dump -->
     </operate>
@@ -68,20 +97,26 @@
   <tile id="uefd_drone1" sheet="uefd_drone1.png" x="0"/>
   <animation id="uefd_drone1.walk" x="0" count="4"/>
   <animation id="uefd_drone1.idle" x="4" count="4"/>
-  <npc id="uefd_drone1" tile="uefd_drone1" speed="2" night="true" behind="true" title="item.names.worker_bot"><idle class="wander" fromX="25" toX="75"/></npc>
+  <npc id="uefd_drone1" tile="uefd_drone1" speed="2" night="true" behind="true" title="item.names.worker_bot">
+    <idle class="wander" fromX="25" toX="75"/>
+  </npc>
 
   <tilesheet id="uefd_drone2.png" width="20" height="26"/>
   <tile id="uefd_drone2" sheet="uefd_drone2.png" x="0"/>
   <animation id="uefd_drone2.idle" x="0" count="4"/>
   <animation id="uefd_drone2.walk" x="4" count="4"/>
-  <npc id="uefd_drone2" tile="uefd_drone2" speed="3" night="true" behind="true" title="item.names.worker_bot"><idle class="wander" fromX="25" toX="75"/></npc>
+  <npc id="uefd_drone2" tile="uefd_drone2" speed="3" night="true" behind="true" title="item.names.worker_bot">
+    <idle class="wander" fromX="25" toX="75"/>
+  </npc>
 
 
   <tilesheet id="uefd_marine.png" width="15" height="19"/>
   <tile id="uefd_marine" sheet="uefd_marine.png" x="0"/>
   <animation id="uefd_marine.idle" x="0" count="4"/>
   <animation id="uefd_marine.walk" x="4" count="6"/>
-  <npc id="uefd_marine" tile="uefd_marine" behind="true"><idle class="wander" fromX="30" toX="70"/></npc>
+  <npc id="uefd_marine" tile="uefd_marine" behind="true">
+    <idle class="wander" fromX="30" toX="70"/>
+  </npc>
 
   <!-- Mekaphelin Signal -->
   <npc id="com_station" tile="com_device.ico"/>
