@@ -1,5 +1,5 @@
 # Mekaphelin
-~ Will be split into two different versions/editions.
+Will be split into two different versions/editions.
 
 Mekaphelin - CybCat Edition: (Work on first)
   - Focused around just one planet, the green planet in the system.
@@ -12,10 +12,10 @@ Mekaphelin - UEFD Edition: (Work on simultaneously, but ultimately later)
   - Contains all UEFD lore, questline, Meks lore, questline, and all their different techs.
   - Also, BIG spaceships. Nuff' said.
 
-~ These two editions will be combined into one main mod at the very end.
+These two editions will be combined into one main mod at the very end.
 
 Mekaphelin: Consolidated
   - Add some finishing touches that bring everything together nicely;
-      UEFD Security Drone-Net over the Cybcat world, to make their questline more like Unnature in a way.
-      Add secret alternate ending, achieved by finishing the Meks questline.
+     * UEFD Security Drone-Net over the Cybcat world, to make their questline more like Unnature in a way.
+     * Add secret alternate ending, achieved by finishing the Meks questline.
       
