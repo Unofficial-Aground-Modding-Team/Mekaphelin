@@ -10,7 +10,6 @@ Mekaphelin - UEFD Edition: (Work on simultaneously, but ultimately later)
   - Focused around the gas giant and the desert planet, green planet is barren.
   - The system will be more UEFD-focused, with the inclusion of the Meks (super-tech aliens).
   - Contains all UEFD lore, questline, Meks lore, questline, and all their different techs.
-  - Also, BIG spaceships. Nuff' said.
 
 These two editions will be combined into one main mod at the very end.
 
