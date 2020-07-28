@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <data>
   <planet id="mekaphelin.gas" height="80">
-    <orbit id="mekaphelin.gas.orbit" width="512" height="64" background="meks.gas.orbit" name="system.planet.mekaphelin.gas.orbit" type="none" distress="!getFlag('mekaphelin.signal')">
+    <orbit id="mekaphelin.gas.orbit" width="512" height="64" canEnterPlanet="player.vehicle != null && player.vehicle.info.id == 'uefd.mining_drone'" background="meks.gas.orbit" name="system.planet.mekaphelin.gas.orbit" type="none" distress="!getFlag('mekaphelin.signal')">
       <!-- <area id="mekaphelin.gas.main"/> -->
       <init><runAreaLoad /></init>
       <onLoad><run procedure="uefd.intro"/><music id="orbit" seconds="1" /><radar tile="orbit.radar" animation="orbit.radar" padding="2" /></onLoad>
