@@ -95,5 +95,8 @@
       <text id="mekaphelin.desert"></text>
       <text id="mekaphelin.dead"></text>
     </section>
+    <section id="warning">
+      <text id="no_bay_space">There are no available bays!</text>
+    </section>
   </lang>
 </data>

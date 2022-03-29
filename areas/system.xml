@@ -56,6 +56,6 @@
     <planet id="mekaphelin.gas" tile="planet10" animation="planet.mekaphelin.gas" orbit="orbit2" orbitOffX="0" orbitOffY="0" offsetX="-30" offsetY="0" name="system.planet.mekaphelin.gas"/>
     <planet id="mekaphelin.desert" tile="planet2" animation="planet.mekaphelin.desert" offsetX="-20" offsetY="-30" name="system.planet.mekaphelin.desert" />
     <planet id="mekaphelin.dead" tile="planet2" animation="planet.mekaphelin.dead" offsetX="-52" offsetY="25" name="system.planet.mekaphelin.dead" />
-    <planet id="mekaphelin.grass" tile="planet4" animation="planet.mekaphelin.grass" orbit="orbit4" offsetX="65" offsetY="10" name="system.planet.mekaphelin.meks" />
+    <!-- <planet id="mekaphelin.grass" tile="planet4" animation="planet.mekaphelin.grass" orbit="orbit4" offsetX="65" offsetY="10" name="system.planet.mekaphelin.meks" /> -->
   </system>
 </data>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<data>
+	<parallax id="mekaphelin.desert_moon" mapBG="1b6a9d" mapBGHeight="80">
+		<layer p="0" day="true">
+			<tile sheet="{core}/start/parallax/bg.png" x="0" y="0" />
+			<rect color="438a9e" x="0" y="80" width="256" height="64" />
+		</layer>
+		<layer p="0" day="false" storm="false" glow="true">
+			<tile sheet="{core}/start/parallax/night_bg.png" x="0" y="0" />
+		</layer>
+		<layer p="0" storm="false">
+			<tile id="sun" animation="sun" fps="5" rise="5" set="20" dir="left" pathHeight="96" pathTop="-16" sun="true" />
+		</layer>
+		<layer p="0.0625" py="0.25" ><tile sheet="{mod:full_version}/space/sol/bg.2" x="3" offsetY="-25" /></layer>
+		<layer p="0.125" py="0.5"><tile sheet="{mod:full_version}/space/dwarf/parallax.3" x="0" /></layer>
+		<layer p="0.1875" py="0.625"><tile sheet="{mod:full_version}/space/dwarf/parallax.2" x="1" /></layer>
+		<layer p="0.5" py="1"><tile sheet="{mod:full_version}/space/dwarf/parallax.1" x="0" /></layer>
+		<layer p="1" px="1" loop="true">
+			<tile sheet="{core}/science1/parallax/desert.png" x="0" y="0" offsetX="64" loop="true" offsetY="-26" />
+			<tile sheet="{core}/science1/parallax/desert.png" x="0" y="2" offsetX="448" loop="true" offsetY="-26" />
+			<tile sheet="{core}/science1/parallax/desert.png" x="0" y="1" offsetX="800" loop="true" offsetY="-26" />
+		</layer>
+		<layer type="back" />
+	</parallax>
+</data>

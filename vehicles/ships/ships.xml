@@ -7,7 +7,11 @@
   <vehicle id="uefd_carrier" extends="colony_ship" tile="uefd_carrier" canLoadVehicles="true" tooltipVehicle="true" spaceship="true">
     <interior area="uefd_carrier.interior" offsetX="0" offsetY="-464" enterX="10" enterY="-1" exitX="7" operateX="6" operateY="-24" />
     <tooltip section="vehicle" id="load" if="player.vehicle != null && (player.vehicle.info.xml.get('loadInto') == 'frigate_bay' || player.vehicle.info.xml.get('loadInto') == 'corvette_bay')"/>
-    <operate><action with="fade_fast">if(player.vehicle == null) this.enter(player); else loadCorvette(player,this);</action><stop/></operate>
+    <operate><choose>
+      <action with="fade_fast" if="player.vehicle == null">this.enter(player)</action>
+      <!-- <action if="getAvailableBay(this, player.vehicle) == null"><show tooltip="popup" text="warning.no_bay_space" x="0.5" y="0.5" color="ff0000" /><stop /></action> -->
+      <action>loadCorvette(player,this)</action>
+    </choose><stop/></operate>
   </vehicle>
 
   <tilesheet id="engine.png" width="48" height="80"/>
@@ -60,17 +64,13 @@
   <animation id="corvette.fly" x="0" count="3"/>
   <animation id="corvette.hover" x="3" count="3"/>
   <animation id="corvette.idle" x="3" count="3"/>
-  <vehicle id="corvette" tile="corvette" health="500" fuel="2000" useBatteries="false" efficiency="0" fuelName="power" defense="10" speed="12" attack_move="true" type="spaceship" blood="science.explosion.med" title="world.fighter" underground="false" flight_height="999" max_weight="3000" death_sfx="explosion" block_icon="fighter.shields.ico" block_behind="true" block_move="true" icon="escort_fighter.ico" takeoff_sfx="ship_takeoff" land_sfx="ship_land" loadInto="corvette_bay" accessObject="true">
+  <vehicle id="corvette" tile="corvette" health="500" fuel="2000" useBatteries="false" efficiency="0" fuelName="power" defense="10" speed="12" attack_move="true" type="spaceship" blood="science.explosion.med" title="world.corvette" underground="false" flight_height="999" max_weight="3000" death_sfx="explosion" block_icon="fighter.shields.ico" block_behind="true" block_move="true" icon="escort_fighter.ico" takeoff_sfx="ship_takeoff" land_sfx="ship_land" loadInto="corvette_bay" accessObject="true">
     <tooltip section="structure.tooltip" id="manage_ship" if="this.area.vehicle != null"/>
     <operate>
       <section if="this.area.vehicle != null">
         <menu section="structure.tooltip" closeable="true" autoselect="true" darken="false" yalign="0.55">
           <choice id="spaceship">
-            <section with="ellipse_fast">
-            <action>
-                exitCarrier(this,player);
-            </action>
-            </section>
+            <action>setGameScale(2); this.doMount(player, true); unloadCorvette(player)</action>
           </choice>
           <choice id="manage_cargo">
             <action>
@@ -128,13 +128,13 @@
 
   <tilesheet id="frigate.png" width="256" height="128"/>
   <tile id="frigate" sheet="frigate.png"/>
-  <vehicle id="frigate" tile="frigate" health="600" fuel="2000" useBatteries="false" efficiency="0" fuelName="power" defense="14" speed="8" speedY="5" attack_move="true" type="spaceship" blood="science.explosion.med" title="world.fighter" underground="false" flight_height="999" max_weight="5000" death_sfx="explosion" block_icon="fighter.shields.ico" block_behind="true" block_move="true" icon="escort_fighter.ico" takeoff_sfx="ship_takeoff" land_sfx="ship_land" loadInto="frigate_bay" accessObject="true">
+  <vehicle id="frigate" tile="frigate" health="600" fuel="2000" useBatteries="false" efficiency="0" fuelName="power" defense="14" speed="8" speedY="5" attack_move="true" type="spaceship" blood="science.explosion.med" title="world.frigate" underground="false" flight_height="999" max_weight="5000" death_sfx="explosion" block_icon="fighter.shields.ico" block_behind="true" block_move="true" icon="escort_fighter.ico" takeoff_sfx="ship_takeoff" land_sfx="ship_land" loadInto="frigate_bay" accessObject="true">
     <tooltip section="structure.tooltip" id="manage_ship" if="this.area.vehicle != null"/>
     <operate>
       <section if="this.area.vehicle != null">
         <menu section="structure.tooltip" closeable="true" autoselect="true" darken="false" yalign="0.55">
           <choice id="spaceship">
-            <section with="ellipse_fast"><action>exitCarrier(this,player);</action></section>
+            <action>setGameScale(2); this.doMount(player, true); unloadCorvette(player)</action>
           </choice>
           <choice id="manage_cargo">
             <action>
@@ -168,4 +168,15 @@
 		</onFrame>
     <shield tile="fighter.shields" animation="fighter.shields" hit_front="fighter.shields.front" hit_back="fighter.shields.back" hit_sfx="ship_shield" />
   </vehicle>
+
+  <recipe id="corvette" object="corvette" type="station.dock">
+    <item id="advanced_circuitry" count="4" />
+    <item id="chrome_plating" count="8"/>
+    <item id="phlebotnium_core" count="2"/>
+  </recipe>
+  <recipe id="frigate" object="frigate" type="station.dock">
+    <item id="advanced_circuitry" count="5" />
+    <item id="chrome_plating" count="10"/>
+    <item id="phlebotnium_core" count="3"/>
+  </recipe>
 </data>

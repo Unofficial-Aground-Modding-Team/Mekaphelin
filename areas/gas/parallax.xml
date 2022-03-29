@@ -1,0 +1,23 @@
+<data>
+  <tilesheet id="storm_bg.png" width="512" height="144"/>
+  <tilesheet id="gas1.png" width="256" height="192"/>
+  <tilesheet id="gas2.png" width="256" height="192"/>
+	<tile id="gas.storm" sheet="storm_bg.png" x="0" />
+  <!-- waterLevel="256" -->
+	<parallax id="gas_giant" mapBG="1b6a9d" mapBGHeight="80" >
+    <!-- Deep Parallax -->
+    <layer p="0.125" py="0" layerWidth="256" glow="true"  max_depth="10000"><tile sheet="gas3.png" x="0" y="0"/></layer>
+    <layer p="0" max_depth="192"><rect color="000000" x="0" y="0" width="256" height="144" /></layer>
+    <!-- Surface Day/Night Layers -->
+		<layer p="0" day="true" max_depth="192">
+			<tile sheet="gas_bg.png" x="0" y="0" />
+			<rect color="a855a3" x="0" y="80" width="256" height="64" />
+		</layer>
+    <!-- Surface Scrolling Layer -->
+		<layer p="0.125" py="0" layerWidth="256" max_depth="192"><tile sheet="gas1.png" x="0" y="0"/></layer>
+    <!-- Transitional Layer -->
+		<layer p="0.125" py="0.83" layerWidth="256" layerHeight="192" max_depth="256"><tile sheet="gas2.png" x="0" y="0" dy="2672"/></layer>
+    <!-- Storm -->
+		<layer p="0.25" py="0.025"  layerWidth="512" max_depth="10000" scroll="-0.125"><tile id="gas.storm" animation="item12" fps="10" /><tile id="gas.storm" animation="item12" fps="10" offsetX="-512" /></layer>
+	</parallax>
+</data>

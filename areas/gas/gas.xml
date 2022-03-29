@@ -1,20 +1,49 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <data>
+  <include id="parallax.xml"/>
+  <include id="orbit_parallax/parallax.xml"/>
   <planet id="mekaphelin.gas" height="80">
-    <orbit id="mekaphelin.gas.orbit" width="512" height="64" canEnterPlanet="player.vehicle != null && player.vehicle.info.id == 'uefd.mining_drone'" background="meks.gas.orbit" name="system.planet.mekaphelin.gas.orbit" type="none" distress="!getFlag('mekaphelin.signal')">
-      <!-- <area id="mekaphelin.gas.main"/> -->
+    <orbit id="mekaphelin.gas.orbit" width="512" height="64" background="meks.gas.orbit" name="system.planet.mekaphelin.gas.orbit" type="none" distress="false">
+      <area id="mekaphelin.gas"/>
       <init><runAreaLoad /></init>
-      <onLoad><run procedure="uefd.intro"/><music id="orbit" seconds="1" /><radar tile="orbit.radar" animation="orbit.radar" padding="2" /></onLoad>
+      <onLoad><music id="orbit" seconds="1" /><radar tile="orbit.radar" animation="orbit.radar" padding="2" /></onLoad>
     </orbit>
   </planet>
 
-  <parallax id="mekaphelin.gas.main">
-    <run procedure="start.water"/>
-  </parallax>
-  <area id="mekaphelin.gas.main" width="200" background="gas_giant" hasO2="false" planet="mekaphelin.gas">
-    <tiles id="bedrock" y="0" empty="true" />
+  <animation id="lh2" count="7" />
+  <area id="mekaphelin.gas" width="128" height="274" background="gas_giant" hasO2="false" powered="true" planet="mekaphelin.gas" water="lh2" water_anim="lh2">
+		<tiles from="platform.png" x="0" y="0">
+      <tile id="steel_ladder" color="00ff00" layer="back" />
+			<tile id="mek.girder_h" color="ff0000" />
+			<tile id="mek.girder_v" color="ee0000" />
+			<tile id="mek.pipe_bl" color="ffff00" />
+			<tile id="mek.pipe_tl" color="ffee00" />
+			<tile id="mek.pipe_tr" color="ffcc00" />
+			<tile id="mek.pipe_br" color="ffbb00" />
+      <tile color="ff00ff">getStructure("elevator").build(null, area, x*Tile.SIZE, y*Tile.SIZE);</tile>
+		</tiles>
+    <appendArea id="mekaphelin.gas.liquid" offsetX="-64" offsetY="256" />
+    <appendArea id="mekaphelin.gas.mine" offsetX="0" offsetY="255" />
+    <action>for(y in 256...(256+16)) {for(x in -63...190) {area.setWater(x, y);}}</action>
+    <onLoad><music id="gas_giant" seconds="1" /></onLoad>
     <init><runAreaLoad/></init>
-    <onLoad><run procedure="gas_giant.handleSecond"/></onLoad>
+    <!-- <onLoad><run procedure="gas_giant.handleSecond"/></onLoad> -->
+  </area>
+  <area id="mekaphelin.gas.mine" width="128" height="256">
+		<tiles from="platform2.png" x="0" y="0">
+			<tile id="mek.girder_h" color="ff0000" />
+			<tile id="mek.girder_v" color="ee0000" />
+			<tile id="mek.pipe_bl" color="ffff00" />
+			<tile id="mek.pipe_br" color="ffbb00" />
+		</tiles>
+  </area>
+  <area id="mekaphelin.gas.liquid" width="256" height="17" water="lh2" water_anim="lh2">
+  	<tiles id="empty" start="0" end="1" />
+    <set id="light" value="2" if="!exists('light')" />
+    <!-- area.setWater(x, y);area.addFlags(x, y, 132); -->
+    <action>
+      for(y in 0...16) {for(x in 1...255) {mine(x, y, light);}}
+    </action>
   </area>
 
   <action>
@@ -25,6 +54,7 @@
       }
       // return unaided player(since there will be no non-vehicle equipments that help with gas pressure)
       else return 0;
+      //TODO: Add support for gas depth gear
     }
     function getPlayerPressure(player){
       if(player.vehicle != null) player = player.vehicle;
@@ -34,7 +64,7 @@
   <procedure id="gas_giant.handleSecond">
     <section if="player.area.id == 'mekaphelin.gas.main'">
       <section if="getPlayerPressure(player) > 0">
-        <show id="pressure" tooltip="popup" text="common.to_much_pressure" x="0.5" y="0.25" seconds="0"/>
+        <show id="pressure" tooltip="popup" text="common.too_much_pressure" x="0.5" y="0.25" seconds="0"/>
         <damage object="player.vehicle == null?player:player.vehicle" damage="Math.floor(getPlayerPressure(player) / 4)" directional="false" critical="false" />
       </section>
       <invokeLater seconds="1"><run procedure="gas_giant.handleSecond"/></invokeLater>

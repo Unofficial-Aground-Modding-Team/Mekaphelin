@@ -11,9 +11,7 @@
       <section if="player.vehicle != null">
         <menu section="vehicle" closeable="true" autoselect="true" darken="false" yalign="0.55">
           <choice id="unload">
-            <section with="fade_fast">
-            <action>unloadCorvette(player)</action>
-            </section>
+            <action with="fade_fast">unloadCorvette(player)</action><stop />
           </choice>
           <choice id="dismount">
             <action>player.vehicle.doDismount();</action>
@@ -33,9 +31,7 @@
       <section if="player.vehicle != null">
         <menu section="vehicle" closeable="true" autoselect="true" darken="false" yalign="0.55">
           <choice id="unload">
-            <section with="fade_fast">
-            <action>unloadCorvette(player)</action>
-            </section><stop />
+            <action with="fade_fast">unloadCorvette(player)</action><stop />
           </choice>
           <choice id="dismount">
             <action>player.vehicle.doDismount();</action>

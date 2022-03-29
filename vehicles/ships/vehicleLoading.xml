@@ -1,23 +1,17 @@
 <airom>
   <!-- Local Version 2.0 -->
   <action>
-    function exitCarrier(v,p){
-      v.doMount(p);
-      setGameScale(2);
-      v.area.vehicle.exit(p);
-    }
     function loadCorvette(player,carrier){
       //the interior area top-left is (0,0)
-      // player.vehicle.getOverlappingObjects()[1].getId()
-      //for(v in player.vehicle.getOverlappingObjects()){
-        if(carrier.getXml().get('canLoadVehicles')  == 'true'){
-          bayLocation = getAvailableBay(carrier, player.vehicle);
-          if(bayLocation != null)
+      if(carrier.getXml().get('canLoadVehicles')  == 'true'){
+        bayLocation = getAvailableBay(carrier, player.vehicle);
+        if(bayLocation != null) {
           player.doTeleport(null,bayLocation.x * Tile.SIZE,bayLocation.y * Tile.SIZE,false,carrier.interior);
-          //player.doTeleport(null, getGlobal("originalX"), getGlobal("originalY"), false, getGlobal("originalArea"));
-          //break;
+        } else {
+          player.showWarning(getText('warning.no_bay_space'));
         }
 
+      }
     }
     function getAvailableBay(v, small){
       bayName = small.getXml().get('loadInto');
@@ -28,7 +22,7 @@
 
     function unloadCorvette(player){
       var v = player.vehicle;
-      player.doTeleport(null,(v.area.vehicle.tile_x + v.tile_x) * Tile.SIZE,(v.area.vehicle.tile_y + v.tile_y) * Tile.SIZE,false,v.area.vehicle.area);
+      player.doTeleport(null,(v.area.vehicle.tile_x + v.tile_x) * Tile.SIZE,(v.area.vehicle.tile_y + v.tile_y + 1) * Tile.SIZE,false,v.area.vehicle.area);
     }
   </action>
 </airom>

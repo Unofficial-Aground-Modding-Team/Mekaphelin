@@ -62,7 +62,10 @@
   <structure id="axolotl.exit" tile="axolotl.exit" room="true" name="exit">
     <over><action>this.loopAnimation("over")</action></over>
     <out><action>this.loopAnimation("idle")</action></out>
-    <operate><dialogue section="warning" id="spaceship_exit" if="var flight = player.getFlight(); return area.vehicle.exitFlying() && (flight == null || area.vehicle.tile_y <= -flight.flight.height)" /><action>area.vehicle.doExit(player)</action></operate>
+    <operate>
+      <window type="prompt" message="warning.spaceship_exit" if="var flight = player.getFlight(); return area.vehicle.exitFlying() && (flight == null || area.vehicle.tile_y <= -flight.flight.height)" on="no"><stop /></window>
+      <action>area.vehicle.exit(player)</action>
+    </operate>
   </structure>
 
   <tile id="axolotl.cargo" sheet="axolotl_sheet.4" x="0" />

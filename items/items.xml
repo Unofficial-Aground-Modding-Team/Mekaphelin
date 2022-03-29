@@ -53,15 +53,4 @@
     <item id="carbon_lattice" count="1"/>
     <item id="polymers" count="1"/>
   </recipe>
-
-  <recipe id="corvette" object="corvette" type="station.dock">
-    <item id="advanced_circuitry" count="4" />
-    <item id="chrome_plating" count="8"/>
-    <item id="phlebotnium_core" count="2"/>
-  </recipe>
-  <recipe id="frigate" object="frigate" type="station.dock">
-    <item id="advanced_circuitry" count="5" />
-    <item id="chrome_plating" count="10"/>
-    <item id="phlebotnium_core" count="3"/>
-  </recipe>
 </data>

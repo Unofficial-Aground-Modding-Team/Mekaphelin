@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<data>
+  <include id="gas.xml"/>
+  <tile id="meks.gas1" sheet="gas.1" x="0"/>
+  <animation id="purple1" count="1" color="d285d4" colorScale="1.5"/>
+  <tile id="meks.gas2" sheet="gas.1" x="1"/>
+  <animation id="purple2" count="1" color="e394e3" colorScale="1"/>
+  <tile id="meks.gas3" sheet="gas.1" x="2"/>
+  <animation id="purple3" count="3" length="15" color="d285d4" colorScale="1.5" />
+
+  <parallax id="meks.gas.orbit" mapBG="0" skyColor="0">
+		<layer p="0" glow="true" max_depth="10000"><tile sheet="{mod:full_version}/space/night_bg.png" x="0" y="0" /></layer>
+		<layer p="0" glow="true" max_depth="10000">
+			<tile id="sun" animation="sun" fps="5" rise="5" set="20" dir="left" pathHeight="96" pathTop="-16" sun="true" />
+		</layer>
+		<layer p="0" py="0.0125" max_depth="10000" color="6f0076" colorScale="3"><tile id="start.gas.base" animation="purple3" offsetY="22" /></layer>
+		<layer p="0" py="0.0125" scroll="0.015625" max_depth="10000" color="6f0076" colorScale="3"><tile id="meks.gas1" animation="purple1" offsetY="22" dy="22" color="6f0076" colorScale="3"/></layer>
+		<layer p="0" py="0.0125" scroll="0.03125" max_depth="10000" color="84008d" colorScale="3"><tile id="meks.gas2" animation="purple2" offsetY="22" dy="22" color="84008d" colorScale="3"/></layer>
+		<layer p="0" py="0.0125" scroll="0.0625" max_depth="10000" color="6f0076" colorScale="3"><tile id="meks.gas3" animation="purple1" offsetY="22" dy="22" color="6f0076" colorScale="3"/></layer>
+		<layer type="back" />
+	</parallax>
+</data>

@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <mod>
-	<name>Mekaphelin</name>
-	<description>Discover the secrets of the Mekaphelin CF-64!</description>
-	<author>ChesireX42, Airom, and Apprentice Alchemist</author>
+	<name>Mekaphelin: The UEFD</name>
+	<description>Uncover the secrets of the stranded United Earth Federal Defense.</description>
+	<author>Airom, ChesireX42, VorTechnix, and Apprentice Alchemist</author>
 	<version>None</version>
   <requires>Full Version</requires>
+	<requires>CybCats</requires>
 	<loadAfter>Asteroids</loadAfter>
 	<loadAfter>Planets Extended</loadAfter>
 	<init>

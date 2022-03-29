@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <data>
   <include id="mountain_range.xml"/>
+  <include id="parallax.xml"/>
   <procedure id="uefd_outpost_gen">
     <structure id="bunker_barracks" x="33" y="-1"/>
     <!-- <structure id="powerline1" x="43" y="-1"/> -->
@@ -27,24 +28,25 @@
     <structure id="hydroponics" x="50" y="3"><addAnimal id="rice_seed" count="1" /></structure>
     <structure id="hydroponics" x="53" y="3"><addAnimal id="rice_seed" count="1" /></structure>
   </procedure>
+  <planet id="mekaphelin.desert" height="80">
+    <orbit id="mekaphelin.desert.orbit" width="256" height="64" background="stars.empty.orbit" name="system.mekaphelin.desert.orbit" type="none">
+      <area id="mekaphelin.desert.outpost"/>
+      <init><runAreaLoad /></init>
+      <onLoad><music id="orbit" seconds="1" /><radar tile="orbit.radar" animation="orbit.radar" padding="2" /></onLoad>
+    </orbit>
+  </planet>
   <area id="mekaphelin.desert.outpost" width="512" height="96" background="mekaphelin.desert_moon" planet="mekaphelin.desert" looping="true" name="mekaphelin.uefd_outpost" >
     <appendArea id="desert.mountain" offsetX="100" offsetY="1"/>
-    <tiles id="desert.dirt_top" y="0" empty="true" />
-    <tiles id="bedrock" y="95" empty="true" />
     <tiles id="desert.dirt" start="0" end="0.5" empty="true" />
     <tiles id="basalt" start="0.5" end="1" empty="true" />
+    <tiles id="desert.dirt_top" y="0" empty="true" />
+    <tiles id="blackstone" y="95"/>
     <ore id="oil" start="0.0" end="0.5" percent="0.0375" tile="desert.dirt" />
     <ore id="uranium" start="0.9" end="1.0" percent="0.000625" tile="basalt" />
     <ore id="diamond" start="0.8" end="1.0" percent="0.0125" tile="basalt" />
     <ore id="gold" start="0.5" end="1.0" percent="0.0125" tile="basalt" />
     <ore id="oil" start="0.5" end="0.8" percent="0.0375" tile="basalt" />
     <ore id="chromium" start="0.8" end="1" percent="0.0375" tile="basalt" />
-    <object id="conifer_snow" x="216" y="-6" />
-    <object id="conifer_snow" x="127" y="-16" />
-    <objects id="conifer_snow" y="-32" startX="226" endX="243" minDist="6" maxDist="6" />
-    <objects id="conifer_snow" y="-16" startX="179" endX="207" minDist="6" maxDist="6" />
-    <objects id="conifer_snow" y="-52" startX="140" endX="168" minDist="6" maxDist="6" />
-    <objects id="conifer_snow" y="-19" startX="95" endX="105" minDist="6" maxDist="6" />
     <init><runAreaLoad /></init>
     <onLoad>
       <music id="outpost" seconds="1" />
