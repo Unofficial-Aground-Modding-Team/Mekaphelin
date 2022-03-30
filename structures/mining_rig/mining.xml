@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<data>
+  <tilesheet id="drone_console.png" width="32" height="32"/>
+  <tile id="pilot_console" sheet="drone_console.png"/>
+  <animation id="uefd.pilot_console.idle" x="6" count="1"/>
+  <animation id="uefd.pilot_console.over" x="0" count="6"/>
+  <structure id="uefd.pilot_console" tile="pilot_console" powered="false">
+    <tooltip section="actions" id="use" />
+    <over><action>this.loopAnimation("over")</action></over>
+    <out><action>this.loopAnimation("idle")</action></out>
+    <operate>
+      <set id="drones" value="[]" global="true" />
+      <action>
+      player.getAllObjects(function(o){if(o.info.xml.get("droneControl") == "uefd_control" &amp;&amp; o.area.isVisitable(player) &amp;&amp; o.info.id == "uefd.mining_drone") drones.push(o);});
+      var str = '&lt;window type="craft" title="vehicle.select_drone">'; var len = drones.length;
+      for(i in 0...len){
+        var d = drones[i]; str += '&lt;listItem icon="'+d.info.getDisplayTile()+'" title=">>'+d.getTitle(player).get()+'">&lt;action>d = getGlobal("drones")['+i+'];&lt;/action>&lt;closeWindows modal="true" />&lt;action>if(player.vehicle != null) player.vehicle.dismountInterior(); d.onOperate(player)&lt;/action>&lt;tooltip>';
+        str += '&lt;option title="vehicle.area{area:'+d.area.getDisplay().get()+'}" size="small" />';
+        str += '&lt;option title="vehicle.position{x:'+d.tile_x+'}{y:'+d.tile_y+'}" size="small" />';
+        str += '&lt;/tooltip>&lt;/listItem>';
+      } evalXml(str+'&lt;/window>&lt;set id="drones" value="null" global="true" />');
+    </action>
+    </operate>
+  </structure>
+
+  <tilesheet id="mining_rig.png" width="224" height="192"/>
+  <tile id="uefd_mining_rig" sheet="mining_rig.png" x="1" />
+  <tile id="uefd_mining_rig.interior" sheet="mining_rig.png" x="0" />
+</data>

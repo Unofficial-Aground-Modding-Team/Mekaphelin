@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<data>
+  <tilesheet id="vermin_turret.png" width="26" height="27" />
+  <tile id="vermin.turret" sheet="vermin_turret.png" x="0" />
+  <animation id="vermin.turret.idle" x="0" count="5" />
+  <animation id="vermin.turret.attack" x="5" count="5"/>
+  <animation id="vermin.turret.hit" x="10" count="1"/>
+
+  <enemy id="vermin.turret" tile="vermin.turret" health="50" defense="4" speed="0" type="surface" friendlyFire="false" fps="12" element="plant">
+    <attack type="projectile" damage="8" range="10" animation="attack" sfx="radioactive_bolt" cooldown="100">
+      <projectile tile="fireball_small" animation="fireball_small.acid" speed="3" offsetY="-1" delay="2" glow="true" hit_sfx="bolt_hit" knockback="5" underwater="true">
+        <light tile="light.small" color="44cc00" />
+      </projectile>
+    </attack>
+    <loot id="meat" />
+  </enemy>
+
+  <tile id="vermin.penoid" sheet="vermling_penoids.png" x="0" />
+  <animation id="vermin.penoid.idle" x="0" count="4" />
+  <animation id="vermin.penoid.walk" x="4" count="4" />
+  <animation id="vermin.penoid.attack" x="8" count="4" length="2"/>
+  <animation id="vermin.penoid.hit" x="12" count="1" length="2"/>
+
+  <enemy id="vermin.penoid" tile="vermin.penoid" health="10" defense="3" speed="3" type="surface" range="7" element="plant" passEnemies="true">
+    <attack type="melee" damage="4" knockback="1" />
+    <loot id="meat" />
+  </enemy>
+
+  <tilesheet id="vermin_nest.png" width="64" height="32" />
+  <tile id="vermin.nest" sheet="vermin_nest.png" x="0"/>
+  <animation id="vermin.nest.gas_summon" x="0" count="4" repeat="4"/>
+  <animation id="vermin.nest.idle" x="4" count="1"/>
+  <animation id="vermin.nest.hit" x="5" count="1" length="2"/>
+
+  <enemy id="vermin.nest" tile="vermin.nest" health="200" defense="5" speed="0" canFlip="false" type="surface" element="plant" fps="10">
+    <loot id="meat" />
+    <onDeath><object id="vermin.penoid" x="this.tile_x" y="this.tile_y"/></onDeath>
+
+    <cooldown seconds="15">
+      <sound id="cultivator_gas" object="this" /><object id="gas_cloud" x="this.tile_x-2" y="this.tile_y" />
+      <action>gas_cloud.alpha = 0;</action><lerp object="gas_cloud" alpha="1" seconds="0.5" modal="false" />
+      <play object="this" animation="gas_summon" /><action>this.playIdle()</action>
+    </cooldown>
+    <cooldown seconds="3">
+      <section if="area.getLiveCount('vermin.penoid') &lt; (10 * area.getLiveCount('vermin.nest'))">
+        <object id="vermin.penoid" x="this.tile_x" y="this.tile_y" />
+      </section>
+    </cooldown>
+  </enemy>
+</data>

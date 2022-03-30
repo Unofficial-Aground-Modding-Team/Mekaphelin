@@ -25,9 +25,18 @@
       <text id="axolotl.power">Auxillary Power</text>
       <text id="axolotl.shield">Shield Booster</text>
 
-      <text id="small_mech">Battlesuit</text>
-      <text id="med_mech">Gorilla</text>
+      <text id="small_mech">UEFD Battlesuit</text>
+      <text id="med_mech">UEFD Gorilla Mech</text>
+      <text id="uefd.mining_drone">UEFD Mining Drone</text>
       <text id="med_mech.rockets">Missile Launchers</text>
+
+      <text id="small_mech.light">Small Mech Light</text>
+      <text id="small_mech.laser_head">Small Mech Visor</text>
+      <text id="small_mech.marm">Small Mech Main Arm</text>
+      <text id="small_mech.bfg">Small Mech Cannon</text>
+      <text id="small_mech.oarm">Small Mech Second Arm</text>
+      <text id="small_mech.oshield">Small Mech Shield</text>
+      <text id="small_mech.drill">Small Mech Drill</text>
     </section>
     <section id='item.descriptions'>
       <text id="axolotl.power">+1 Power Generation</text>
@@ -36,6 +45,9 @@
     </section>
     <section id="equipment">
       <text id="tech">Tech:</text>
+      <text id="mech_head">Headgear:</text>
+      <text id="mech_back">Back:</text>
+      <text id="mech_boots">Boots:</text>
     </section>
     <section id="vehicle">
       <text id="load">Load</text>
@@ -43,12 +55,11 @@
     </section>
     <section id="world">
       <text id="axolotl">Axolotl</text>
-      <text id="corvette">Corvette</text>
-      <text id="frigate">Frigate</text>
-      <text id="carrier">Carrier</text>
+      <text id="corvette">UEFD Corvette</text>
+      <text id="frigate">UEFD Frigate</text>
+      <text id="carrier">UEFD Carrier</text>
     </section>
     <section id="structure.tooltip">
-      <text id="exit">Exit</text>
       <text id="summon_mechanic">Call Mechanic</text>
       <text id="fusion_plant">Operate Fusion Plant</text>
       <text id="manufactory">Operate Manufactory</text>
@@ -68,11 +79,15 @@
       <text id="mek_signal3">The [color=770000]Com Station[/color] is all repaired now, just a few blown transistors. I've used the data it collected before breaking to pinpoint the origin of the signal! You should head over to that system and find out the cause!</text>
     </section>
     <section id="uefd">
+      <text id="intro1">Who goes there! Disable your weapons systems and stand down immediately or you will be fired upon!</text>
+      <text id="intro2">Surrender your ship and prepare to be boarded. You will be brought aboard for interrogation.</text>
       <text id="warning">You have interfered with the ecosystem of this planet. This is your [global=uefd_warning] warning.</text>
       <text id="warning_last">You have interfered with the ecosystem of this planet. This is your [global=uefd_warning] and last warning.</text>
     </section>
     <section id="npc">
       <text id="com_station">Com Station</text>
+      <text id="uefd_engineer">UEFD Engineer</text>
+      <text id="uefd_leader">UEFD Admiral</text>
     </section>
     <section id="mekaphelin">
       <text id="mek_signal">ASi.. [pause=1] SJiak ksd [pause=1] ---BZZZZZZZZT--- JAJisd [pause=2] ASOasdDIhqsdho ---BZZZZZZZZZZZT--- [pause=2] aopsiaLIdhASD"</text>
@@ -97,6 +112,33 @@
     </section>
     <section id="warning">
       <text id="no_bay_space">There are no available bays!</text>
+      <text id="mek_equip">You can only install equipment for this vehicle in the [color=770000]Mek Factory[/color].</text>
+    </section>
+    <section id="uefd_engineer">
+      <text id="vermin1">Ah, you must be the new recruit. The Admiral told me you'd be coming.</text>
+      <text id="vermin2">As the Admiral probably already explained, you need to prove your worth. There's no place for weaklings on this harsh world.</text>
+      <text id="vermin3">There are some natives here, completely hostile. They've been getting more bold lately, I need you to go torch one of their hives.</text>
+      <text id="scout1">Outstanding work! I've talked with command and we've decided to grant you a promotion! Follow me, we're headed to the starport.</text>
+      <text id="scout2">You're being promoted to a Pilot Class One, authorized to pilot our small scouting Corvettes. This time, you need to go retrieve some gear a previous operation left behind.</text>
+      <text id="scout3">You'll find it over the mountains to the east. There may be more vermin there, keep a lookout.</text>
+      <text id="pilot1">Well, look who it is. The hotshot Corvette pilot returns.</text>
+      <text id="pilot2">You've been authorized for an upgrade: we need a skilled pilot to run a transport op.</text>
+      <text id="pilot3">We've found a large vermin hive, and need to carry out an immediate strike. You'll be piloting this here Frigate to carry some Marines and Strike Drones.</text>
+      <text id="mining1">Great work on that strike op! Those vermin shouldn't be bothering us for a while.</text>
+      <text id="mining2">Now, follow me. The Admiral has summoned you. I've got a dropship waiting, you're headed back to orbit!</text>
+      <text id="idle">What do you want? I don't have time for idle chatter, this place doesn't repair itself!</text>
+    </section>
+    <section id="uefd_leader">
+      <text id="intro1">Hello stranger. I am the Admiral of the United Earth Fleet Defense. You appear human, so I assume you are another survivor of Earth. Tell me, how did you arrive in this system?</text>
+      <text id="intro2">My colony ship crashed in a system and I reconstructed space capable vessel, mined exomatter, and set out to explore the stars. I seek revenge for the bombardment.</text>
+      <text id="intro3">Ah yes, the Calamari. We have seen no signs of them in this system. We also seek revenge, although our forces are somewhat... limited at the moment.</text>
+      <text id="intro4">Since you are an outsider, we will be forced to confiscate your belongings until your prove your alligiance to this organization. We will provide you with a standard issue Battlesuit, and send you down to the planet to assist in defense.</text>
+      <text id="meknium1">Since there is no [item=exotic_matter] in this forsaken place, we have turned to alternate sources.</text>
+      <text id="meknium2">The gas giant here contains trace amounts of a high energy particle, [item=meknium].</text>
+      <text id="meknium3">We have been trying to set up a mining operation on the planet, but all efforts so far have failed.</text>
+      <text id="uefd1">Like all suvivors, the UEFD fled Sol when they attacked.</text>
+      <text id="uefd2">Our ships were damaged by a strange pulse on arrival, which rendered them useless.</text>
+      <text id="uefd3">Since then, we have been trying to stay alive, fighting the natives here for survival.</text>
     </section>
   </lang>
 </data>

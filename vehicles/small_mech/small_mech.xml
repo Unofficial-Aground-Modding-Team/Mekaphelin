@@ -1,87 +1,96 @@
 <sheets>
-<tilesheet id='small_mech.1' sheet='small_mech.png' width='15' height='22'>
-	<image frame='0' x='0' y='22' width='15' height='22' offsetX='-1'/>
-	<image frame='1' x='0' y='44' width='15' height='22' offsetX='-1'/>
-	<image frame='2' x='16' y='0' width='15' height='22' offsetX='-1'/>
-	<image frame='3' x='16' y='22' width='14' height='22' />
-	<image frame='4' x='16' y='44' width='14' height='22' />
-	<image frame='5' x='45' y='44' width='14' height='21' />
-	<image frame='6' x='31' y='0' width='14' height='22' />
-	<image frame='7' x='45' y='0' width='14' height='22' />
-	<image frame='10' x='59' y='0' width='14' height='22' />
-	<image frame='11' x='31' y='22' width='14' height='22' />
-	<image frame='12' x='59' y='22' width='14' height='21' />
-	<image frame='13' x='31' y='44' width='14' height='22' />
-	<image frame='14' x='45' y='22' width='14' height='22' />
-	<image frame='8' equals='1' offsetX='-1'/>
-	<image frame='9' equals='2' offsetX='-1'/>
+<tilesheet id='small_mech.1' sheet='small_mech.png' width='15' height='22' offsetX="-22" offsetY="-10">
+	<image frame='0' x='24' y='16' width='15' height='22' offsetX='21' offsetY='10' />
+	<image frame='1' x='24' y='38' width='15' height='22' offsetX='21' offsetY='10' />
+	<image frame='2' x='24' y='60' width='15' height='22' offsetX='21' offsetY='10' />
+	<image frame='3' x='39' y='16' width='14' height='22' offsetX='22' offsetY='10' />
+	<image frame='4' x='53' y='16' width='14' height='22' offsetX='22' offsetY='10' />
+	<image frame='5' x='67' y='38' width='14' height='21' offsetX='22' offsetY='10' />
+	<image frame='6' x='67' y='16' width='14' height='22' offsetX='22' offsetY='10' />
+	<image frame='7' x='81' y='16' width='14' height='22' offsetX='22' offsetY='10' />
+	<image frame='10' x='39' y='38' width='14' height='22' offsetX='22' offsetY='10' />
+	<image frame='11' x='39' y='60' width='14' height='22' offsetX='22' offsetY='10' />
+	<image frame='12' x='81' y='38' width='14' height='21' offsetX='22' offsetY='10' />
+	<image frame='13' x='53' y='38' width='14' height='22' offsetX='22' offsetY='10' />
+	<image frame='14' x='53' y='60' width='14' height='22' offsetX='22' offsetY='10' />
+	<image frame='8' equals='1' offsetX='21' offsetY='10' />
+	<image frame='9' equals='2' offsetX='21' offsetY='10' />
 </tilesheet>
 <tilesheet id='small_mech.2' sheet='small_mech.png' width='48' height='32'>
-	<image frame='0' x='73' y='0' width='9' height='15' offsetX='25' offsetY='10'/>
-	<image frame='1' equals='0' offsetX='24' offsetY='10'/>
-	<image frame='2' equals='0' offsetX='24' offsetY='10' />
-	<image frame='3' equals='0' offsetX='24' offsetY='10' />
-	<image frame='4' equals='0' offsetX='25' offsetY='10' />
-	<image frame='5' equals='0' offsetX='26' offsetY='10' />
-	<image frame='6' equals='0' offsetX='26' offsetY='10' />
-	<image frame='7' equals='0' offsetX='25' offsetY='10' />
-	<image frame='8' equals='0' offsetX='24' offsetY='10' />
-	<image frame='9' equals='0' offsetX='24' offsetY='10' />
-	<image frame='10' equals='0' offsetX='24' offsetY='10' />
-	<image frame='11' equals='0' offsetX='25' offsetY='10' />
-	<image frame='12' equals='0' offsetX='26' offsetY='10' />
-	<image frame='13' equals='0' offsetX='26' offsetY='10' />
-	<image frame='14' equals='0' offsetX='25' offsetY='10' />
+	<image frame='0' x='92' y='0' width='9' height='15' offsetX='30' offsetY='15' />
+	<image frame='1' equals='0' offsetX='29' offsetY='15' />
+	<image frame='2' equals='0' offsetX='29' offsetY='15' />
+	<image frame='3' equals='0' offsetX='29' offsetY='15' />
+	<image frame='4' equals='0' offsetX='30' offsetY='15' />
+	<image frame='5' equals='0' offsetX='31' offsetY='15' />
+	<image frame='6' equals='0' offsetX='31' offsetY='15' />
+	<image frame='7' equals='0' offsetX='30' offsetY='15' />
+	<image frame='8' equals='0' offsetX='29' offsetY='15' />
+	<image frame='9' equals='0' offsetX='29' offsetY='15' />
+	<image frame='10' equals='0' offsetX='29' offsetY='15' />
+	<image frame='11' equals='0' offsetX='30' offsetY='15' />
+	<image frame='12' equals='0' offsetX='31' offsetY='15' />
+	<image frame='13' equals='0' offsetX='31' offsetY='15' />
+	<image frame='14' equals='0' offsetX='30' offsetY='15' />
 </tilesheet>
 <tilesheet id='small_mech.3' sheet='small_mech.png' width='48' height='32'>
-	<image frame='0' x='73' y='22' width='9' height='15' offsetX='14' offsetY='10' />
-	<image frame='1' equals='0' offsetX='15' offsetY='10' />
-	<image frame='2' equals='0' offsetX='15' offsetY='10' />
-	<image frame='3' equals='0' offsetX='15' offsetY='10' />
-	<image frame='4' equals='0' offsetX='14' offsetY='10' />
-	<image frame='5' equals='0' offsetX='13' offsetY='10' />
-	<image frame='6' equals='0' offsetX='13' offsetY='10' />
-	<image frame='7' equals='0' offsetX='14' offsetY='10' />
-	<image frame='8' equals='0' offsetX='15' offsetY='10' />
-	<image frame='9' equals='0' offsetX='15' offsetY='10' />
-	<image frame='10' equals='0' offsetX='15' offsetY='10' />
-	<image frame='11' equals='0' offsetX='14' offsetY='10' />
-	<image frame='12' equals='0' offsetX='13' offsetY='10' />
-	<image frame='13' equals='0' offsetX='13' offsetY='10' />
-	<image frame='14' equals='0' offsetX='14' offsetY='10' />
+	<image frame='0' x='82' y='70' width='4' height='14' offsetX='19' offsetY='15' />
+	<image frame='1' x='93' y='70' width='3' height='13' offsetX='20' offsetY='15' />
+	<image frame='2' x='90' y='70' width='3' height='14' offsetX='20' offsetY='15' />
+	<image frame='3' x='86' y='70' width='4' height='14' offsetX='20' offsetY='15' />
+	<image frame='4' x='95' y='16' width='7' height='15' offsetX='19' offsetY='15' />
+	<image frame='5' x='95' y='38' width='7' height='15' offsetX='18' offsetY='15' />
+	<image frame='7' x='77' y='70' width='5' height='15' offsetX='19' offsetY='15' />
+	<image frame='6' equals='5' offsetX='18' offsetY='15' />
+	<image frame='8' equals='1' offsetX='20' offsetY='15' />
+	<image frame='9' equals='2' offsetX='20' offsetY='15' />
+	<image frame='10' equals='3' offsetX='20' offsetY='15' />
+	<image frame='11' equals='4' offsetX='19' offsetY='15' />
+	<image frame='12' equals='5' offsetX='18' offsetY='15' />
+	<image frame='13' equals='5' offsetX='18' offsetY='15' />
+	<image frame='14' equals='7' offsetX='19' offsetY='15' />
 </tilesheet>
 <tilesheet id='small_mech.4' sheet='small_mech.png' width='48' height='32'>
-	<image frame='0' x='59' y='43' width='23' height='12' offsetX='0' offsetY='10' />
-	<image frame='1' equals='0' offsetX='1' offsetY='10' />
-	<image frame='2' equals='0' offsetX='1' offsetY='10' />
-	<image frame='3' equals='0' offsetX='1' offsetY='10' />
-	<image frame='4' equals='0' offsetX='0' offsetY='10' />
-	<image frame='5' equals='0' offsetX='-1' offsetY='10' />
-	<image frame='6' equals='0' offsetX='-1' offsetY='10' />
-	<image frame='7' equals='0' offsetX='0' offsetY='10' />
-	<image frame='8' equals='0' offsetX='1' offsetY='10' />
-	<image frame='9' equals='0' offsetX='1' offsetY='10' />
-	<image frame='10' equals='0' offsetX='1' offsetY='10' />
-	<image frame='11' equals='0' offsetX='0' offsetY='10' />
-	<image frame='12' equals='0' offsetX='-1' offsetY='10' />
-	<image frame='13' equals='0' offsetX='-1' offsetY='10' />
-	<image frame='14' equals='0' offsetX='0' offsetY='10' />
+	<image frame='0' x='39' y='82' width='13' height='11' offsetX='10' offsetY='15' />
+	<image frame='1' x='67' y='59' width='12' height='11' offsetX='11' offsetY='15' />
+	<image frame='4' x='24' y='82' width='14' height='11' offsetX='10' offsetY='15' />
+	<image frame='5' x='0' y='80' width='15' height='11' offsetX='9' offsetY='15' />
+	<image frame='10' x='53' y='82' width='13' height='11' offsetX='11' offsetY='15' />
+	<image frame='2' equals='1' offsetX='11' offsetY='15' />
+	<image frame='3' equals='1' offsetX='11' offsetY='15' />
+	<image frame='6' equals='5' offsetX='9' offsetY='15' />
+	<image frame='7' equals='4' offsetX='10' offsetY='15' />
+	<image frame='8' equals='1' offsetX='11' offsetY='15' />
+	<image frame='9' equals='1' offsetX='11' offsetY='15' />
+	<image frame='11' equals='4' offsetX='10' offsetY='15' />
+	<image frame='12' equals='5' offsetX='9' offsetY='15' />
+	<image frame='13' equals='5' offsetX='9' offsetY='15' />
+	<image frame='14' equals='4' offsetX='10' offsetY='15' />
 </tilesheet>
 <tilesheet id='small_mech.5' sheet='small_mech.png' width='48' height='32'>
-	<image frame='0' x='0' y='0' width='16' height='22' offsetX='7' offsetY='4' />
-	<image frame='1' equals='0' offsetX='8' offsetY='4' />
-	<image frame='2' equals='0' offsetX='8' offsetY='4' />
-	<image frame='3' equals='0' offsetX='8' offsetY='4' />
-	<image frame='4' equals='0' offsetX='7' offsetY='4' />
-	<image frame='5' equals='0' offsetX='6' offsetY='4' />
-	<image frame='6' equals='0' offsetX='6' offsetY='4' />
-	<image frame='7' equals='0' offsetX='7' offsetY='4' />
-	<image frame='8' equals='0' offsetX='8' offsetY='4' />
-	<image frame='9' equals='0' offsetX='8' offsetY='4' />
-	<image frame='10' equals='0' offsetX='8' offsetY='4' />
-	<image frame='11' equals='0' offsetX='7' offsetY='4' />
-	<image frame='12' equals='0' offsetX='6' offsetY='4' />
-	<image frame='13' equals='0' offsetX='6' offsetY='4' />
-	<image frame='14' equals='0' offsetX='7' offsetY='4' />
+	<image frame='0' x='67' y='70' width='10' height='11' offsetX='13' offsetY='15' />
+	<image frame='1' x='15' y='80' width='9' height='11' offsetX='14' offsetY='15' />
+	<image frame='4' x='91' y='59' width='11' height='11' offsetX='13' offsetY='15' />
+	<image frame='5' x='79' y='59' width='12' height='11' offsetX='12' offsetY='15' />
+	<image frame='10' x='67' y='81' width='10' height='11' offsetX='14' offsetY='15' />
+	<image frame='2' equals='1' offsetX='14' offsetY='15' />
+	<image frame='3' equals='1' offsetX='14' offsetY='15' />
+	<image frame='6' equals='5' offsetX='12' offsetY='15' />
+	<image frame='7' equals='4' offsetX='13' offsetY='15' />
+	<image frame='8' equals='1' offsetX='14' offsetY='15' />
+	<image frame='9' equals='1' offsetX='14' offsetY='15' />
+	<image frame='11' equals='4' offsetX='13' offsetY='15' />
+	<image frame='12' equals='5' offsetX='12' offsetY='15' />
+	<image frame='13' equals='5' offsetX='12' offsetY='15' />
+	<image frame='14' equals='4' offsetX='13' offsetY='15' />
+</tilesheet>
+<tilesheet id='small_mech.6' sheet='small_mech.png' width='48' height='32'>
+	<image frame='0' x='0' y='16' width='24' height='16' offsetX='14' offsetY='12' />
+	<image frame='1' x='0' y='32' width='24' height='16' offsetX='14' offsetY='12' />
+	<image frame='2' x='0' y='48' width='24' height='16' offsetX='14' offsetY='12' />
+	<image frame='3' x='0' y='64' width='24' height='16' offsetX='14' offsetY='12' />
+	<image frame='4' x='62' y='0' width='30' height='16' offsetX='8' offsetY='12' />
+	<image frame='5' x='0' y='0' width='31' height='16' offsetX='7' offsetY='12' />
+	<image frame='6' x='31' y='0' width='31' height='16' offsetX='7' offsetY='12' />
 </tilesheet>
 </sheets>

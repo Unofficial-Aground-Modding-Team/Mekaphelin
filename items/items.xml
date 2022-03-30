@@ -36,10 +36,10 @@
     <item id="power_core" count="1"/>
     <item id="phlebotnium" count="2"/>
   </recipe>
-  <recipe id="craft_chrome_plating" creates="chrome_plating" type="manufactory">
+  <!-- <recipe id="craft_chrome_plating" creates="chrome_plating" type="manufactory">
     <item id="titanium" count="1"/>
     <item id="chromium" count="1"/>
-  </recipe>
+  </recipe> -->
   <recipe id="craft_carbon_lattice" creates="carbon_lattice" type="manufactory">
     <item id="diamond" count="1"/>
     <item id="coal" count="2"/>
@@ -48,9 +48,15 @@
     <item id="refined_oil" count="1"/>
     <item id="sulfur" count="1"/>
   </recipe>
-  <recipe id="craft_advanced_circuitry" creates="advanced_circuitry" type="manufactory">
+  <!-- <recipe id="craft_advanced_circuitry" creates="advanced_circuitry" type="manufactory">
     <item id="ship_parts" count="1"/>
     <item id="carbon_lattice" count="1"/>
     <item id="polymers" count="1"/>
+  </recipe> -->
+
+  <recipe id="craft_ship_parts_uefd" creates="ship_parts" type="manufactory">
+    <item id="carbon_lattice" count="2"/>
+    <item id="polymers" count="2"/>
+    <item id="gold_bar" count="3"/>
   </recipe>
 </data>

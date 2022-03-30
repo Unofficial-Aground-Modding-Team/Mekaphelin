@@ -1,0 +1,127 @@
+<data>
+  <include id="small_mech.xml"/>
+  <tile id="small_mech" sheet="small_mech.1"/>
+  <animation id="small_mech.idle" count="1"/>
+  <animation id="small_mech.move" x="1" count="14"/>
+
+  <tilesheet id="small_mech_shield.png" width="8" height="22"/>
+  <tile id="small_mech_shield" sheet="small_mech_shield.png" offsetY="-1" offsetX="-14"/>
+
+  <procedure id="check_uefd_mech_equip">
+    <set id="s" value="this.getStructure(this.xPos, this.yTop())" />
+    <choose>
+      <section if="s != null && s.info.xml.get('uefd_mech_equip') == 'true'"><set id="v" value="this" /><run procedure="exo_mech_equip" /></section>
+      <dialogue section="warning" id="mek_equip" />
+    </choose><stop />
+  </procedure>
+
+  <vehicle id="small_mech" tile="small_mech" health="200" speed="2" defense="8" fps="9" fuel="5000" efficiency="0" title="item.names.small_mech" tooltip="structure.tooltip.operate" icon="exo_mech.ico" blood="science.explosion.sm" max_weight="1000" hitDamage="1" death_sfx="explosion" block_move="true" oxygen="100" underwater="true">
+    <listItem title="vehicle.pack_up">
+      <closeWindows /><action>this.dismount();</action>
+      <invokeLater><section if="player.vehicle == null">
+        <action>player.inventory.addAll(this.inventory);</action><remove object="this" />
+        <item id="small_mech" value="this.health">
+          <parameter id="l" value="this.equipment.getItemId('attack')" />
+          <parameter id="p" value="this.equipment.getItemId('defend')" />
+          <parameter id="f" value="Std.string(this.fuel)" />
+          <parameter id="a" value="this.equipment.getItemId('mech_head')" />
+          <parameter id="b" value="this.equipment.getItemId('mech_back')" />
+          <parameter id="c" value="this.equipment.getItemId('mech_boots')" />
+        </item>
+      </section></invokeLater>
+    </listItem>
+    <!-- <slot id="head"><run procedure="check_meks_equip" /></slot> -->
+    <slot id="mech_head"><run procedure="check_uefd_mech_equip"/></slot>
+    <slot id="attack"><run procedure="check_uefd_mech_equip"/></slot>
+    <slot id="defend"><run procedure="check_uefd_mech_equip"/></slot>
+    <slot id="mech_back"><run procedure="check_uefd_mech_equip"/></slot>
+    <slot id="mech_boots"><run procedure="check_uefd_mech_equip"/></slot>
+    <init><set id="partial" value="0" /></init>
+    <onFrame>
+      if(this.blocking){var of = Math.floor(frames*2.5); partial += frames*2.5-of; if(partial >= 1){of++; partial -= 1;} if(of > 0) this.useFuel(of);}
+    </onFrame>
+    <!-- <onFrame>
+      var f2 = frames*2; var of = Math.floor(f2); partial += f2-of; if(partial >= 1){of++; partial -= 1;}
+      var p = of*cores; if(this.blocking) p -= of*4; if(p > 0) this.addFuel(p); else if(p &lt; 0) this.useFuel(-p);
+    </onFrame> -->
+    <shield tile="small_mech_shield" animation="single" hit_sfx="ship_shield" />
+    <light tile="light.headlamp" offsetX="-72"/>
+    <!-- <initRenderer><action>this.renderer.addChildAt(this.renderer.equipmentSprite, 0); this.renderer.startAnimIndex = 1</action></initRenderer> -->
+  </vehicle>
+
+  <item id="small_mech" type="object" cost="0" weight="100" icon="exo_mech.ico" durability="200" durabilityName="common.health" durabilityIcon="vehicle_health">
+    <action id="plant" name="vehicle.deploy" object="small_mech" onGrass="false" overlapBlueprints="true" overlapStructures="true" removeBushes="false" on_air="true" underground="true">
+      <action>
+        object.setHealth(this.getFeed()); l = Item.getParameter(this.getNameStr(), "l"); p = Item.getParameter(this.getNameStr(), "p");
+        f = Item.getParameter(this.getNameStr(), "f"); if(f != null) object.setFuel(Std.parseInt(f)); a = Item.getParameter(this.getNameStr(), "a");
+        b = Item.getParameter(this.getNameStr(), "b"); c = Item.getParameter(this.getNameStr(), "c");
+      </action>
+      <equip eval="l" to="object" fromInventory="false" if="l != null" /><equip eval="p" to="object" fromInventory="false" if="p != null" />
+      <equip eval="a" to="object" fromInventory="false" if="a != null" /><equip eval="b" to="object" fromInventory="false" if="b != null" />
+      <equip eval="c" to="object" fromInventory="false" if="c != null" />
+    </action>
+    <action id="feed" alt="feed_all" alt_name="repair_all" name="repair" full="warning.max_repair" auto="common.auto_repair" select="actions.repair" sfx="workshop" />
+    <food id="chrome_plating" value="500" />
+  </item>
+
+  <!-- Head -->
+  <item id="small_mech.light" type="equipment" slot="mech_head" equipOn="small_mech" icon="exo_mech.light.ico" cost="0" weight="0" unequip="false">
+    <light tile="light.large" />
+  </item>
+
+  <item id="small_mech.laser_head" type="equipment" slot="mech_head" equipOn="small_mech" cost="0" weight="0" unequip="false" range="10" attack="8" power="50" enableAttack="true" desc="item.descriptions.auto_fire">
+    <handleSecond>
+      <!-- <section if="(player.vehicle.equipment.getStateI('head')&NO_ATTACK) == 0 && getEnemyInRange(player.vehicle, this.info.range, this.info.attack, 0, 0) != null && player.vehicle.getUsableFuel() >= this.info.xml.get('power')"> -->
+      <section if="getEnemyInRange(player.vehicle, this.info.range, this.info.attack, 0, 0) != null && player.vehicle.getUsableFuel() >= eval(this.info.xml.get('power'))">
+      <!-- <action>player.vehicle.renderer.setItemAnimation("head", "fire", false); player.loseStamina(this.info.getStamina(player));</action> -->
+      <action>player.vehicle.useFuel(eval(this.info.xml.get('power')))</action>
+      <projectile tile="mega_earth_helm.projectile" animation="mega_earth_helm.projectile" width="16" height="16" speed="3" dx="player.vehicle.getDX()" spawner="player.vehicle" damage="this.info.attack" range="this.info.range" fire_sfx="fireball" underwater="true">
+        <hitEffect tile="mega_earth_helm.projectile" animation="mega_earth_helm.projectile.impact" />
+      </projectile>
+    </section></handleSecond>
+  </item>
+
+  <!-- Main Hand Weapons -->
+  <tile id="small_mech.marm" sheet="small_mech.2" offsetX="-5" offsetY="-5"/>
+  <animation id="equipment.small_mech.marm.idle" count="1" />
+  <animation id="equipment.small_mech.marm.move" x="1" count="14" />
+  <animation id="equipment.small_mech.marm" x="1" count="14" />
+  <item id="small_mech.marm" type="equipment" slot="attack" equipOn="small_mech" cost="0" weight="0" unequip="false"/>
+
+  <!-- Two handed Weapons -->
+  <tile id="small_mech.bfg" sheet="small_mech.6" offsetX="-5" offsetY="-5"/>
+  <animation id="equipment.small_mech.bfg" x="1" count="6" />
+  <item id="small_mech.bfg" type="equipment" slot="attack" equipOn="small_mech" icon="exo_mech.gun.ico" cost="0" power="100" weight="0" attack="10" range="15" unequip="false">
+    <use slot="defend"/><use slot="mech_back"/>
+    <projectile tile="exo_gun" animation="exo_gun.bolt" speed="4" critical="true" delay="4" offsetY="-2">
+      <pre><play object="this" animation="warmup" /></pre>
+      <hitEffect tile="exo_gun" animation="exo_gun.bolt.impact" color="99ccff" />
+    </projectile>
+  </item>
+
+  <!-- Offhand Utils -->
+  <tile id="small_mech.oarm" sheet="small_mech.3" offsetX="-5" offsetY="-5" />
+  <animation id="equipment.small_mech.oarm.idle" count="1" />
+  <animation id="equipment.small_mech.oarm.move" x="1" count="14" />
+  <animation id="equipment.small_mech.oarm" x="1" count="14" />
+  <item id="small_mech.oarm" type="equipment" slot="defend" equipOn="small_mech" cost="0" weight="0" unequip="false"/>
+
+  <tile id="small_mech.oshield" sheet="small_mech.5" offsetX="-5" offsetY="-5"/>
+  <animation id="equipment.small_mech.oshield.idle" count="1" />
+  <animation id="equipment.small_mech.oshield.move" x="1" count="14" />
+  <animation id="equipment.small_mech.oshield" x="1" count="14" />
+  <item id="small_mech.oshield" type="equipment" slot="defend" equipOn="small_mech" icon="energy_shield.ico" cost="0" weight="0" use="block" unequip="false"/>
+
+  <tile id="small_mech.drill" sheet="small_mech.4" offsetX="-5" offsetY="-5"/>
+  <animation id="equipment.small_mech.drill.move" x="1" count="14" />
+  <animation id="equipment.small_mech.drill" x="4" count="5" length="0.5"/>
+  <item id="small_mech.drill" type="equipment" slot="defend" equipOn="small_mech" cost="0" power="25" mine="7" weight="0" unequip="false" sfx="drill">
+    <onEquip><action>object.mine_power = this.info.mine; object.mineSlot = "defend";</action></onEquip>
+    <onUnequip><action>object.mine_power = 0; object.mineSlot = null;</action></onUnequip>
+  </item>
+
+  <!-- Back -->
+  <item id="small_mech.power_core" type="equipment" slot="mech_back" equipOn="small_mech" icon="power_core.ico" cost="0" weight="0" unequip="false">
+    <handleSecond><action>player.vehicle.addFuel(5);</action></handleSecond>
+  </item>
+</data>

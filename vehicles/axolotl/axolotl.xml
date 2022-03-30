@@ -60,6 +60,7 @@
   <tile id="axolotl.exit" sheet="axolotl_sheet.3" x="9" />
   <animation id="axolotl.exit.over" x="1" count="4"/>
   <structure id="axolotl.exit" tile="axolotl.exit" room="true" name="exit">
+    <tooltip section="common" id="exit"/>
     <over><action>this.loopAnimation("over")</action></over>
     <out><action>this.loopAnimation("idle")</action></out>
     <operate>

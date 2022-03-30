@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <mod>
 	<name>Mekaphelin: The UEFD</name>
-	<description>Uncover the secrets of the stranded United Earth Federal Defense.</description>
+	<description>Uncover the secrets of the stranded United Earth Fleet Defense.</description>
 	<author>Airom, ChesireX42, VorTechnix, and Apprentice Alchemist</author>
 	<version>None</version>
   <requires>Full Version</requires>
@@ -18,6 +18,7 @@
 	<include id="enemies/enemies.xml" />
 	<include id="items/items.xml" />
 	<include id="vehicles/vehicles.xml" />
+	<include id="enemies/enemies.xml" />
 	<include id="npcs/npcs.xml"/>
 	<include id="structures/structures.xml" />
   </init>

@@ -22,7 +22,7 @@
     <append tile="manufactory" animation="manufactory.door.operate"/>
   </animation>
 
-  <structure id="manufactory" tile="manufactory" type="crafting" powered="true" fullHeight="true" repairType="uefd_engineer">
+  <structure id="manufactory" tile="manufactory" type="crafting" powered="true" fullHeight="true" repairType="uefd_engineer" uefd_mech_equip="true">
     <recipe type="manufactory"/>
     <over><play object="this" animation="open" /><action>this.loopAnimation("operate")</action></over>
     <out><play object="this" animation="close" /><action>this.loopAnimation("idle")</action></out>

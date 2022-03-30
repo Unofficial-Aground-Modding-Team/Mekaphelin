@@ -8,27 +8,53 @@
     <show id="uefd_leader_welcome">
       <layer id="command_ship.bg" /><wait seconds="2" />
       <layer id="uefd_leader" /><hide id="uefd_leader" /><lerp object="uefd_leader" alpha="1" seconds="0.25" />
-      <dialogue section="colony" id="rescue1" speaker="uefd_leader" />
-      <dialogue section="colony" id="rescue2" speaker="player" />
+      <dialogue section="uefd_leader" id="intro1" speaker="uefd_leader" />
+      <dialogue section="uefd_leader" id="intro2" speaker="player" />
+      <dialogue section="uefd_leader" id="intro3" speaker="uefd_leader" />
+      <dialogue section="uefd_leader" id="intro4" speaker="uefd_leader" />
       <wait seconds="2" />
+    </show>
+    <show id="uefd_leader">
+      <layer id="command_ship.bg" />
+      <layer id="uefd_leader" /><wait seconds="1" />
+      <menu section="colony" width="150" closeable="true">
+        <dialogue section="colony" id="president1" />
+        <choice id="value" values="(['uefd','meknium']]).iterator()">
+          <dialogue eval="'uefd_leader.'+value+'1'" speaker="uefd_leader" /><dialogue eval="'uefd_leader.'+value+'2'" speaker="uefd_leader" />
+          <dialogue eval="'uefd_leader.'+value+'3'" speaker="uefd_leader" />
+        </choice>
+      </menu>
+      <wait seconds="1" />
     </show>
   </scene>
   <!-- TODO : Multiplayer! -->
+  <area id="uefd_detention"/>
   <action>
-    function confiscateVehicle(player,area){
-      try{
-      var a = player.areas.get("spirit_box.void");
+    function confiscateVehicle(player, area){
+      var a = player.areas.get("uefd_detention");
       var v = player.vehicle;
-      v.dismount();
-      player.area.vehicle.exit();
+      player.vehicle.doDismount();
       area.removeObject(v);
-      a.addObject(v);
-      }catch(e:Dynamic){
-        trace(e);
+      maxIdx = 0;
+      for (o in player.areas.get("uefd_detention").objects.objectList) {
+          if (o.tile_x > maxIdx) maxIdx = o.tile_x;
       }
+      maxIdx++;
+      a.addObject(v);
+      v.setTile(maxIdx, 0);
+      player.setVar('uefd_detention_idx', maxIdx);
     }
+
     function retrieveVehicle(player){
-      throw "Not implemented";
+      var idx = player.getVar('uefd_detention_idx');
+      var d_area = player.areas.get('uefd_detention');
+      for (o in d_area.objects.objectList) {
+        if (o.tile_x == idx) {
+          d_area.removeObject(o);
+          o.setTile(player.tile_x, player.tile_y);
+          player.area.addObject(o);
+        }
+      }
     }
   </action>
   <procedure id="uefd.arrive">
@@ -50,6 +76,7 @@
       <section if="player.vehicle != null"><action>confiscateVehicle(player,area)</action></section>
       <invokeLater>
         <!-- Teleport player into the UEFD carrier -->
+        <action>player.doTeleport(null, beacon.xPos, beacon.yTile, false, player.areas.get('mekaphelin.desert.orbit').getObject('uefd_carrier').interior);</action>
       </invokeLater>
     </section>
   </procedure>
@@ -58,10 +85,9 @@
     <section if="!getFlag('uefd_welcome')">
       <action>setFlag('uefd_welcome',true);</action>
       <run procedure="uefd.arrive" />
-      <dialogue section="unnature" id="intro1"/>
-      <!-- Approach the player, and ask where they are from. Then take the player back to the outpost -->
+      <dialogue section="uefd" id="intro1"/>
+      <dialogue section="uefd" id="intro2"/>
       <run procedure="uefd.leave" />
-      <!-- Move the player to the UEFD orbit -->
       <run procedure="uefd.escort"/>
     </section>
   </procedure>
@@ -74,23 +100,68 @@
   <animation id="uefd_engineer.idle" x="16" count="1"/>
   <animation id="uefd_engineer.repair" equals="uefd_engineer.idle" length="10"/>
 
+  <npc id="uefd_engineer" tile="uefd_engineer" action="talk" talk_sfx="talking6" animation="mechanic">
+    <idle class="repair"><repair type="uefd_engineer"/><repair type="mechanic"/></idle>
+    <operate>
+      <section if="!player.hasQuest('kill_vermin')">
+        <dialogue section="uefd_engineer" id="vermin1" speaker="this"/>
+        <dialogue section="uefd_engineer" id="vermin2" speaker="this"/>
+        <dialogue section="uefd_engineer" id="vermin3" speaker="this"/>
+        <quest id="kill_vermin" />
+      </section>
+      <section if="player.canCompleteQuest('kill_vermin') && !player.hasQuest('scout_op')">
+        <dialogue section="uefd_engineer" id="scout1" speaker="this"/>
+        <dialogue section="uefd_engineer" id="scout2" speaker="this"/>
+        <dialogue section="uefd_engineer" id="scout3" speaker="this"/>
+        <complete quest="kill_vermin"/>
+        <quest id="scout_op" />
+      </section>
+      <section if="player.canCompleteQuest('scout_op') && !player.hasQuest('frigate_op')">
+        <dialogue section="uefd_engineer" id="pilot1" speaker="this"/>
+        <dialogue section="uefd_engineer" id="pilot2" speaker="this"/>
+        <dialogue section="uefd_engineer" id="pilot3" speaker="this"/>
+        <complete quest="scout_op"/>
+        <quest id="frigate_op" />
+      </section>
+      <section if="player.canCompleteQuest('frigate_op') && !player.hasQuest('repair_mining_rig')">
+        <dialogue section="uefd_engineer" id="mining1" speaker="this"/>
+        <dialogue section="uefd_engineer" id="mining2" speaker="this"/>
+        <complete quest="frigate_op"/>
+        <!-- Teleport to orbit to talk with Admiral -->
+      </section>
+      <dialogue section="uefd_engineer" id="idle" speaker="this"/>
+    </operate>
+  </npc>
+
+  <quest id="kill_vermin" giver="uefd_engineer" exp="250">
+    <kill id="vermin.penoid" count="10" />
+    <kill id="vermin.turret" count="1" />
+  </quest>
+
+  <quest id="scout_op" giver="uefd_engineer" exp="250">
+    <item id="meknium_core" count="1" />
+  </quest>
+
+  <quest id="frigate_op" giver="uefd_engineer" exp="500">
+    <kill id="vermin.nest" count="1" />
+    <flag id="frigate_op" name="common.compete" tile="meknium_core.ico" />
+  </quest>
+
   <tilesheet id="uefd-admiral.png" width="16" height="16"/>
   <tile id="uefd_leader" sheet="uefd-admiral.png"/>
   <animation id="uefd_leader.talk" x="0" count="10"/>
   <animation id="uefd_leader.walk" x="10" count="10"/>
   <animation id="uefd_leader.idle" x="20" count="1"/>
-  <npc id="uefd_engineer" tile="uefd_engineer" action="talk" talk_sfx="talking6" animation="mechanic">
-    <idle class="repair"><repair type="uefd_engineer"/><repair type="mechanic"/></idle>
-    <operate>
-      <dialogue section="warning" id="incomplete" speaker="this"/>
-    </operate>
-  </npc>
   <npc id="uefd_leader" tile="uefd_leader" action="talk" talk_sfx="talking7">
     <idle class="wander" toX="116" />
     <operate>
-      <dialogue section="warning" id="incomplete" speaker="this"/>
+      <!-- <dialogue section="warning" id="incomplete" speaker="this"/> -->
       <!-- Gives initial quests and contact with the Meks -->
       <!-- Trigger capAIn-like cutscene with lore dump -->
+      <section if="player.questComplete('frigate_op') && !player.hasQuest('repair_mining_rig')">
+        <quest id="repair_mining_rig" />
+      </section>
+      <scene id="colony" show="uefd_leader" with="fade" />
     </operate>
   </npc>
 
@@ -114,10 +185,29 @@
   <tile id="uefd_marine" sheet="uefd_marine.png" x="0"/>
   <animation id="uefd_marine.idle" x="0" count="4"/>
   <animation id="uefd_marine.walk" x="4" count="6"/>
+  <animation id="uefd_marine.attack" x="4" count="6"/>
   <npc id="uefd_marine" tile="uefd_marine" behind="true">
     <idle class="wander" fromX="30" toX="70"/>
   </npc>
 
+
+  <npc id="uefd_marine_hunter" tile="uefd_marine" animation="uefd_marine">
+    <idle class="hunt" />
+    <attack type="projectile" damage="2" range="7" animation="attack">
+      <projectile tile="laser_bolt" animation="laser_bolt" speed="5" offsetY="6">
+        <hitEffect tile="laser_bolt" animation="laser_bolt.impact" color="ff9999" />
+      </projectile>
+    </attack>
+  </npc>
+
+  <enemy id="npc.uefd_marine" tile="uefd_marine" animation="uefd_marine" health="100" defense="6" friendly="true" speed="4" type="surface" passEnemies="true" blood="science.explosion.sm" range="10">
+    <tooltip />
+    <attack type="projectile" damage="2" range="7" animation="attack">
+      <projectile tile="laser_bolt" animation="laser_bolt" speed="5" offsetY="6">
+        <hitEffect tile="laser_bolt" animation="laser_bolt.impact" color="ff9999" />
+      </projectile>
+    </attack>
+  </enemy>
   <!-- Mekaphelin Signal -->
   <npc id="com_station" tile="com_device.ico"/>
   <procedure id="mekaphelin.signal">

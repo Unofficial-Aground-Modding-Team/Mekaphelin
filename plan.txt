@@ -1,0 +1,35 @@
+Mekaphelin: UEFD
+
+Phases to work on:
+Arrival:
+  Confiscation of tech
+  Missions to earn trust & gear:
+    Foot Soldier
+    Corvette & Frigate Pilot missions
+    Mining Rig Repair
+Meeting Meks:
+  Gas Giant mining area
+CybCats:
+  Discover planet shield
+  Get around using mektek
+
+
+Gas Giant:
+  Area
+  Damage Procedure (use vanilla depth mechanic?)
+  Obtaining the gas
+  Mining vehicle + station
+  Mining rig area
+
+Corvette:
+  Weaponry?
+
+Frigate:
+  Drone/Marine loading & deployment
+  Weaponry?
+  Interior
+
+Arrival:
+  Confiscation of tech
+  UEFD Cruiser interior
+  UEFD outpost & NPC

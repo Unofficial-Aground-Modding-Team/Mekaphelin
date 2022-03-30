@@ -1,38 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <data>
-  <tilesheet id="uefd-mining-droneship.png" image="uefd-mining-droneship.png" width="36" height="36"/>
-  <tile id="mining_drone" sheet="uefd-mining-droneship.png"/>
+  <tilesheet id="mining_drone.png" image="mining_drone.png" width="36" height="36"/>
+  <tile id="mining_drone" sheet="mining_drone.png"/>
 
-  <animation id="mining_drone.idle" x="0" count="1" offsetY="2"/>
-  <animation id="mining_drone.empty" equals="mining_drone.idle"/>
-  <animation id="mining_drone.hover" x="0" count="4"/>
-  <animation id="mining_drone.fly" x="4" count="4" rotate="-90" offsetX="34"/>
+  <animation id="uefd.mining_drone.idle" x="0" count="1" offsetY="2"/>
+  <animation id="uefd.mining_drone.empty" equals="uefd.mining_drone.idle"/>
+  <animation id="uefd.mining_drone.hover" x="0" count="4"/>
+  <animation id="uefd.mining_drone.fly" x="4" count="4" rotate="-90" offsetX="34"/>
 
-  <vehicle id="uefd.mining_drone" tile="mining_drone" underground="false" canJump="false" flyOrbit="true" title="'Mining Drone'" health="500" fuel="10000" useBatteries="false" efficiency="0" fuelName="power" defense="8" drone="true" droneControl="uefd_control" speed="5" underwater="true" type="spaceship" tooltip="structure.tooltip.operate" blood="science.explosion.med" flight_height="999" death_sfx="explosion" max_depth="200">
-    <repair id="titanium" value="250" />
-    <fuel id="phlebotnium" fuel="1000" />
+  <vehicle id="uefd.mining_drone" tile="mining_drone" animation="uefd.mining_drone" icon="drone.drill.ico" underground="false" canJump="false" flyOrbit="true" title="itemName('item.names>uefd.mining_drone', this.name)" health="500" fuel="10000" efficiency="0" fuelName="power" defense="8" drone="true" droneControl="uefd_control" speed="5" underwater="true" type="spaceship" tooltip="structure.tooltip.operate" blood="science.explosion.med" flight_height="999" death_sfx="explosion" max_depth="200" pressure_depth="100">
+    <repair id="chrome_plating" value="500" />
+    <!-- <fuel id="phlebotnium" fuel="1000" /> -->
     <light tile="light.largest" />
   </vehicle>
-  <tilesheet id="uefd-pilot-console.png" width="32" height="32"/>
-  <tile id="pilot_console" sheet="uefd-pilot-console.png"/>
-  <animation id="pilot_console.over" x="6" count="1"/>
-  <animation id="pilot_console.idle" x="0" count="6"/>
-  <structure id="uefd.pilot_console" tile="pilot_console" powered="false">
-    <tooltip section="actions" id="use" />
-    <over><action>this.loopAnimation("over")</action></over>
-		<out><action>this.loopAnimation("idle")</action></out>
-    <operate>
-      <set id="drones" value="[]" global="true" />
-      <action>
-      player.getAllObjects(function(o){if(o.info.xml.get("droneControl") == "uefd_control" &amp;&amp; o.area.isVisitable(player) &amp;&amp; o.info.id == "uefd.mining_drone") drones.push(o);});
-      var str = '&lt;window type="craft" title="vehicle.select_drone">'; var len = drones.length;
-      for(i in 0...len){
-        var d = drones[i]; str += '&lt;listItem icon="'+d.info.getDisplayTile()+'" title=">>'+d.getTitle(player).get()+'">&lt;action>d = getGlobal("drones")['+i+'];&lt;/action>&lt;closeWindows modal="true" />&lt;action>if(player.vehicle != null) player.vehicle.dismountInterior(); d.onOperate(player)&lt;/action>&lt;tooltip>';
-        str += '&lt;option title="vehicle.area{area:'+d.area.getDisplay().get()+'}" size="small" />';
-        str += '&lt;option title="vehicle.position{x:'+d.tile_x+'}{y:'+d.tile_y+'}" size="small" />';
-        str += '&lt;/tooltip>&lt;/listItem>';
-      } evalXml(str+'&lt;/window>&lt;set id="drones" value="null" global="true" />');
-    </action>
-    </operate>
-  </structure>
 </data>

@@ -2,7 +2,7 @@
 <data>
   <include id="axolotl/axolotl.xml"/>
   <include id="ships/ships.xml"/>
-  <include id="small_mech/mod.xml" child="init"/>
+  <include id="small_mech/mech.xml"/>
   <include id="med_mech/mech.xml"/>
   <include id="mining_drone/mining_drone.xml"/>
 </data>
